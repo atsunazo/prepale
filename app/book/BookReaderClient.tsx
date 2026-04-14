@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import type { Profile } from "../../types/profile";
@@ -46,8 +46,6 @@ type PanelLayout = {
   left: number;
   width: number;
   maxHeight: number;
-  arrowLeft: number;
-  side: "top" | "bottom";
 };
 
 const ALL_FIELDS: { key: FieldKey; label: string }[] = [
@@ -74,40 +72,26 @@ function getAnchorFromElement(element: HTMLElement): FloatingAnchor {
   };
 }
 
-function getPanelLayout(anchor: FloatingAnchor | null): PanelLayout | null {
-  if (!anchor || typeof window === "undefined") return null;
+function getPanelLayout(_anchor: FloatingAnchor | null): PanelLayout | null {
+  if (typeof window === "undefined") return null;
 
-  const margin = 12;
+  const margin = 14;
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
-  const width = Math.min(360, viewportWidth - margin * 2);
-  const left = clamp(anchor.x - width / 2, margin, viewportWidth - width - margin);
-  const arrowLeft = clamp(anchor.x - left, 28, width - 28);
-  const estimatedHeight = Math.min(460, viewportHeight * 0.68);
-  const spaceBelow = viewportHeight - anchor.y - margin;
-  const spaceAbove = anchor.y - margin;
-  const openUpward = spaceBelow < 280 && spaceAbove > spaceBelow;
+  const width = Math.min(392, viewportWidth - margin * 2);
+  const left = Math.max(margin, (viewportWidth - width) / 2);
+  const preferredTop = Math.round(viewportHeight * 0.25);
+  const top = clamp(preferredTop, 72, Math.max(72, viewportHeight - 280));
+  const maxHeight = Math.max(
+    240,
+    Math.min(540, Math.round(viewportHeight * 0.6), viewportHeight - top - margin)
+  );
 
-  if (openUpward) {
-    const maxHeight = Math.max(220, Math.min(estimatedHeight, spaceAbove - 24));
-    return {
-      top: clamp(anchor.y - maxHeight - 12, margin, viewportHeight - maxHeight - margin),
-      left,
-      width,
-      maxHeight,
-      arrowLeft,
-      side: "bottom",
-    };
-  }
-
-  const maxHeight = Math.max(220, Math.min(estimatedHeight, spaceBelow - 16));
   return {
-    top: clamp(anchor.y + 12, margin, viewportHeight - maxHeight - margin),
+    top,
     left,
     width,
     maxHeight,
-    arrowLeft,
-    side: "top",
   };
 }
 
@@ -424,13 +408,13 @@ export default function BookReaderClient() {
     scrollFrame.current = window.requestAnimationFrame(syncIndexFromScroll);
   }
 
-  function openToc(event: React.MouseEvent<HTMLElement>) {
+  function openToc(event: MouseEvent<HTMLElement>) {
     const anchor = getAnchorFromElement(event.currentTarget);
     setPanel({ mode: "toc", anchor });
   }
 
   function openFieldInspector(
-    event: React.MouseEvent<HTMLElement>,
+    event: MouseEvent<HTMLElement>,
     fieldKey: FieldKey,
     fieldLabel: string
   ) {
@@ -444,7 +428,7 @@ export default function BookReaderClient() {
   }
 
   function openValueInspector(
-    event: React.MouseEvent<HTMLElement>,
+    event: MouseEvent<HTMLElement>,
     fieldKey: FieldKey,
     fieldLabel: string,
     selectedValue: string
@@ -534,6 +518,7 @@ export default function BookReaderClient() {
                   p. {String(index + 1).padStart(2, "0")}
                 </div>
 
+                <div className="profile-paper-scroll">
                 <header className="profile-paper-header">
                   <div className="profile-top-row">
                     <div className="profile-avatar-box">
@@ -797,7 +782,8 @@ export default function BookReaderClient() {
                     {profile.message || "―"}
                   </button>
                 </section>
-              </article>
+              </div>
+            </article>
             );
           })}
         </div>
@@ -837,7 +823,6 @@ export default function BookReaderClient() {
         <div className="floating-layer" onClick={() => setPanel(null)}>
           <section
             className="floating-sheet"
-            data-side={panelLayout.side}
             onClick={(e) => e.stopPropagation()}
             style={
               {
@@ -845,8 +830,7 @@ export default function BookReaderClient() {
                 left: `${panelLayout.left}px`,
                 width: `${panelLayout.width}px`,
                 maxHeight: `${panelLayout.maxHeight}px`,
-                ["--arrow-left" as string]: `${panelLayout.arrowLeft}px`,
-              } as React.CSSProperties
+              } as CSSProperties
             }
           >
             <div className="floating-sheet-head">
