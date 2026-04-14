@@ -14,4 +14,4 @@ export type Profile = {
   topics?: string;
   message: string;
   searchText: string;
-
+};
