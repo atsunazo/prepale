@@ -120,9 +120,13 @@ function buildAvatarCandidates(xId: string) {
 }
 
 function buildAvatarFallback(name: string, xId: string) {
-  const raw = buildHandle(xId);
-  if (raw) return raw.slice(0, 2);
-  return (name || "？").slice(0, 2);
+  const handle = buildHandle(xId);
+  if (handle) return handle.charAt(0).toUpperCase();
+
+  const latin = (name || "").match(/[A-Za-z]/);
+  if (latin) return latin[0].toUpperCase();
+
+  return (name || "？").charAt(0);
 }
 
 function normalizeText(value?: string) {
@@ -410,7 +414,7 @@ export default function BookReaderClient() {
     page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
 
   const distance = targetLeft - startLeft;
-  const duration = 180; // まずは 180ms くらい
+  const duration = 100; // まずは 180ms くらい
   const startTime = performance.now();
 
   suppressScrollSync.current = true;
