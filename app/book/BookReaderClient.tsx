@@ -6,7 +6,8 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type MouseEvent
+  type MouseEvent,
+  type TouchEvent,
 } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
@@ -245,6 +246,8 @@ export default function BookReaderClient() {
   const pageRefs = useRef<(HTMLElement | null)[]>([]);
   const scrollFrame = useRef<number | null>(null);
   const suppressScrollSync = useRef(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
@@ -407,6 +410,34 @@ export default function BookReaderClient() {
     scrollFrame.current = window.requestAnimationFrame(syncIndexFromScroll);
   }
 
+  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
+    const touch = event.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+  }
+
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX.current;
+    const deltaY = touch.clientY - touchStartY.current;
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    if (Math.abs(deltaX) < 28) return;
+    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
+
+    if (deltaX < 0 && currentIndex < bookPages.length - 1) {
+      scrollToIndex(currentIndex + 1);
+      return;
+    }
+
+    if (deltaX > 0 && currentIndex > 0) {
+      scrollToIndex(currentIndex - 1);
+    }
+  }
 
   function openToc(event: MouseEvent<HTMLElement>) {
     setPanel({ mode: "toc", anchor: getAnchorFromElement(event.currentTarget) });
@@ -475,6 +506,8 @@ export default function BookReaderClient() {
           ref={scrollerRef}
           className="book-carousel"
           onScroll={handleScrollerScroll}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <article
             ref={(element) => {

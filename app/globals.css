@@ -160,7 +160,7 @@ select {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scroll-padding-inline: 0;
   scroll-behavior: smooth;
   overscroll-behavior-x: contain;
