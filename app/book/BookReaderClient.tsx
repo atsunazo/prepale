@@ -88,11 +88,11 @@ function getPanelLayout(_anchor: FloatingAnchor | null): PanelLayout | null {
   const viewportHeight = window.innerHeight;
   const width = Math.min(392, viewportWidth - margin * 2);
   const left = Math.max(margin, (viewportWidth - width) / 2);
-  const preferredTop = Math.round(viewportHeight * 0.25);
-  const top = clamp(preferredTop, 72, Math.max(72, viewportHeight - 300));
+  const preferredTop = 18;
+  const top = clamp(preferredTop, 10, Math.max(10, viewportHeight - 300));
   const maxHeight = Math.max(
     240,
-    Math.min(540, Math.round(viewportHeight * 0.62), viewportHeight - top - margin)
+    Math.min(540, Math.round(viewportHeight * 0.72), viewportHeight - top - margin)
   );
 
   return { top, left, width, maxHeight };
@@ -117,6 +117,16 @@ function buildAvatarCandidates(xId: string) {
     .map((name) => `/avatars/${encodeURIComponent(name)}.jpg`);
 
   return Array.from(new Set(candidates));
+}
+
+function buildAvatarFallback(name: string, xId: string) {
+  const handle = buildHandle(xId);
+  if (handle) return handle.slice(0, 2).toUpperCase();
+
+  const latin = (name || "").replace(/[^A-Za-z0-9]/g, "");
+  if (latin) return latin.slice(0, 2).toUpperCase();
+
+  return (name || "？").slice(0, 2);
 }
 
 function normalizeText(value?: string) {
@@ -199,7 +209,7 @@ function ProfileAvatar({ name, xId }: { name: string; xId: string }) {
   }, [xId]);
 
   const showFallback = candidates.length === 0 || candidateIndex >= candidates.length;
-  const fallbackText = (name || "？").slice(0, 2);
+  const fallbackText = buildAvatarFallback(name, xId);
 
   if (showFallback) {
     return (
@@ -232,7 +242,6 @@ export default function BookReaderClient() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [queryText, setQueryText] = useState("");
   const [panel, setPanel] = useState<FloatingPanelState>(null);
   const [panelLayout, setPanelLayout] = useState<PanelLayout | null>(null);
   const [pendingProfileId, setPendingProfileId] = useState<string | null>(null);
@@ -275,14 +284,7 @@ export default function BookReaderClient() {
     loadProfiles();
   }, []);
 
-  const filteredProfiles = useMemo(() => {
-    const keyword = queryText.trim().toLowerCase();
-    if (!keyword) return profiles;
-
-    return profiles.filter((profile) =>
-      (profile.searchText ?? "").toLowerCase().includes(keyword)
-    );
-  }, [profiles, queryText]);
+  const filteredProfiles = useMemo(() => profiles, [profiles]);
 
   const bookPages = useMemo(
     () => [
@@ -402,13 +404,7 @@ export default function BookReaderClient() {
     scrollToIndex(currentIndex + 1);
   }
 
-  function jumpToFilteredIndex(index: number) {
-    scrollToIndex(index + 1);
-    setPanel(null);
-  }
-
   function jumpToProfileById(profileId: string) {
-    setQueryText("");
     setPendingProfileId(profileId);
     setPanel(null);
   }
@@ -484,8 +480,8 @@ export default function BookReaderClient() {
 
   if (loading) {
     return (
-      <main className="book-app-shell">
-        <section className="book-loading-sheet">
+      <main className="book-app-shell book-app-shell-fixed book-app-shell-no-topbar">
+        <section className="book-loading-sheet book-loading-sheet-compact">
           <div className="book-loading-card">
             <p className="loading-copy">プロフィールを読み込んでいます…</p>
           </div>
@@ -496,14 +492,8 @@ export default function BookReaderClient() {
 
   if (bookPages.length === 1) {
     return (
-      <main className="book-app-shell">
-        <header className="book-topbar">
-          <button type="button" className="topbar-button" onClick={openToc}>
-            検索・目次
-          </button>
-          <div className="page-indicator">COVER</div>
-        </header>
-        <section className="book-empty-wrap">
+      <main className="book-app-shell book-app-shell-fixed book-app-shell-no-topbar">
+        <section className="book-empty-wrap book-empty-wrap-compact">
           <EmptyState label="プロフィールがまだありません。先にデータを追加してください。" />
         </section>
       </main>
@@ -511,17 +501,8 @@ export default function BookReaderClient() {
   }
 
   return (
-    <main className="book-app-shell book-app-shell-fixed">
-      <header className="book-topbar">
-        <button type="button" className="topbar-button" onClick={openToc}>
-          検索・目次
-        </button>
-        <div className="page-indicator">
-          {currentIndex === 0 ? "COVER" : `${currentIndex} / ${filteredProfiles.length}`}
-        </div>
-      </header>
-
-      <section className="book-stage book-stage-fixed" aria-label="プロフィールブック">
+    <main className="book-app-shell book-app-shell-fixed book-app-shell-no-topbar">
+      <section className="book-stage book-stage-fixed book-stage-no-topbar" aria-label="プロフィールブック">
         <div className="book-shelf-glow book-shelf-glow-a" />
         <div className="book-shelf-glow book-shelf-glow-b" />
 
@@ -588,9 +569,7 @@ export default function BookReaderClient() {
                 <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
 
                 <div className="book-page-scroll profile-page-scroll">
-                  <div className="profile-page-number">p. {String(pageIndex).padStart(2, "0")}</div>
-
-                  <header className="profile-paper-header">
+                  <header className="profile-paper-header profile-paper-header-tight">
                     <div className="profile-top-row">
                       <div className="profile-avatar-box">
                         <ProfileAvatar name={profile.name} xId={profile.xId} />
@@ -832,7 +811,7 @@ export default function BookReaderClient() {
         </button>
 
         <button type="button" className="nav-button nav-button-center" onClick={openToc}>
-          <span>{currentIndex === 0 ? "目次" : "一覧"}</span>
+          <span>一覧</span>
         </button>
 
         <button
@@ -864,7 +843,7 @@ export default function BookReaderClient() {
             <div className="floating-sheet-head">
               <h2>
                 {panel.mode === "toc"
-                  ? "検索・目次"
+                  ? "一覧"
                   : panel.mode === "field"
                     ? panel.fieldLabel
                     : `「${panel.selectedValue}」`}
@@ -875,45 +854,32 @@ export default function BookReaderClient() {
             </div>
 
             {panel.mode === "toc" ? (
-              <>
-                <input
-                  type="text"
-                  value={queryText}
-                  onChange={(e) => setQueryText(e.target.value)}
-                  placeholder="名前・好きなこと・話題で検索"
-                  className="search-input"
-                />
-
-                <div className="floating-list">
+              <div className="floating-list floating-list-topless">
+                <button
+                  type="button"
+                  className="toc-item toc-item-cover"
+                  onClick={() => {
+                    scrollToIndex(0);
+                    setPanel(null);
+                  }}
+                >
+                  <span className="toc-name">表紙</span>
+                  <span className="toc-meta">プロフィール帳の入口に戻る</span>
+                </button>
+                {filteredProfiles.map((profile) => (
                   <button
+                    key={profile.id}
                     type="button"
-                    className="toc-item toc-item-cover"
-                    onClick={() => {
-                      scrollToIndex(0);
-                      setPanel(null);
-                    }}
+                    className="toc-item"
+                    onClick={() => jumpToProfileById(profile.id)}
                   >
-                    <span className="toc-name">表紙</span>
-                    <span className="toc-meta">プロフィール帳の入口に戻る</span>
+                    <span className="toc-name">{profile.name}</span>
+                    <span className="toc-meta">
+                      {(profile.favorites ?? []).slice(0, 2).join(" / ") || "プロフィールを見る"}
+                    </span>
                   </button>
-                  {filteredProfiles.map((profile, index) => (
-                    <button
-                      key={profile.id}
-                      type="button"
-                      className="toc-item"
-                      onClick={() => jumpToFilteredIndex(index)}
-                    >
-                      <span className="toc-name">{profile.name}</span>
-                      <span className="toc-meta">
-                        {(profile.favorites ?? []).slice(0, 2).join(" / ") || "プロフィールを見る"}
-                      </span>
-                    </button>
-                  ))}
-                  {filteredProfiles.length === 0 ? (
-                    <p className="inspector-empty">一致するプロフィールがありません。</p>
-                  ) : null}
-                </div>
-              </>
+                ))}
+              </div>
             ) : panel.mode === "field" ? (
               <>
                 <div className="inspector-picked-value">みんなの「{panel.fieldLabel}」</div>

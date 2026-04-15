@@ -79,15 +79,11 @@ select {
 .book-app-shell-fixed {
   height: 100dvh;
   overflow: hidden;
-  padding: 16px 14px 130px;
+  padding: 8px 14px 130px;
 }
 
-.book-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+.book-app-shell-no-topbar {
+  padding-top: 8px;
 }
 
 .topbar-button,
@@ -120,34 +116,15 @@ select {
   transform: scale(0.98);
 }
 
-.topbar-button {
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  background: rgba(255, 249, 252, 0.82);
-  color: var(--ink);
-  border-radius: 999px;
-  padding: 12px 16px;
-  font-weight: 700;
-  box-shadow: 0 10px 18px rgba(104, 89, 128, 0.08);
-}
-
-.page-indicator {
-  min-width: 84px;
-  text-align: center;
-  padding: 10px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.86);
-}
-
 .book-stage-fixed {
   position: relative;
-  height: calc(100dvh - 156px);
+  height: calc(100dvh - 146px);
   overflow: hidden;
   perspective: 1800px;
+}
+
+.book-stage-no-topbar {
+  height: calc(100dvh - 146px);
 }
 
 .book-shelf-glow {
@@ -159,7 +136,7 @@ select {
 }
 
 .book-shelf-glow-a {
-  inset: 10% auto auto -4%;
+  inset: 8% auto auto -4%;
   width: 110px;
   height: 110px;
   background: rgba(247, 184, 212, 0.42);
@@ -179,7 +156,7 @@ select {
   height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 6px 0 16px;
+  padding: 0 0 16px;
   scroll-snap-type: x proximity;
   scroll-padding-inline: 0;
   scroll-behavior: smooth;
@@ -297,7 +274,7 @@ select {
 }
 
 .cover-page-scroll {
-  padding: 26px 22px 34px;
+  padding: 22px 22px 34px;
 }
 
 .cover-sheet-inner {
@@ -421,7 +398,7 @@ select {
 }
 
 .profile-page-scroll {
-  padding: 24px 18px 28px 20px;
+  padding: 18px 18px 28px 20px;
 }
 
 .paper-spine {
@@ -486,21 +463,12 @@ select {
   background: rgba(191, 228, 255, 0.88);
 }
 
-.profile-page-number {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.84);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-}
-
 .profile-paper-header {
   margin-top: 16px;
+}
+
+.profile-paper-header-tight {
+  margin-top: 2px;
 }
 
 .profile-top-row {
@@ -532,6 +500,8 @@ select {
   color: #6b5a78;
   font-size: 24px;
   font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .profile-kicker {
@@ -743,15 +713,6 @@ select {
   font-weight: 700;
 }
 
-.search-input {
-  margin: 0 16px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--ink);
-}
-
 .inspector-picked-value {
   margin: 0 16px;
   padding: 12px 14px;
@@ -770,6 +731,11 @@ select {
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+.floating-list-topless {
+  margin-top: 0;
+  padding-top: 4px;
 }
 
 .toc-item {
@@ -810,6 +776,11 @@ select {
   min-height: calc(100dvh - 120px);
 }
 
+.book-loading-sheet-compact,
+.book-empty-wrap-compact {
+  min-height: calc(100dvh - 146px);
+}
+
 .book-loading-card,
 .book-empty-state {
   padding: 24px;
@@ -825,20 +796,22 @@ select {
 }
 
 @media (max-width: 420px) {
-  .book-app-shell-fixed {
-    padding: 14px 12px 126px;
+  .book-app-shell-fixed,
+  .book-app-shell-no-topbar {
+    padding: 8px 12px 126px;
   }
 
-  .book-stage-fixed {
-    height: calc(100dvh - 152px);
+  .book-stage-fixed,
+  .book-stage-no-topbar {
+    height: calc(100dvh - 142px);
   }
 
   .profile-page-scroll {
-    padding: 22px 16px 26px 18px;
+    padding: 16px 16px 26px 18px;
   }
 
   .cover-page-scroll {
-    padding: 22px 18px 30px;
+    padding: 18px 18px 30px;
   }
 
   .cover-sheet-inner {
