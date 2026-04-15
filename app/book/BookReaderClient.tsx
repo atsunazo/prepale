@@ -400,23 +400,43 @@ export default function BookReaderClient() {
     setCurrentIndex(closestIndex);
   }
 
-  function scrollToIndex(index: number, behavior: ScrollBehavior = "smooth") {
-    const scroller = scrollerRef.current;
-    const page = pageRefs.current[index];
-    if (!scroller || !page) return;
+  function scrollToIndex(index: number) {
+  const scroller = scrollerRef.current;
+  const page = pageRefs.current[index];
+  if (!scroller || !page) return;
 
-    suppressScrollSync.current = true;
-    scroller.scrollTo({
-      left: page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2,
-      behavior,
-    });
-    setCurrentIndex(index);
+  const startLeft = scroller.scrollLeft;
+  const targetLeft =
+    page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
 
-    window.setTimeout(() => {
+  const distance = targetLeft - startLeft;
+  const duration = 180; // まずは 180ms くらい
+  const startTime = performance.now();
+
+  suppressScrollSync.current = true;
+  setCurrentIndex(index);
+
+  function easeOutCubic(t: number) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function step(now: number) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutCubic(progress);
+
+    scroller.scrollLeft = startLeft + distance * eased;
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 380 : 40);
+    }
   }
+
+  requestAnimationFrame(step);
+}
 
   function goPrev() {
     if (currentIndex <= 0) return;
