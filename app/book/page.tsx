@@ -1,7 +1,5 @@
-import BookReaderClient from "./BookReaderClient";
+import { redirect } from "next/navigation";
 
 export default function BookPage() {
-  return <BookReaderClient />;
+  redirect("/");
 }
-
-

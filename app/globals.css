@@ -13,6 +13,47 @@
   --lavender: #ebe0ff;
   --shadow: 0 16px 34px rgba(101, 87, 130, 0.12);
   --shadow-lg: 0 22px 48px rgba(91, 80, 120, 0.18);
+  --shadow-cover: 0 28px 58px rgba(90, 72, 118, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  overscroll-behavior: none;
+  background:
+    radial-gradient(circle at top left, rgba(247, 184, 212, 0.3), transparent 28%),
+    radial-gradient(circle at right 20%, rgba(191, 228, 255, 0.32), transparent 24%),
+    linear-gradient(180deg, #fffafc 0%, #fff7f1 100%);
+  color: var(--ink);
+  font-family:
+    "Hiragino Sans",
+    "Yu Gothic",
+    "Noto Sans JP",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 .book-app-shell {
@@ -21,6 +62,18 @@
   min-height: 100dvh;
   position: relative;
   color: var(--ink);
+  isolation: isolate;
+}
+
+.book-app-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(247, 184, 212, 0.12), transparent 20%),
+    radial-gradient(circle at 88% 72%, rgba(191, 228, 255, 0.14), transparent 22%);
 }
 
 .book-app-shell-fixed {
@@ -45,8 +98,26 @@
 .paper-tag-button,
 .paper-message-button,
 .search-close,
-.toc-item {
+.toc-item,
+.profile-x-link {
   -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    background 180ms ease;
+}
+
+.topbar-button:active,
+.nav-button:active,
+.cover-button:active,
+.paper-tag-button:active,
+.paper-value-button:active,
+.paper-message-button:active,
+.search-close:active,
+.toc-item:active,
+.profile-x-link:active {
+  transform: scale(0.98);
 }
 
 .topbar-button {
@@ -55,7 +126,6 @@
   color: var(--ink);
   border-radius: 999px;
   padding: 12px 16px;
-  font: inherit;
   font-weight: 700;
   box-shadow: 0 10px 18px rgba(104, 89, 128, 0.08);
 }
@@ -77,6 +147,7 @@
   position: relative;
   height: calc(100dvh - 156px);
   overflow: hidden;
+  perspective: 1800px;
 }
 
 .book-shelf-glow {
@@ -134,6 +205,7 @@
   scroll-snap-align: center;
   scroll-snap-stop: always;
   overflow: hidden;
+  transform-style: preserve-3d;
 }
 
 .book-page,
@@ -141,14 +213,65 @@
   transform: scale(0.972) rotate(-0.5deg);
   transform-origin: center center;
   opacity: 0.88;
-  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, box-shadow 280ms ease;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    box-shadow 320ms ease,
+    filter 320ms ease;
+  filter: saturate(0.98);
 }
 
-.book-page.is-active,
 .profile-paper.is-active {
   opacity: 1;
   transform: scale(1) rotate(0deg);
   box-shadow: var(--shadow-lg);
+  filter: saturate(1);
+}
+
+.book-cover-page {
+  transform-origin: right center;
+  background:
+    linear-gradient(180deg, #fff7fb 0%, #fff5f0 100%);
+}
+
+.book-cover-page::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  bottom: 12px;
+  width: 14px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(239, 134, 182, 0.74) 0%,
+      rgba(247, 184, 212, 0.62) 30%,
+      rgba(191, 228, 255, 0.58) 100%
+    );
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.5),
+    -8px 0 18px rgba(105, 86, 129, 0.1);
+  opacity: 0.98;
+}
+
+.book-cover-page::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 18px;
+  right: 26px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.56), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.book-cover-page.is-active {
+  opacity: 1;
+  transform: perspective(1400px) rotateY(-11deg) scale(1) rotate(-0.2deg);
+  box-shadow: var(--shadow-cover);
+  filter: saturate(1.02);
 }
 
 .book-page-scroll {
@@ -180,7 +303,7 @@
   position: relative;
   min-height: 100%;
   border-radius: 24px;
-  padding: 28px 18px 24px;
+  padding: 34px 22px 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -189,8 +312,31 @@
   background:
     radial-gradient(circle at 18% 20%, rgba(247, 184, 212, 0.34), transparent 36%),
     radial-gradient(circle at 82% 24%, rgba(191, 228, 255, 0.32), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 249, 252, 0.72));
-  border: 1px solid rgba(255, 255, 255, 0.8);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 249, 252, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.66),
+    inset -16px 0 26px rgba(240, 173, 204, 0.08),
+    inset 10px 0 20px rgba(118, 188, 235, 0.05);
+}
+
+.cover-sheet-inner::before {
+  content: "";
+  position: absolute;
+  inset: 18px 18px 18px auto;
+  width: 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.08));
+  opacity: 0.9;
+}
+
+.cover-sheet-inner::after {
+  content: "";
+  position: absolute;
+  inset: 22px auto 22px 22px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(123, 96, 150, 0.12));
 }
 
 .cover-kicker {
@@ -204,6 +350,8 @@
   margin: 16px 0 8px;
   font-size: clamp(2.2rem, 7vw, 3.3rem);
   line-height: 1.05;
+  color: #5d465f;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.54);
 }
 
 .cover-subtitle {
@@ -226,9 +374,12 @@
   border: 1px solid rgba(255, 255, 255, 0.92);
   background: linear-gradient(135deg, #f8bfd8, #cbe9ff);
   color: #5a435f;
-  font: inherit;
   font-weight: 800;
   box-shadow: 0 12px 24px rgba(116, 98, 140, 0.16);
+}
+
+.cover-button:hover {
+  box-shadow: 0 16px 30px rgba(116, 98, 140, 0.2);
 }
 
 .cover-hint {
@@ -294,7 +445,12 @@
   right: -4px;
   width: 74px;
   height: 74px;
-  background: radial-gradient(circle at 0% 100%, rgba(255,255,255,0), rgba(255,255,255,0) 46%, rgba(255, 227, 238, 0.92) 46%);
+  background: radial-gradient(
+    circle at 0% 100%,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 46%,
+    rgba(255, 227, 238, 0.92) 46%
+  );
 }
 
 .paper-corner-b {
@@ -302,7 +458,12 @@
   left: -18px;
   width: 88px;
   height: 88px;
-  background: radial-gradient(circle at 100% 0%, rgba(255,255,255,0), rgba(255,255,255,0) 48%, rgba(221, 240, 255, 0.72) 48%);
+  background: radial-gradient(
+    circle at 100% 0%,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 48%,
+    rgba(221, 240, 255, 0.72) 48%
+  );
 }
 
 .paper-sparkle-a,
@@ -428,7 +589,6 @@
   background: transparent;
   padding: 0;
   text-align: left;
-  font: inherit;
   font-size: 13px;
   font-weight: 800;
   color: #7a6489;
@@ -444,7 +604,6 @@
 .paper-value-button,
 .paper-message-button {
   border: 0;
-  font: inherit;
   text-align: left;
 }
 
@@ -514,7 +673,6 @@
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.8);
   color: var(--ink);
-  font: inherit;
   font-weight: 800;
 }
 
@@ -539,7 +697,11 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, rgba(255, 253, 249, 0.985) 0%, rgba(255, 250, 244, 0.985) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 249, 0.985) 0%,
+    rgba(255, 250, 244, 0.985) 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.92);
   border-radius: 26px;
   box-shadow: 0 22px 44px rgba(88, 83, 120, 0.18);
@@ -576,7 +738,6 @@
   background: rgba(255, 255, 255, 0.74);
   padding: 10px 12px;
   border-radius: 999px;
-  font: inherit;
   font-size: 13px;
   font-weight: 700;
 }
@@ -588,7 +749,6 @@
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.72);
   color: var(--ink);
-  font: inherit;
 }
 
 .inspector-picked-value {
@@ -668,13 +828,45 @@
     padding: 14px 12px 126px;
   }
 
+  .book-stage-fixed {
+    height: calc(100dvh - 152px);
+  }
+
   .profile-page-scroll {
     padding: 22px 16px 26px 18px;
+  }
+
+  .cover-page-scroll {
+    padding: 22px 18px 30px;
+  }
+
+  .cover-sheet-inner {
+    padding: 30px 18px 24px;
   }
 
   .bottom-dock {
     width: min(calc(100% - 20px), 452px);
     gap: 8px;
     padding: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-page,
+  .profile-paper,
+  .topbar-button,
+  .nav-button,
+  .cover-button,
+  .paper-tag-button,
+  .paper-value-button,
+  .paper-message-button,
+  .search-close,
+  .toc-item,
+  .profile-x-link {
+    transition: none;
+  }
+
+  .book-cover-page.is-active {
+    transform: scale(1);
   }
 }
