@@ -160,7 +160,7 @@ select {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
   scroll-padding-inline: 0;
   scroll-behavior: smooth;
   overscroll-behavior-x: contain;
@@ -191,20 +191,18 @@ select {
 
 .book-page,
 .profile-paper {
-  transform: scale(0.986) rotate(-0.35deg);
+  transform: none;
   transform-origin: center center;
-  opacity: 0.94;
+  opacity: 1;
   transition:
-    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 200ms ease,
-    box-shadow 260ms ease,
-    filter 260ms ease;
-  filter: saturate(0.99);
+    box-shadow 220ms ease,
+    filter 220ms ease;
+  filter: saturate(1);
 }
 
 .profile-paper.is-active {
   opacity: 1;
-  transform: scale(1) rotate(0deg);
+  transform: none;
   box-shadow: var(--shadow-lg);
   filter: saturate(1);
 }
@@ -249,7 +247,7 @@ select {
 
 .book-cover-page.is-active {
   opacity: 1;
-  transform: perspective(1400px) rotateY(-8deg) scale(1) rotate(-0.12deg);
+  transform: none;
   box-shadow: var(--shadow-cover);
   filter: saturate(1.02);
 }
@@ -843,6 +841,6 @@ select {
   }
 
   .book-cover-page.is-active {
-    transform: scale(1);
+    transform: none;
   }
 }
