@@ -419,7 +419,7 @@ export default function BookReaderClient() {
     window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 380 : 40);
+    }, behavior === "smooth" ? 180 : 40);
   }
 
   function goPrev() {
