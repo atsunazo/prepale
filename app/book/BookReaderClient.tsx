@@ -355,7 +355,7 @@ export default function BookReaderClient() {
       (profile) => profile.id === pendingProfileId
     );
     if (profileIndex < 0) return;
-    scrollToIndex(profileIndex + 1);
+    scrollToIndex(profileIndex + 1, "smooth");
     setPendingProfileId(null);
   }, [filteredProfiles, pendingProfileId]);
 
@@ -404,20 +404,22 @@ export default function BookReaderClient() {
     setCurrentIndex(closestIndex);
   }
 
-  function scrollToIndex(index: number) {
+  function scrollToIndex(index: number, behavior: ScrollBehavior = "smooth") {
     const scroller = scrollerRef.current;
     const page = pageRefs.current[index];
     if (!scroller || !page) return;
 
     suppressScrollSync.current = true;
-    scroller.scrollLeft =
-      page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
+    scroller.scrollTo({
+      left: page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2,
+      behavior,
+    });
     setCurrentIndex(index);
 
-    requestAnimationFrame(() => {
+    window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    });
+    }, behavior === "smooth" ? 380 : 40);
   }
 
   function goPrev() {
