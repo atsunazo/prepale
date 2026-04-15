@@ -197,17 +197,52 @@ function ChevronIcon({ dir }: { dir: "left" | "right" }) {
 }
 
 function ProfileAvatar({ name, xId }: { name: string; xId: string }) {
-  const [candidateIndex, setCandidateIndex] = useState(0);
   const candidates = useMemo(() => buildAvatarCandidates(xId), [xId]);
-
-  useEffect(() => {
-    setCandidateIndex(0);
-  }, [xId]);
-
-  const showFallback = candidates.length === 0 || candidateIndex >= candidates.length;
+  const [resolvedSrc, setResolvedSrc] = useState<string | null>(null);
+  const [checked, setChecked] = useState(false);
   const fallbackText = buildAvatarFallback(name, xId);
 
-  if (showFallback) {
+  useEffect(() => {
+    let cancelled = false;
+    setResolvedSrc(null);
+    setChecked(false);
+
+    if (candidates.length === 0) {
+      setChecked(true);
+      return;
+    }
+
+    async function resolveAvatar() {
+      for (const candidate of candidates) {
+        const ok = await new Promise<boolean>((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          img.src = candidate;
+        });
+
+        if (cancelled) return;
+        if (ok) {
+          setResolvedSrc(candidate);
+          setChecked(true);
+          return;
+        }
+      }
+
+      if (!cancelled) {
+        setResolvedSrc(null);
+        setChecked(true);
+      }
+    }
+
+    resolveAvatar();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [candidates]);
+
+  if (!checked || !resolvedSrc) {
     return (
       <div className="profile-avatar-fallback" aria-label={`${name}のアイコン`}>
         {fallbackText}
@@ -215,14 +250,7 @@ function ProfileAvatar({ name, xId }: { name: string; xId: string }) {
     );
   }
 
-  return (
-    <img
-      src={candidates[candidateIndex]}
-      alt={`${name}のアイコン`}
-      className="profile-avatar-image"
-      onError={() => setCandidateIndex((prev) => prev + 1)}
-    />
-  );
+  return <img src={resolvedSrc} alt={`${name}のアイコン`} className="profile-avatar-image" />;
 }
 
 function EmptyState({ label }: { label: string }) {

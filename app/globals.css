@@ -162,7 +162,7 @@ select {
   padding: 0;
   scroll-snap-type: x proximity;
   scroll-padding-inline: 0;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   overscroll-behavior-x: contain;
   overscroll-behavior-y: none;
   scrollbar-width: none;
