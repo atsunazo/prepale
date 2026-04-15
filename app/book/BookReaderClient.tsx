@@ -9,8 +9,8 @@ import {
   type MouseEvent,
 } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../../lib/firebase";
-import type { Profile } from "../../types/profile";
+import { db } from "../lib/firebase";
+import type { Profile } from "../types/profile";
 
 type FieldKey =
   | "interests"
@@ -227,7 +227,7 @@ function EmptyState({ label }: { label: string }) {
   );
 }
 
-export default function BookReaderClient() {
+export default function UnifiedProfileBookClient() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -488,7 +488,7 @@ export default function BookReaderClient() {
         <div className="book-shelf-glow book-shelf-glow-a" />
         <div className="book-shelf-glow book-shelf-glow-b" />
 
-        <div ref={scrollerRef} className="book-carousel book-carousel-fixed" onScroll={handleScrollerScroll}>
+        <div ref={scrollerRef} className="book-carousel" onScroll={handleScrollerScroll}>
           <article
             ref={(element) => {
               pageRefs.current[0] = element;
@@ -511,7 +511,7 @@ export default function BookReaderClient() {
                 <button type="button" className="cover-button" onClick={() => scrollToIndex(1)}>
                   1ページ目へ
                 </button>
-                <p className="cover-hint">左へフリックすると、つづきのプロフィール帳へ進めます。</p>
+                <p className="cover-hint">左へフリックすると、そのままプロフィール帳へ進めます。</p>
               </section>
             </div>
           </article>
@@ -832,7 +832,14 @@ export default function BookReaderClient() {
                 />
 
                 <div className="floating-list">
-                  <button type="button" className="toc-item toc-item-cover" onClick={() => { scrollToIndex(0); setPanel(null); }}>
+                  <button
+                    type="button"
+                    className="toc-item toc-item-cover"
+                    onClick={() => {
+                      scrollToIndex(0);
+                      setPanel(null);
+                    }}
+                  >
                     <span className="toc-name">表紙</span>
                     <span className="toc-meta">プロフィール帳の入口に戻る</span>
                   </button>
