@@ -7,6 +7,7 @@ import {
   useState,
   type CSSProperties,
   type MouseEvent,
+  type TouchEvent,
 } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
@@ -240,6 +241,8 @@ export default function BookReaderClient() {
   const pageRefs = useRef<(HTMLElement | null)[]>([]);
   const scrollFrame = useRef<number | null>(null);
   const suppressScrollSync = useRef(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
@@ -415,6 +418,35 @@ export default function BookReaderClient() {
     scrollFrame.current = window.requestAnimationFrame(syncIndexFromScroll);
   }
 
+  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
+    const touch = event.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+  }
+
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX.current;
+    const deltaY = touch.clientY - touchStartY.current;
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    if (Math.abs(deltaX) < 28) return;
+    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
+
+    if (deltaX < 0 && currentIndex < bookPages.length - 1) {
+      scrollToIndex(currentIndex + 1);
+      return;
+    }
+
+    if (deltaX > 0 && currentIndex > 0) {
+      scrollToIndex(currentIndex - 1);
+    }
+  }
+
   function openToc(event: MouseEvent<HTMLElement>) {
     setPanel({ mode: "toc", anchor: getAnchorFromElement(event.currentTarget) });
   }
@@ -493,7 +525,13 @@ export default function BookReaderClient() {
         <div className="book-shelf-glow book-shelf-glow-a" />
         <div className="book-shelf-glow book-shelf-glow-b" />
 
-        <div ref={scrollerRef} className="book-carousel" onScroll={handleScrollerScroll}>
+        <div
+          ref={scrollerRef}
+          className="book-carousel"
+          onScroll={handleScrollerScroll}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <article
             ref={(element) => {
               pageRefs.current[0] = element;
@@ -550,9 +588,7 @@ export default function BookReaderClient() {
                 <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
 
                 <div className="book-page-scroll profile-page-scroll">
-                  <div className="profile-page-number">
-                    p. {String(pageIndex).padStart(2, "0")}
-                  </div>
+                  <div className="profile-page-number">p. {String(pageIndex).padStart(2, "0")}</div>
 
                   <header className="profile-paper-header">
                     <div className="profile-top-row">
@@ -586,9 +622,7 @@ export default function BookReaderClient() {
                       <button
                         type="button"
                         className="paper-label-button"
-                        onClick={(e) =>
-                          openFieldInspector(e, "interests", "興味のあるもの")
-                        }
+                        onClick={(e) => openFieldInspector(e, "interests", "興味のあるもの")}
                       >
                         興味のあるもの
                       </button>
@@ -599,9 +633,7 @@ export default function BookReaderClient() {
                             key={item}
                             type="button"
                             className="paper-tag-button"
-                            onClick={(e) =>
-                              openValueInspector(e, "interests", "興味のあるもの", item)
-                            }
+                            onClick={(e) => openValueInspector(e, "interests", "興味のあるもの", item)}
                           >
                             {item}
                           </button>
@@ -613,9 +645,7 @@ export default function BookReaderClient() {
                       <button
                         type="button"
                         className="paper-label-button"
-                        onClick={(e) =>
-                          openFieldInspector(e, "favorites", "好きなこと・もの")
-                        }
+                        onClick={(e) => openFieldInspector(e, "favorites", "好きなこと・もの")}
                       >
                         好きなこと・もの
                       </button>
@@ -626,14 +656,7 @@ export default function BookReaderClient() {
                             key={item}
                             type="button"
                             className="paper-tag-button paper-tag-soft-button"
-                            onClick={(e) =>
-                              openValueInspector(
-                                e,
-                                "favorites",
-                                "好きなこと・もの",
-                                item
-                              )
-                            }
+                            onClick={(e) => openValueInspector(e, "favorites", "好きなこと・もの", item)}
                           >
                             {item}
                           </button>
@@ -650,23 +673,14 @@ export default function BookReaderClient() {
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) =>
-                            openFieldInspector(e, "food", "好きな食べ物・飲み物")
-                          }
+                          onClick={(e) => openFieldInspector(e, "food", "好きな食べ物・飲み物")}
                         >
                           好きな食べ物・飲み物
                         </button>
                         <button
                           type="button"
                           className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(
-                              e,
-                              "food",
-                              "好きな食べ物・飲み物",
-                              profile.food || ""
-                            )
-                          }
+                          onClick={(e) => openValueInspector(e, "food", "好きな食べ物・飲み物", profile.food || "")}
                           disabled={!profile.food}
                         >
                           {profile.food || "―"}
@@ -677,23 +691,14 @@ export default function BookReaderClient() {
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) =>
-                            openFieldInspector(e, "place", "よく出没する場所")
-                          }
+                          onClick={(e) => openFieldInspector(e, "place", "よく出没する場所")}
                         >
                           よく出没する場所
                         </button>
                         <button
                           type="button"
                           className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(
-                              e,
-                              "place",
-                              "よく出没する場所",
-                              profile.place || ""
-                            )
-                          }
+                          onClick={(e) => openValueInspector(e, "place", "よく出没する場所", profile.place || "")}
                           disabled={!profile.place}
                         >
                           {profile.place || "―"}
@@ -704,23 +709,14 @@ export default function BookReaderClient() {
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) =>
-                            openFieldInspector(e, "club", "学生時代の部活動")
-                          }
+                          onClick={(e) => openFieldInspector(e, "club", "学生時代の部活動")}
                         >
                           学生時代の部活動
                         </button>
                         <button
                           type="button"
                           className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(
-                              e,
-                              "club",
-                              "学生時代の部活動",
-                              profile.club || ""
-                            )
-                          }
+                          onClick={(e) => openValueInspector(e, "club", "学生時代の部活動", profile.club || "")}
                           disabled={!profile.club}
                         >
                           {profile.club || "―"}
@@ -731,23 +727,14 @@ export default function BookReaderClient() {
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) =>
-                            openFieldInspector(e, "recent", "最近ハマっていること")
-                          }
+                          onClick={(e) => openFieldInspector(e, "recent", "最近ハマっていること")}
                         >
                           最近ハマっていること
                         </button>
                         <button
                           type="button"
                           className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(
-                              e,
-                              "recent",
-                              "最近ハマっていること",
-                              profile.recent || ""
-                            )
-                          }
+                          onClick={(e) => openValueInspector(e, "recent", "最近ハマっていること", profile.recent || "")}
                           disabled={!profile.recent}
                         >
                           {profile.recent || "―"}
@@ -765,11 +752,7 @@ export default function BookReaderClient() {
                           type="button"
                           className="paper-label-button"
                           onClick={(e) =>
-                            openFieldInspector(
-                              e,
-                              "recommendation",
-                              "おすすめしたいコンテンツ"
-                            )
+                            openFieldInspector(e, "recommendation", "おすすめしたいコンテンツ")
                           }
                         >
                           おすすめしたいコンテンツ
@@ -795,23 +778,14 @@ export default function BookReaderClient() {
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) =>
-                            openFieldInspector(e, "topics", "興味のある話題")
-                          }
+                          onClick={(e) => openFieldInspector(e, "topics", "興味のある話題")}
                         >
                           興味のある話題
                         </button>
                         <button
                           type="button"
                           className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(
-                              e,
-                              "topics",
-                              "興味のある話題",
-                              profile.topics || ""
-                            )
-                          }
+                          onClick={(e) => openValueInspector(e, "topics", "興味のある話題", profile.topics || "")}
                           disabled={!profile.topics}
                         >
                           {profile.topics || "―"}
@@ -832,14 +806,7 @@ export default function BookReaderClient() {
                     <button
                       type="button"
                       className="paper-message-button"
-                      onClick={(e) =>
-                        openValueInspector(
-                          e,
-                          "message",
-                          "ひとこと",
-                          profile.message || ""
-                        )
-                      }
+                      onClick={(e) => openValueInspector(e, "message", "ひとこと", profile.message || "")}
                       disabled={!profile.message}
                     >
                       {profile.message || "―"}
@@ -902,11 +869,7 @@ export default function BookReaderClient() {
                     ? panel.fieldLabel
                     : `「${panel.selectedValue}」`}
               </h2>
-              <button
-                type="button"
-                className="search-close"
-                onClick={() => setPanel(null)}
-              >
+              <button type="button" className="search-close" onClick={() => setPanel(null)}>
                 閉じる
               </button>
             </div>
@@ -933,7 +896,6 @@ export default function BookReaderClient() {
                     <span className="toc-name">表紙</span>
                     <span className="toc-meta">プロフィール帳の入口に戻る</span>
                   </button>
-
                   {filteredProfiles.map((profile, index) => (
                     <button
                       key={profile.id}
@@ -943,12 +905,10 @@ export default function BookReaderClient() {
                     >
                       <span className="toc-name">{profile.name}</span>
                       <span className="toc-meta">
-                        {(profile.favorites ?? []).slice(0, 2).join(" / ") ||
-                          "プロフィールを見る"}
+                        {(profile.favorites ?? []).slice(0, 2).join(" / ") || "プロフィールを見る"}
                       </span>
                     </button>
                   ))}
-
                   {filteredProfiles.length === 0 ? (
                     <p className="inspector-empty">一致するプロフィールがありません。</p>
                   ) : null}
@@ -956,9 +916,7 @@ export default function BookReaderClient() {
               </>
             ) : panel.mode === "field" ? (
               <>
-                <div className="inspector-picked-value">
-                  みんなの「{panel.fieldLabel}」
-                </div>
+                <div className="inspector-picked-value">みんなの「{panel.fieldLabel}」</div>
                 <div className="floating-list">
                   {fieldEntries.map((entry) => (
                     <button
@@ -975,9 +933,7 @@ export default function BookReaderClient() {
               </>
             ) : (
               <>
-                <div className="inspector-picked-value">
-                  「{panel.selectedValue}」を書いている人
-                </div>
+                <div className="inspector-picked-value">「{panel.selectedValue}」を書いている人</div>
                 <div className="floating-list">
                   {sameValueProfiles.length > 0 ? (
                     sameValueProfiles.map((entry) => (
@@ -988,15 +944,11 @@ export default function BookReaderClient() {
                         onClick={() => jumpToProfileById(entry.id)}
                       >
                         <span className="toc-name">{entry.name}</span>
-                        <span className="toc-meta">
-                          {entry.matchedFields.map((f) => f.label).join(" / ")}
-                        </span>
+                        <span className="toc-meta">{entry.matchedFields.map((f) => f.label).join(" / ")}</span>
                       </button>
                     ))
                   ) : (
-                    <p className="inspector-empty">
-                      同じ内容を書いている人はいません。
-                    </p>
+                    <p className="inspector-empty">同じ内容を書いている人はいません。</p>
                   )}
                 </div>
               </>
