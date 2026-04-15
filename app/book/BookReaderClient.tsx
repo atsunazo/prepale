@@ -405,42 +405,20 @@ export default function BookReaderClient() {
   }
 
   function scrollToIndex(index: number) {
-  const scroller = scrollerRef.current;
-  const page = pageRefs.current[index];
-  if (!scroller || !page) return;
+    const scroller = scrollerRef.current;
+    const page = pageRefs.current[index];
+    if (!scroller || !page) return;
 
-  const startLeft = scroller.scrollLeft;
-  const targetLeft =
-    page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
+    suppressScrollSync.current = true;
+    scroller.scrollLeft =
+      page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
+    setCurrentIndex(index);
 
-  const distance = targetLeft - startLeft;
-  const duration = 100; // まずは 180ms くらい
-  const startTime = performance.now();
-
-  suppressScrollSync.current = true;
-  setCurrentIndex(index);
-
-  function easeOutCubic(t: number) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function step(now: number) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easeOutCubic(progress);
-
-    scroller.scrollLeft = startLeft + distance * eased;
-
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    } else {
+    requestAnimationFrame(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }
+    });
   }
-
-  requestAnimationFrame(step);
-}
 
   function goPrev() {
     if (currentIndex <= 0) return;
