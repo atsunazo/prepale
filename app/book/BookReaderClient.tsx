@@ -9,8 +9,8 @@ import {
   type MouseEvent,
 } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../lib/firebase";
-import type { Profile } from "../types/profile";
+import { db } from "../../lib/firebase";
+import type { Profile } from "../../types/profile";
 
 type FieldKey =
   | "interests"
