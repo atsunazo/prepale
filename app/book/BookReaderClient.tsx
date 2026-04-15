@@ -355,7 +355,7 @@ export default function BookReaderClient() {
       (profile) => profile.id === pendingProfileId
     );
     if (profileIndex < 0) return;
-    scrollToIndex(profileIndex + 1, "smooth");
+    scrollToIndex(profileIndex + 1);
     setPendingProfileId(null);
   }, [filteredProfiles, pendingProfileId]);
 
