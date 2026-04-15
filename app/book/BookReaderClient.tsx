@@ -88,11 +88,11 @@ function getPanelLayout(_anchor: FloatingAnchor | null): PanelLayout | null {
   const viewportHeight = window.innerHeight;
   const width = Math.min(392, viewportWidth - margin * 2);
   const left = Math.max(margin, (viewportWidth - width) / 2);
-  const preferredTop = 18;
-  const top = clamp(preferredTop, 10, Math.max(10, viewportHeight - 300));
+  const preferredTop = Math.round(viewportHeight * 0.25);
+  const top = clamp(preferredTop, 72, Math.max(72, viewportHeight - 300));
   const maxHeight = Math.max(
     240,
-    Math.min(540, Math.round(viewportHeight * 0.72), viewportHeight - top - margin)
+    Math.min(540, Math.round(viewportHeight * 0.62), viewportHeight - top - margin)
   );
 
   return { top, left, width, maxHeight };
@@ -120,12 +120,8 @@ function buildAvatarCandidates(xId: string) {
 }
 
 function buildAvatarFallback(name: string, xId: string) {
-  const handle = buildHandle(xId);
-  if (handle) return handle.slice(0, 2).toUpperCase();
-
-  const latin = (name || "").replace(/[^A-Za-z0-9]/g, "");
-  if (latin) return latin.slice(0, 2).toUpperCase();
-
+  const raw = buildHandle(xId);
+  if (raw) return raw.slice(0, 2);
   return (name || "？").slice(0, 2);
 }
 
@@ -480,8 +476,8 @@ export default function BookReaderClient() {
 
   if (loading) {
     return (
-      <main className="book-app-shell book-app-shell-fixed book-app-shell-no-topbar">
-        <section className="book-loading-sheet book-loading-sheet-compact">
+      <main className="book-app-shell book-app-shell-fixed book-app-shell-balanced">
+        <section className="book-loading-sheet book-loading-sheet-balanced">
           <div className="book-loading-card">
             <p className="loading-copy">プロフィールを読み込んでいます…</p>
           </div>
@@ -492,8 +488,8 @@ export default function BookReaderClient() {
 
   if (bookPages.length === 1) {
     return (
-      <main className="book-app-shell book-app-shell-fixed book-app-shell-no-topbar">
-        <section className="book-empty-wrap book-empty-wrap-compact">
+      <main className="book-app-shell book-app-shell-fixed book-app-shell-balanced">
+        <section className="book-empty-wrap book-empty-wrap-balanced">
           <EmptyState label="プロフィールがまだありません。先にデータを追加してください。" />
         </section>
       </main>
@@ -501,8 +497,8 @@ export default function BookReaderClient() {
   }
 
   return (
-    <main className="book-app-shell book-app-shell-fixed book-app-shell-no-topbar">
-      <section className="book-stage book-stage-fixed book-stage-no-topbar" aria-label="プロフィールブック">
+    <main className="book-app-shell book-app-shell-fixed book-app-shell-balanced">
+      <section className="book-stage book-stage-fixed book-stage-balanced" aria-label="プロフィールブック">
         <div className="book-shelf-glow book-shelf-glow-a" />
         <div className="book-shelf-glow book-shelf-glow-b" />
 
@@ -569,7 +565,7 @@ export default function BookReaderClient() {
                 <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
 
                 <div className="book-page-scroll profile-page-scroll">
-                  <header className="profile-paper-header profile-paper-header-tight">
+                  <header className="profile-paper-header profile-paper-header-balanced">
                     <div className="profile-top-row">
                       <div className="profile-avatar-box">
                         <ProfileAvatar name={profile.name} xId={profile.xId} />

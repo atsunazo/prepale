@@ -14,6 +14,9 @@
   --shadow: 0 16px 34px rgba(101, 87, 130, 0.12);
   --shadow-lg: 0 22px 48px rgba(91, 80, 120, 0.18);
   --shadow-cover: 0 28px 58px rgba(90, 72, 118, 0.22);
+  --dock-height: 76px;
+  --stage-gap-top: 22px;
+  --stage-gap-bottom: 22px;
 }
 
 * {
@@ -79,11 +82,11 @@ select {
 .book-app-shell-fixed {
   height: 100dvh;
   overflow: hidden;
-  padding: 8px 14px 130px;
+  padding: var(--stage-gap-top) 14px calc(var(--dock-height) + var(--stage-gap-bottom) + env(safe-area-inset-bottom));
 }
 
-.book-app-shell-no-topbar {
-  padding-top: 8px;
+.book-app-shell-balanced {
+  padding-top: var(--stage-gap-top);
 }
 
 .topbar-button,
@@ -118,13 +121,13 @@ select {
 
 .book-stage-fixed {
   position: relative;
-  height: calc(100dvh - 146px);
+  height: calc(100dvh - var(--stage-gap-top) - var(--dock-height) - var(--stage-gap-bottom) - env(safe-area-inset-bottom));
   overflow: hidden;
   perspective: 1800px;
 }
 
-.book-stage-no-topbar {
-  height: calc(100dvh - 146px);
+.book-stage-balanced {
+  height: calc(100dvh - var(--stage-gap-top) - var(--dock-height) - var(--stage-gap-bottom) - env(safe-area-inset-bottom));
 }
 
 .book-shelf-glow {
@@ -136,7 +139,7 @@ select {
 }
 
 .book-shelf-glow-a {
-  inset: 8% auto auto -4%;
+  inset: 10% auto auto -4%;
   width: 110px;
   height: 110px;
   background: rgba(247, 184, 212, 0.42);
@@ -156,7 +159,7 @@ select {
   height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 0 0 16px;
+  padding: 0;
   scroll-snap-type: x proximity;
   scroll-padding-inline: 0;
   scroll-behavior: smooth;
@@ -274,7 +277,7 @@ select {
 }
 
 .cover-page-scroll {
-  padding: 22px 22px 34px;
+  padding: 24px 22px 24px;
 }
 
 .cover-sheet-inner {
@@ -398,7 +401,7 @@ select {
 }
 
 .profile-page-scroll {
-  padding: 18px 18px 28px 20px;
+  padding: 22px 18px 22px 20px;
 }
 
 .paper-spine {
@@ -467,8 +470,8 @@ select {
   margin-top: 16px;
 }
 
-.profile-paper-header-tight {
-  margin-top: 2px;
+.profile-paper-header-balanced {
+  margin-top: 8px;
 }
 
 .profile-top-row {
@@ -500,8 +503,7 @@ select {
   color: #6b5a78;
   font-size: 24px;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .profile-kicker {
@@ -619,7 +621,7 @@ select {
 .bottom-dock {
   position: fixed;
   left: 50%;
-  bottom: max(14px, env(safe-area-inset-bottom));
+  bottom: max(var(--stage-gap-bottom), env(safe-area-inset-bottom));
   transform: translateX(-50%);
   width: min(calc(100% - 28px), 452px);
   display: grid;
@@ -773,12 +775,12 @@ select {
 
 .book-loading-sheet,
 .book-empty-wrap {
-  min-height: calc(100dvh - 120px);
+  min-height: calc(100dvh - var(--stage-gap-top) - var(--dock-height) - var(--stage-gap-bottom) - env(safe-area-inset-bottom));
 }
 
-.book-loading-sheet-compact,
-.book-empty-wrap-compact {
-  min-height: calc(100dvh - 146px);
+.book-loading-sheet-balanced,
+.book-empty-wrap-balanced {
+  min-height: calc(100dvh - var(--stage-gap-top) - var(--dock-height) - var(--stage-gap-bottom) - env(safe-area-inset-bottom));
 }
 
 .book-loading-card,
@@ -796,22 +798,22 @@ select {
 }
 
 @media (max-width: 420px) {
-  .book-app-shell-fixed,
-  .book-app-shell-no-topbar {
-    padding: 8px 12px 126px;
+  :root {
+    --stage-gap-top: 18px;
+    --stage-gap-bottom: 18px;
   }
 
-  .book-stage-fixed,
-  .book-stage-no-topbar {
-    height: calc(100dvh - 142px);
+  .book-app-shell-fixed,
+  .book-app-shell-balanced {
+    padding-inline: 12px;
   }
 
   .profile-page-scroll {
-    padding: 16px 16px 26px 18px;
+    padding: 20px 16px 20px 18px;
   }
 
   .cover-page-scroll {
-    padding: 18px 18px 30px;
+    padding: 20px 18px 20px;
   }
 
   .cover-sheet-inner {
