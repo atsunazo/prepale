@@ -154,12 +154,18 @@ function getFieldValues(profile: Profile, fieldKey: FieldKey): string[] {
       return (profile.clubTokens ?? []).filter(Boolean).map((v) => v.trim());
     case "recent":
       return (profile.recentTokens ?? []).filter(Boolean).map((v) => v.trim());
-    case "recommendation":
-      return normalizeText(profile.recommendation) ? [profile.recommendation.trim()] : [];
-    case "topics":
-      return normalizeText(profile.topics) ? [profile.topics.trim()] : [];
-    case "message":
-      return normalizeText(profile.message) ? [profile.message.trim()] : [];
+    case "recommendation": {
+      const value = normalizeText(profile.recommendation);
+      return value ? [value] : [];
+    }
+    case "topics": {
+      const value = normalizeText(profile.topics);
+      return value ? [value] : [];
+    }
+    case "message": {
+      const value = normalizeText(profile.message);
+      return value ? [value] : [];
+    }
     default:
       return [];
   }
