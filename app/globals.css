@@ -17,6 +17,13 @@
   --dock-height: 76px;
   --stage-gap-top: 22px;
   --stage-gap-bottom: 22px;
+  --favorite-color: #ef7f96;
+  --favorite-bg: #fff1f4;
+  --favorite-border: #f6b8c5;
+
+  --bookmark-color: #d99a1f;
+  --bookmark-bg: #fff7df;
+  --bookmark-border: #efd28a;
 }
 
 * {
@@ -1040,4 +1047,54 @@ select {
   .book-cover-page.is-active {
     transform: none;
   }
+}
+
+.icon-toggle-button {
+  color: #8f8478;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(166, 146, 126, 0.2);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.icon-toggle-button.is-active {
+  box-shadow: 0 8px 18px rgba(185, 155, 120, 0.14);
+}
+
+.icon-toggle-button.is-active:nth-of-type(1) {
+  color: var(--favorite-color);
+  background: linear-gradient(180deg, #fff8fa 0%, var(--favorite-bg) 100%);
+  border-color: var(--favorite-border);
+}
+
+.icon-toggle-button.is-active:nth-of-type(2) {
+  color: var(--bookmark-color);
+  background: linear-gradient(180deg, #fffcef 0%, var(--bookmark-bg) 100%);
+  border-color: var(--bookmark-border);
+}
+
+.toc-inline-icon.is-favorite {
+  color: var(--favorite-color);
+  background: var(--favorite-bg);
+  border: 1px solid var(--favorite-border);
+  box-shadow: 0 4px 10px rgba(239, 127, 150, 0.12);
+}
+
+.toc-inline-icon.is-bookmark {
+  color: var(--bookmark-color);
+  background: var(--bookmark-bg);
+  border: 1px solid var(--bookmark-border);
+  box-shadow: 0 4px 10px rgba(217, 154, 31, 0.14);
+}
+
+.paper-bookmark-ribbon {
+  color: #fffaf0;
+  background: linear-gradient(180deg, #f3c14f 0%, #d99a1f 100%);
+  box-shadow:
+    0 10px 18px rgba(181, 132, 24, 0.24),
+    0 2px 4px rgba(255, 255, 255, 0.22) inset;
 }

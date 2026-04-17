@@ -47,10 +47,6 @@ type FloatingPanelState =
       fieldLabel: string;
       selectedValue: string;
     }
-  | {
-      mode: "bookmarks";
-      anchor: FloatingAnchor;
-    }
   | null;
 
 type PanelLayout = {
@@ -140,20 +136,24 @@ function normalizeText(value?: string) {
   return (value ?? "").trim();
 }
 
+function cleanArray(values?: string[]) {
+  return (values ?? []).filter(Boolean).map((v) => v.trim()).filter(Boolean);
+}
+
 function getFieldValues(profile: Profile, fieldKey: FieldKey): string[] {
   switch (fieldKey) {
     case "interests":
-      return (profile.interests ?? []).filter(Boolean).map((v) => v.trim());
+      return cleanArray(profile.interests);
     case "favorites":
-      return (profile.favorites ?? []).filter(Boolean).map((v) => v.trim());
+      return cleanArray(profile.favorites);
     case "food":
-      return (profile.foodTokens ?? []).filter(Boolean).map((v) => v.trim());
+      return cleanArray(profile.foodTokens);
     case "place":
-      return (profile.placeTokens ?? []).filter(Boolean).map((v) => v.trim());
+      return cleanArray(profile.placeTokens);
     case "club":
-      return (profile.clubTokens ?? []).filter(Boolean).map((v) => v.trim());
+      return cleanArray(profile.clubTokens);
     case "recent":
-      return (profile.recentTokens ?? []).filter(Boolean).map((v) => v.trim());
+      return cleanArray(profile.recentTokens);
     case "recommendation": {
       const value = normalizeText(profile.recommendation);
       return value ? [value] : [];
@@ -178,7 +178,6 @@ function getFieldSummary(profile: Profile, fieldKey: FieldKey) {
 function getMatchedFieldsForValue(profile: Profile, selectedValue: string) {
   const target = selectedValue.trim();
   if (!target) return [];
-
   return ALL_FIELDS.filter(({ key }) => getFieldValues(profile, key).includes(target));
 }
 
@@ -204,22 +203,6 @@ function XIcon() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M18.901 1.154h3.68l-8.04 9.188L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.472l8.6-9.829L0 1.154h7.594l5.243 6.932 6.064-6.932Zm-1.29 19.49h2.04L6.486 3.24H4.298l13.313 17.404Z" />
-    </svg>
-  );
-}
-
-function ChevronIcon({ dir }: { dir: "left" | "right" }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      {dir === "left" ? <path d="m15 18-6-6 6-6" /> : <path d="m9 18 6-6-6-6" />}
     </svg>
   );
 }
@@ -322,6 +305,36 @@ function EmptyState({ label }: { label: string }) {
   );
 }
 
+function InlineIndicators({
+  hasX,
+  isFavorite,
+  isBookmarked,
+}: {
+  hasX: boolean;
+  isFavorite: boolean;
+  isBookmarked: boolean;
+}) {
+  return (
+    <span className="toc-icons" aria-hidden="true">
+      {hasX ? (
+        <span className="toc-inline-icon is-x">
+          <XIcon />
+        </span>
+      ) : null}
+      {isFavorite ? (
+        <span className="toc-inline-icon is-favorite">
+          <HeartIcon filled />
+        </span>
+      ) : null}
+      {isBookmarked ? (
+        <span className="toc-inline-icon is-bookmark">
+          <BookmarkIcon filled />
+        </span>
+      ) : null}
+    </span>
+  );
+}
+
 function TokenFieldBlock({
   label,
   fieldKey,
@@ -352,9 +365,9 @@ function TokenFieldBlock({
 
       <div className="paper-tags paper-tags-inline">
         {items.length > 0 ? (
-          items.map((item) => (
+          items.map((item, index) => (
             <button
-              key={item}
+              key={`${fieldKey}-${item}-${index}`}
               type="button"
               className="paper-tag-button paper-tag-soft-button"
               onClick={(e) => onOpenValue(e, fieldKey, label, item)}
@@ -394,6 +407,7 @@ export default function BookReaderClient() {
     const prevHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
+
     return () => {
       document.body.style.overflow = prevBodyOverflow;
       document.documentElement.style.overflow = prevHtmlOverflow;
@@ -450,11 +464,6 @@ export default function BookReaderClient() {
     return filteredProfiles;
   }, [filteredProfiles, tocFilter, favoriteIdSet, bookmarkIdSet]);
 
-  const bookmarkProfiles = useMemo(
-    () => filteredProfiles.filter((profile) => bookmarkIdSet.has(profile.id)),
-    [filteredProfiles, bookmarkIdSet]
-  );
-
   const bookPages = useMemo(
     () => [
       { kind: "cover" as const },
@@ -462,6 +471,10 @@ export default function BookReaderClient() {
     ],
     [filteredProfiles]
   );
+
+  const progressMax = Math.max(bookPages.length - 1, 1);
+  const progressValue = Math.min(currentIndex, progressMax);
+  const progressPercent = (progressValue / progressMax) * 100;
 
   useEffect(() => {
     if (bookPages.length === 0) {
@@ -508,11 +521,9 @@ export default function BookReaderClient() {
 
   const fieldEntries = useMemo(() => {
     if (!panel || panel.mode !== "field") return [];
-
     return profiles
       .map((profile) => ({
-        id: profile.id,
-        name: profile.name,
+        profile,
         summary: getFieldSummary(profile, panel.fieldKey),
       }))
       .filter((item) => item.summary);
@@ -520,11 +531,9 @@ export default function BookReaderClient() {
 
   const sameValueProfiles = useMemo(() => {
     if (!panel || panel.mode !== "value") return [];
-
     return profiles
       .map((profile) => ({
-        id: profile.id,
-        name: profile.name,
+        profile,
         matchedFields: getMatchedFieldsForValue(profile, panel.selectedValue),
       }))
       .filter((item) => item.matchedFields.length > 0);
@@ -567,16 +576,6 @@ export default function BookReaderClient() {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
     }, behavior === "smooth" ? 380 : 40);
-  }
-
-  function goPrev() {
-    if (currentIndex <= 0) return;
-    scrollToIndex(currentIndex - 1);
-  }
-
-  function goNext() {
-    if (currentIndex >= bookPages.length - 1) return;
-    scrollToIndex(currentIndex + 1);
   }
 
   function jumpToProfileById(profileId: string) {
@@ -623,10 +622,6 @@ export default function BookReaderClient() {
     setPanel({ mode: "toc", anchor: getAnchorFromElement(event.currentTarget) });
   }
 
-  function openBookmarks(event: MouseEvent<HTMLElement>) {
-    setPanel({ mode: "bookmarks", anchor: getAnchorFromElement(event.currentTarget) });
-  }
-
   function openFieldInspector(
     event: MouseEvent<HTMLElement>,
     fieldKey: FieldKey,
@@ -667,6 +662,39 @@ export default function BookReaderClient() {
   function toggleBookmark(profileId: string) {
     setBookmarkIds((prev) =>
       prev.includes(profileId) ? prev.filter((id) => id !== profileId) : [...prev, profileId]
+    );
+  }
+
+  function renderProfileListItem(profile: Profile, meta: string, keyPrefix: string) {
+    const isFavorite = favoriteIdSet.has(profile.id);
+    const isBookmarked = bookmarkIdSet.has(profile.id);
+    const hasX = Boolean(buildXUrl(profile.xId ?? ""));
+
+    return (
+      <button
+        key={`${keyPrefix}-${profile.id}`}
+        type="button"
+        className="toc-item"
+        onClick={() => jumpToProfileById(profile.id)}
+      >
+        <span className="toc-main">
+          <span className="toc-avatar">
+            <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
+          </span>
+
+          <span className="toc-copy">
+            <span className="toc-row">
+              <span className="toc-name">{profile.name}</span>
+              <InlineIndicators
+                hasX={hasX}
+                isFavorite={isFavorite}
+                isBookmarked={isBookmarked}
+              />
+            </span>
+            <span className="toc-meta">{meta}</span>
+          </span>
+        </span>
+      </button>
     );
   }
 
@@ -749,7 +777,7 @@ export default function BookReaderClient() {
           </article>
 
           {filteredProfiles.map((profile, index) => {
-            const xUrl = buildXUrl(profile.xId);
+            const xUrl = buildXUrl(profile.xId ?? "");
             const pageIndex = index + 1;
             const isActive = pageIndex === currentIndex;
             const isFavorite = favoriteIdSet.has(profile.id);
@@ -766,234 +794,243 @@ export default function BookReaderClient() {
                 } ${isBookmarked ? "is-bookmarked" : ""}`}
                 aria-current={isActive ? "page" : undefined}
               >
-                <div className="paper-spine" aria-hidden="true" />
-                <div className="paper-corner paper-corner-a" aria-hidden="true" />
-                <div className="paper-corner paper-corner-b" aria-hidden="true" />
-                <div className="paper-sparkle paper-sparkle-a" aria-hidden="true" />
-                <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
-
                 {isBookmarked ? (
                   <div className="paper-bookmark-ribbon" aria-hidden="true">
                     <BookmarkIcon filled />
                   </div>
                 ) : null}
 
-                <div
-                  ref={(element) => {
-                    pageScrollRefs.current[pageIndex] = element;
-                  }}
-                  className="book-page-scroll profile-page-scroll"
-                >
-                  <header className="profile-paper-header profile-paper-header-balanced">
-                    <div className="profile-top-row">
-                      <div className="profile-avatar-box">
-                        <ProfileAvatar name={profile.name} xId={profile.xId} />
-                      </div>
+                <div className="profile-paper-frame">
+                  <div className="paper-spine" aria-hidden="true" />
+                  <div className="paper-corner paper-corner-a" aria-hidden="true" />
+                  <div className="paper-corner paper-corner-b" aria-hidden="true" />
+                  <div className="paper-sparkle paper-sparkle-a" aria-hidden="true" />
+                  <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
 
-                      <div className="profile-heading-copy">
-                        <div className="profile-kicker">PROFILE</div>
-                        <h2 className="profile-name">{profile.name}</h2>
-                      </div>
+                  <div
+                    ref={(element) => {
+                      pageScrollRefs.current[pageIndex] = element;
+                    }}
+                    className="book-page-scroll profile-page-scroll"
+                  >
+                    <header className="profile-paper-header profile-paper-header-balanced">
+                      <div className="profile-top-row">
+                        <div className="profile-avatar-box">
+                          <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
+                        </div>
 
-                      <div className="profile-head-actions">
-                        <button
-                          type="button"
-                          className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
-                          aria-label={isFavorite ? "お気に入りを解除" : "お気に入りに追加"}
-                          onClick={() => toggleFavorite(profile.id)}
-                        >
-                          <HeartIcon filled={isFavorite} />
-                        </button>
+                        <div className="profile-heading-copy">
+                          <div className="profile-kicker">PROFILE</div>
+                          <h2 className="profile-name">{profile.name}</h2>
+                        </div>
 
-                        <button
-                          type="button"
-                          className={`icon-toggle-button ${isBookmarked ? "is-active" : ""}`}
-                          aria-label={isBookmarked ? "ブックマークを解除" : "ブックマークに追加"}
-                          onClick={() => toggleBookmark(profile.id)}
-                        >
-                          <BookmarkIcon filled={isBookmarked} />
-                        </button>
-
-                        {xUrl ? (
-                          <a
-                            href={xUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="profile-x-link"
-                            aria-label={`${profile.name}のXアカウント`}
-                          >
-                            <XIcon />
-                          </a>
-                        ) : null}
-                      </div>
-                    </div>
-                  </header>
-
-                  <section className="paper-section">
-                    <h3 className="paper-section-title">この人らしさ</h3>
-
-                    <div className="paper-item-block">
-                      <button
-                        type="button"
-                        className="paper-label-button"
-                        onClick={(e) => openFieldInspector(e, "interests", "興味のあるもの")}
-                      >
-                        興味のあるもの
-                      </button>
-
-                      <div className="paper-tags">
-                        {(profile.interests ?? []).map((item) => (
+                        <div className="profile-head-actions">
                           <button
-                            key={item}
                             type="button"
-                            className="paper-tag-button"
-                            onClick={(e) =>
-                              openValueInspector(e, "interests", "興味のあるもの", item)
-                            }
+                            className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
+                            aria-label={isFavorite ? "お気に入りを解除" : "お気に入りに追加"}
+                            onClick={() => toggleFavorite(profile.id)}
                           >
-                            {item}
+                            <HeartIcon filled={isFavorite} />
                           </button>
-                        ))}
-                      </div>
-                    </div>
 
-                    <div className="paper-item-block">
-                      <button
-                        type="button"
-                        className="paper-label-button"
-                        onClick={(e) => openFieldInspector(e, "favorites", "好きなこと・もの")}
-                      >
-                        好きなこと・もの
-                      </button>
-
-                      <div className="paper-tags paper-tags-inline">
-                        {(profile.favorites ?? []).filter(Boolean).map((item) => (
                           <button
-                            key={item}
                             type="button"
-                            className="paper-tag-button paper-tag-soft-button"
-                            onClick={(e) =>
-                              openValueInspector(e, "favorites", "好きなこと・もの", item)
-                            }
+                            className={`icon-toggle-button ${isBookmarked ? "is-active" : ""}`}
+                            aria-label={isBookmarked ? "ブックマークを解除" : "ブックマークに追加"}
+                            onClick={() => toggleBookmark(profile.id)}
                           >
-                            {item}
+                            <BookmarkIcon filled={isBookmarked} />
                           </button>
-                        ))}
+
+                          {xUrl ? (
+                            <a
+                              href={xUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="profile-x-link"
+                              aria-label={`${profile.name}のXアカウント`}
+                            >
+                              <XIcon />
+                            </a>
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
-                  </section>
+                    </header>
 
-                  <section className="paper-section">
-                    <h3 className="paper-section-title">話しかけるヒント</h3>
+                    <section className="paper-section">
+                      <h3 className="paper-section-title">この人らしさ</h3>
 
-                    <div className="paper-list-block">
-                      <TokenFieldBlock
-                        label="好きな食べ物・飲み物"
-                        fieldKey="food"
-                        items={profile.foodTokens ?? []}
-                        onOpenField={openFieldInspector}
-                        onOpenValue={openValueInspector}
-                      />
-
-                      <TokenFieldBlock
-                        label="よく出没する場所"
-                        fieldKey="place"
-                        items={profile.placeTokens ?? []}
-                        onOpenField={openFieldInspector}
-                        onOpenValue={openValueInspector}
-                      />
-
-                      <TokenFieldBlock
-                        label="学生時代の部活動"
-                        fieldKey="club"
-                        items={profile.clubTokens ?? []}
-                        onOpenField={openFieldInspector}
-                        onOpenValue={openValueInspector}
-                      />
-
-                      <TokenFieldBlock
-                        label="最近ハマっていること"
-                        fieldKey="recent"
-                        items={profile.recentTokens ?? []}
-                        onOpenField={openFieldInspector}
-                        onOpenValue={openValueInspector}
-                      />
-                    </div>
-                  </section>
-
-                  <section className="paper-section">
-                    <h3 className="paper-section-title">もっと知りたい</h3>
-
-                    <div className="paper-list-block">
-                      <div className="paper-item">
+                      <div className="paper-item-block">
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) =>
-                            openFieldInspector(e, "recommendation", "おすすめしたいコンテンツ")
-                          }
+                          onClick={(e) => openFieldInspector(e, "interests", "興味のあるもの")}
                         >
-                          おすすめしたいコンテンツ
+                          興味のあるもの
                         </button>
-                        <button
-                          type="button"
-                          className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(
-                              e,
-                              "recommendation",
-                              "おすすめしたいコンテンツ",
-                              profile.recommendation || ""
-                            )
-                          }
-                          disabled={!profile.recommendation}
-                        >
-                          {profile.recommendation || "―"}
-                        </button>
+
+                        <div className="paper-tags">
+                          {(profile.interests ?? []).map((item, itemIndex) => (
+                            <button
+                              key={`interests-${profile.id}-${item}-${itemIndex}`}
+                              type="button"
+                              className="paper-tag-button"
+                              onClick={(e) =>
+                                openValueInspector(e, "interests", "興味のあるもの", item)
+                              }
+                            >
+                              {item}
+                            </button>
+                          ))}
+                        </div>
                       </div>
 
-                      <div className="paper-item">
+                      <div className="paper-item-block">
                         <button
                           type="button"
                           className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "topics", "興味のある話題")}
+                          onClick={(e) => openFieldInspector(e, "favorites", "好きなこと・もの")}
                         >
-                          興味のある話題
+                          好きなこと・もの
                         </button>
-                        <button
-                          type="button"
-                          className="paper-value-button"
-                          onClick={(e) =>
-                            openValueInspector(e, "topics", "興味のある話題", profile.topics || "")
-                          }
-                          disabled={!profile.topics}
-                        >
-                          {profile.topics || "―"}
-                        </button>
+
+                        <div className="paper-tags paper-tags-inline">
+                          {(profile.favorites ?? [])
+                            .filter(Boolean)
+                            .map((item, itemIndex) => (
+                              <button
+                                key={`favorites-${profile.id}-${item}-${itemIndex}`}
+                                type="button"
+                                className="paper-tag-button paper-tag-soft-button"
+                                onClick={(e) =>
+                                  openValueInspector(e, "favorites", "好きなこと・もの", item)
+                                }
+                              >
+                                {item}
+                              </button>
+                            ))}
+                        </div>
                       </div>
-                    </div>
-                  </section>
+                    </section>
 
-                  <section className="paper-message">
-                    <button
-                      type="button"
-                      className="paper-label-button paper-label-button-message"
-                      onClick={(e) => openFieldInspector(e, "message", "ひとこと")}
-                    >
-                      ひとこと
-                    </button>
+                    <section className="paper-section">
+                      <h3 className="paper-section-title">話しかけるヒント</h3>
 
-                    <button
-                      type="button"
-                      className="paper-message-button"
-                      onClick={(e) =>
-                        openValueInspector(e, "message", "ひとこと", profile.message || "")
-                      }
-                      disabled={!profile.message}
-                    >
-                      {profile.message || "―"}
-                    </button>
-                  </section>
+                      <div className="paper-list-block">
+                        <TokenFieldBlock
+                          label="好きな食べ物・飲み物"
+                          fieldKey="food"
+                          items={profile.foodTokens ?? []}
+                          onOpenField={openFieldInspector}
+                          onOpenValue={openValueInspector}
+                        />
+
+                        <TokenFieldBlock
+                          label="よく出没する場所"
+                          fieldKey="place"
+                          items={profile.placeTokens ?? []}
+                          onOpenField={openFieldInspector}
+                          onOpenValue={openValueInspector}
+                        />
+
+                        <TokenFieldBlock
+                          label="学生時代の部活動"
+                          fieldKey="club"
+                          items={profile.clubTokens ?? []}
+                          onOpenField={openFieldInspector}
+                          onOpenValue={openValueInspector}
+                        />
+
+                        <TokenFieldBlock
+                          label="最近ハマっていること"
+                          fieldKey="recent"
+                          items={profile.recentTokens ?? []}
+                          onOpenField={openFieldInspector}
+                          onOpenValue={openValueInspector}
+                        />
+                      </div>
+                    </section>
+
+                    <section className="paper-section">
+                      <h3 className="paper-section-title">もっと知りたい</h3>
+
+                      <div className="paper-list-block">
+                        <div className="paper-item">
+                          <button
+                            type="button"
+                            className="paper-label-button"
+                            onClick={(e) =>
+                              openFieldInspector(e, "recommendation", "おすすめしたいコンテンツ")
+                            }
+                          >
+                            おすすめしたいコンテンツ
+                          </button>
+                          <button
+                            type="button"
+                            className="paper-value-button"
+                            onClick={(e) =>
+                              openValueInspector(
+                                e,
+                                "recommendation",
+                                "おすすめしたいコンテンツ",
+                                profile.recommendation || ""
+                              )
+                            }
+                            disabled={!profile.recommendation}
+                          >
+                            {profile.recommendation || "―"}
+                          </button>
+                        </div>
+
+                        <div className="paper-item">
+                          <button
+                            type="button"
+                            className="paper-label-button"
+                            onClick={(e) => openFieldInspector(e, "topics", "興味のある話題")}
+                          >
+                            興味のある話題
+                          </button>
+                          <button
+                            type="button"
+                            className="paper-value-button"
+                            onClick={(e) =>
+                              openValueInspector(
+                                e,
+                                "topics",
+                                "興味のある話題",
+                                profile.topics || ""
+                              )
+                            }
+                            disabled={!profile.topics}
+                          >
+                            {profile.topics || "―"}
+                          </button>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="paper-message">
+                      <button
+                        type="button"
+                        className="paper-label-button paper-label-button-message"
+                        onClick={(e) => openFieldInspector(e, "message", "ひとこと")}
+                      >
+                        ひとこと
+                      </button>
+
+                      <button
+                        type="button"
+                        className="paper-message-button"
+                        onClick={(e) =>
+                          openValueInspector(e, "message", "ひとこと", profile.message || "")
+                        }
+                        disabled={!profile.message}
+                      >
+                        {profile.message || "―"}
+                      </button>
+                    </section>
+                  </div>
                 </div>
               </article>
             );
@@ -1001,31 +1038,20 @@ export default function BookReaderClient() {
         </div>
       </section>
 
-      <nav className="bottom-dock" aria-label="ページ移動">
+      <nav className="bottom-dock bottom-dock-compact" aria-label="操作">
+        <div className="dock-progress dock-progress-simple" aria-label="現在位置">
+          <div className="dock-progress-bar" aria-hidden="true">
+            <span className="dock-progress-fill" style={{ width: `${progressPercent}%` }} />
+          </div>
+        </div>
+
         <button
           type="button"
-          className="nav-button"
-          onClick={goPrev}
-          disabled={currentIndex === 0}
-          aria-label="前のページへ"
+          className="nav-button nav-button-center"
+          onClick={openToc}
+          aria-label="一覧を開く"
         >
-          <ChevronIcon dir="left" />
-          <span>前へ</span>
-        </button>
-
-        <button type="button" className="nav-button nav-button-center" onClick={openToc}>
           <span>一覧</span>
-        </button>
-
-        <button
-          type="button"
-          className="nav-button"
-          onClick={goNext}
-          disabled={currentIndex === bookPages.length - 1}
-          aria-label="次のページへ"
-        >
-          <span>次へ</span>
-          <ChevronIcon dir="right" />
         </button>
       </nav>
 
@@ -1049,9 +1075,7 @@ export default function BookReaderClient() {
                   ? "一覧"
                   : panel.mode === "field"
                     ? panel.fieldLabel
-                    : panel.mode === "value"
-                      ? `「${panel.selectedValue}」`
-                      : "ブックマーク"}
+                    : `「${panel.selectedValue}」`}
               </h2>
               <button type="button" className="search-close" onClick={() => setPanel(null)}>
                 閉じる
@@ -1097,46 +1121,13 @@ export default function BookReaderClient() {
                     <span className="toc-meta">プロフィール帳の入口に戻る</span>
                   </button>
 
-                  {tocProfiles.map((profile) => {
-                    const isFavorite = favoriteIdSet.has(profile.id);
-                    const isBookmarked = bookmarkIdSet.has(profile.id);
-
-                    return (
-                      <button
-                        key={profile.id}
-                        type="button"
-                        className="toc-item"
-                        onClick={() => jumpToProfileById(profile.id)}
-                      >
-                        <span className="toc-main">
-                          <span className="toc-avatar">
-                            <ProfileAvatar name={profile.name} xId={profile.xId} />
-                          </span>
-
-                          <span className="toc-copy">
-                            <span className="toc-row">
-                              <span className="toc-name">{profile.name}</span>
-                              <span className="toc-icons" aria-hidden="true">
-                                {isFavorite ? (
-                                  <span className="toc-inline-icon is-favorite">
-                                    <HeartIcon filled />
-                                  </span>
-                                ) : null}
-                                {isBookmarked ? (
-                                  <span className="toc-inline-icon is-bookmark">
-                                    <BookmarkIcon filled />
-                                  </span>
-                                ) : null}
-                              </span>
-                            </span>
-                            <span className="toc-meta">
-                              {(profile.favorites ?? []).slice(0, 2).join(" / ") || "プロフィールを見る"}
-                            </span>
-                          </span>
-                        </span>
-                      </button>
-                    );
-                  })}
+                  {tocProfiles.map((profile) =>
+                    renderProfileListItem(
+                      profile,
+                      (profile.favorites ?? []).slice(0, 2).join(" / ") || "プロフィールを見る",
+                      "toc"
+                    )
+                  )}
 
                   {tocProfiles.length === 0 ? (
                     <p className="inspector-empty">該当するプロフィールがありません。</p>
@@ -1147,79 +1138,38 @@ export default function BookReaderClient() {
               <>
                 <div className="inspector-picked-value">みんなの「{panel.fieldLabel}」</div>
                 <div className="floating-list">
-                  {fieldEntries.map((entry) => (
-                    <button
-                      key={`field-${entry.id}`}
-                      type="button"
-                      className="toc-item"
-                      onClick={() => jumpToProfileById(entry.id)}
-                    >
-                      <span className="toc-name">{entry.name}</span>
-                      <span className="toc-meta">{entry.summary}</span>
-                    </button>
-                  ))}
+                  {fieldEntries.length > 0 ? (
+                    fieldEntries.map((entry) =>
+                      renderProfileListItem(
+                        entry.profile,
+                        entry.summary || "プロフィールを見る",
+                        "field"
+                      )
+                    )
+                  ) : (
+                    <p className="inspector-empty">該当するプロフィールがありません。</p>
+                  )}
                 </div>
               </>
-            ) : panel.mode === "value" ? (
+            ) : (
               <>
                 <div className="inspector-picked-value">
                   「{panel.selectedValue}」を書いている人
                 </div>
                 <div className="floating-list">
                   {sameValueProfiles.length > 0 ? (
-                    sameValueProfiles.map((entry) => (
-                      <button
-                        key={`value-${entry.id}`}
-                        type="button"
-                        className="toc-item"
-                        onClick={() => jumpToProfileById(entry.id)}
-                      >
-                        <span className="toc-name">{entry.name}</span>
-                        <span className="toc-meta">
-                          {entry.matchedFields.map((f) => f.label).join(" / ")}
-                        </span>
-                      </button>
-                    ))
+                    sameValueProfiles.map((entry) =>
+                      renderProfileListItem(
+                        entry.profile,
+                        entry.matchedFields.map((f) => f.label).join(" / "),
+                        "value"
+                      )
+                    )
                   ) : (
                     <p className="inspector-empty">同じ内容を書いている人はいません。</p>
                   )}
                 </div>
               </>
-            ) : (
-              <div className="floating-list floating-list-topless">
-                {bookmarkProfiles.length > 0 ? (
-                  bookmarkProfiles.map((profile) => (
-                    <button
-                      key={`bookmark-${profile.id}`}
-                      type="button"
-                      className="toc-item"
-                      onClick={() => jumpToProfileById(profile.id)}
-                    >
-                      <span className="toc-main">
-                        <span className="toc-avatar">
-                          <ProfileAvatar name={profile.name} xId={profile.xId} />
-                        </span>
-
-                        <span className="toc-copy">
-                          <span className="toc-row">
-                            <span className="toc-name">{profile.name}</span>
-                            <span className="toc-icons" aria-hidden="true">
-                              <span className="toc-inline-icon is-bookmark">
-                                <BookmarkIcon filled />
-                              </span>
-                            </span>
-                          </span>
-                          <span className="toc-meta">
-                            {(profile.favorites ?? []).slice(0, 2).join(" / ") || "プロフィールを見る"}
-                          </span>
-                        </span>
-                      </span>
-                    </button>
-                  ))
-                ) : (
-                  <p className="inspector-empty">ブックマークはまだありません。</p>
-                )}
-              </div>
             )}
           </section>
         </div>
