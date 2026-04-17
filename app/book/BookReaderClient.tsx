@@ -140,21 +140,19 @@ function getFieldValues(profile: Profile, fieldKey: FieldKey): string[] {
     case "favorites":
       return (profile.favorites ?? []).filter(Boolean).map((v) => v.trim());
     case "food":
-      return normalizeText(profile.food) ? [profile.food!.trim()] : [];
+      return (profile.foodTokens ?? []).filter(Boolean).map((v) => v.trim());
     case "place":
-      return normalizeText(profile.place) ? [profile.place!.trim()] : [];
+      return (profile.placeTokens ?? []).filter(Boolean).map((v) => v.trim());
     case "club":
-      return normalizeText(profile.club) ? [profile.club!.trim()] : [];
+      return (profile.clubTokens ?? []).filter(Boolean).map((v) => v.trim());
     case "recent":
-      return normalizeText(profile.recent) ? [profile.recent!.trim()] : [];
+      return (profile.recentTokens ?? []).filter(Boolean).map((v) => v.trim());
     case "recommendation":
-      return normalizeText(profile.recommendation)
-        ? [profile.recommendation!.trim()]
-        : [];
+      return normalizeText(profile.recommendation) ? [profile.recommendation!.trim()] : [];
     case "topics":
       return normalizeText(profile.topics) ? [profile.topics!.trim()] : [];
     case "message":
-      return normalizeText(profile.message) ? [profile.message!.trim()] : [];
+      return normalizeText(profile.message) ? [profile.message.trim()] : [];
     default:
       return [];
   }
@@ -266,6 +264,54 @@ function EmptyState({ label }: { label: string }) {
   );
 }
 
+function TokenFieldBlock({
+  label,
+  fieldKey,
+  items,
+  onOpenField,
+  onOpenValue,
+}: {
+  label: string;
+  fieldKey: Extract<FieldKey, "food" | "place" | "club" | "recent">;
+  items: string[];
+  onOpenField: (event: MouseEvent<HTMLElement>, fieldKey: FieldKey, fieldLabel: string) => void;
+  onOpenValue: (
+    event: MouseEvent<HTMLElement>,
+    fieldKey: FieldKey,
+    fieldLabel: string,
+    selectedValue: string
+  ) => void;
+}) {
+  return (
+    <div className="paper-item-block">
+      <button
+        type="button"
+        className="paper-label-button"
+        onClick={(e) => onOpenField(e, fieldKey, label)}
+      >
+        {label}
+      </button>
+
+      <div className="paper-tags paper-tags-inline">
+        {items.length > 0 ? (
+          items.map((item) => (
+            <button
+              key={item}
+              type="button"
+              className="paper-tag-button paper-tag-soft-button"
+              onClick={(e) => onOpenValue(e, fieldKey, label, item)}
+            >
+              {item}
+            </button>
+          ))
+        ) : (
+          <span className="paper-value-empty">―</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function BookReaderClient() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -351,9 +397,7 @@ export default function BookReaderClient() {
 
   useEffect(() => {
     if (!pendingProfileId || filteredProfiles.length === 0) return;
-    const profileIndex = filteredProfiles.findIndex(
-      (profile) => profile.id === pendingProfileId
-    );
+    const profileIndex = filteredProfiles.findIndex((profile) => profile.id === pendingProfileId);
     if (profileIndex < 0) return;
     scrollToIndex(profileIndex + 1, "smooth");
     setPendingProfileId(null);
@@ -419,7 +463,7 @@ export default function BookReaderClient() {
     window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 180 : 40);
+    }, behavior === "smooth" ? 380 : 40);
   }
 
   function goPrev() {
@@ -530,7 +574,10 @@ export default function BookReaderClient() {
 
   return (
     <main className="book-app-shell book-app-shell-fixed book-app-shell-balanced">
-      <section className="book-stage book-stage-fixed book-stage-balanced" aria-label="プロフィールブック">
+      <section
+        className="book-stage book-stage-fixed book-stage-balanced"
+        aria-label="プロフィールブック"
+      >
         <div className="book-shelf-glow book-shelf-glow-a" />
         <div className="book-shelf-glow book-shelf-glow-b" />
 
@@ -640,7 +687,9 @@ export default function BookReaderClient() {
                             key={item}
                             type="button"
                             className="paper-tag-button"
-                            onClick={(e) => openValueInspector(e, "interests", "興味のあるもの", item)}
+                            onClick={(e) =>
+                              openValueInspector(e, "interests", "興味のあるもの", item)
+                            }
                           >
                             {item}
                           </button>
@@ -663,7 +712,9 @@ export default function BookReaderClient() {
                             key={item}
                             type="button"
                             className="paper-tag-button paper-tag-soft-button"
-                            onClick={(e) => openValueInspector(e, "favorites", "好きなこと・もの", item)}
+                            onClick={(e) =>
+                              openValueInspector(e, "favorites", "好きなこと・もの", item)
+                            }
                           >
                             {item}
                           </button>
@@ -676,77 +727,37 @@ export default function BookReaderClient() {
                     <h3 className="paper-section-title">話しかけるヒント</h3>
 
                     <div className="paper-list-block">
-                      <div className="paper-item">
-                        <button
-                          type="button"
-                          className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "food", "好きな食べ物・飲み物")}
-                        >
-                          好きな食べ物・飲み物
-                        </button>
-                        <button
-                          type="button"
-                          className="paper-value-button"
-                          onClick={(e) => openValueInspector(e, "food", "好きな食べ物・飲み物", profile.food || "")}
-                          disabled={!profile.food}
-                        >
-                          {profile.food || "―"}
-                        </button>
-                      </div>
+                      <TokenFieldBlock
+                        label="好きな食べ物・飲み物"
+                        fieldKey="food"
+                        items={profile.foodTokens ?? []}
+                        onOpenField={openFieldInspector}
+                        onOpenValue={openValueInspector}
+                      />
 
-                      <div className="paper-item">
-                        <button
-                          type="button"
-                          className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "place", "よく出没する場所")}
-                        >
-                          よく出没する場所
-                        </button>
-                        <button
-                          type="button"
-                          className="paper-value-button"
-                          onClick={(e) => openValueInspector(e, "place", "よく出没する場所", profile.place || "")}
-                          disabled={!profile.place}
-                        >
-                          {profile.place || "―"}
-                        </button>
-                      </div>
+                      <TokenFieldBlock
+                        label="よく出没する場所"
+                        fieldKey="place"
+                        items={profile.placeTokens ?? []}
+                        onOpenField={openFieldInspector}
+                        onOpenValue={openValueInspector}
+                      />
 
-                      <div className="paper-item">
-                        <button
-                          type="button"
-                          className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "club", "学生時代の部活動")}
-                        >
-                          学生時代の部活動
-                        </button>
-                        <button
-                          type="button"
-                          className="paper-value-button"
-                          onClick={(e) => openValueInspector(e, "club", "学生時代の部活動", profile.club || "")}
-                          disabled={!profile.club}
-                        >
-                          {profile.club || "―"}
-                        </button>
-                      </div>
+                      <TokenFieldBlock
+                        label="学生時代の部活動"
+                        fieldKey="club"
+                        items={profile.clubTokens ?? []}
+                        onOpenField={openFieldInspector}
+                        onOpenValue={openValueInspector}
+                      />
 
-                      <div className="paper-item">
-                        <button
-                          type="button"
-                          className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "recent", "最近ハマっていること")}
-                        >
-                          最近ハマっていること
-                        </button>
-                        <button
-                          type="button"
-                          className="paper-value-button"
-                          onClick={(e) => openValueInspector(e, "recent", "最近ハマっていること", profile.recent || "")}
-                          disabled={!profile.recent}
-                        >
-                          {profile.recent || "―"}
-                        </button>
-                      </div>
+                      <TokenFieldBlock
+                        label="最近ハマっていること"
+                        fieldKey="recent"
+                        items={profile.recentTokens ?? []}
+                        onOpenField={openFieldInspector}
+                        onOpenValue={openValueInspector}
+                      />
                     </div>
                   </section>
 
@@ -792,7 +803,9 @@ export default function BookReaderClient() {
                         <button
                           type="button"
                           className="paper-value-button"
-                          onClick={(e) => openValueInspector(e, "topics", "興味のある話題", profile.topics || "")}
+                          onClick={(e) =>
+                            openValueInspector(e, "topics", "興味のある話題", profile.topics || "")
+                          }
                           disabled={!profile.topics}
                         >
                           {profile.topics || "―"}
@@ -813,7 +826,9 @@ export default function BookReaderClient() {
                     <button
                       type="button"
                       className="paper-message-button"
-                      onClick={(e) => openValueInspector(e, "message", "ひとこと", profile.message || "")}
+                      onClick={(e) =>
+                        openValueInspector(e, "message", "ひとこと", profile.message || "")
+                      }
                       disabled={!profile.message}
                     >
                       {profile.message || "―"}
@@ -927,7 +942,9 @@ export default function BookReaderClient() {
               </>
             ) : (
               <>
-                <div className="inspector-picked-value">「{panel.selectedValue}」を書いている人</div>
+                <div className="inspector-picked-value">
+                  「{panel.selectedValue}」を書いている人
+                </div>
                 <div className="floating-list">
                   {sameValueProfiles.length > 0 ? (
                     sameValueProfiles.map((entry) => (
@@ -938,7 +955,9 @@ export default function BookReaderClient() {
                         onClick={() => jumpToProfileById(entry.id)}
                       >
                         <span className="toc-name">{entry.name}</span>
-                        <span className="toc-meta">{entry.matchedFields.map((f) => f.label).join(" / ")}</span>
+                        <span className="toc-meta">
+                          {entry.matchedFields.map((f) => f.label).join(" / ")}
+                        </span>
                       </button>
                     ))
                   ) : (

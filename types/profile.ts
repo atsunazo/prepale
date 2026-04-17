@@ -6,10 +6,10 @@ export type Profile = {
   xId: string;
   interests: string[];
   favorites: string[];
-  food: string;
-  place?: string;
-  club?: string;
-  recent?: string;
+  foodTokens: string[];
+  placeTokens: string[];
+  clubTokens: string[];
+  recentTokens: string[];
   recommendation?: string;
   topics?: string;
   message: string;
