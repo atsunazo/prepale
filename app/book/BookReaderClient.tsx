@@ -1102,8 +1102,7 @@ export default function BookReaderClient() {
                       setPanel(null);
                     }}
                   >
-                    <span className="toc-name">表紙</span>
-                    <span className="toc-meta">プロフィール帳の入口に戻る</span>
+                    <span className="toc-name">表紙に戻る</span>
                   </button>
 
                   {tocProfiles.map((profile) =>

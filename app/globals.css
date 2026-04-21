@@ -1078,7 +1078,7 @@ select {
 
 .toc-name {
   display: block;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--ink);
 }
 
