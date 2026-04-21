@@ -1176,13 +1176,17 @@ select {
 
 .paper-value-button,
 .paper-message-button {
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 6px 14px rgba(101, 87, 130, 0.05);
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--ink);
+  text-align: left;
+  border-radius: 0;
+  box-shadow: none;
 }
+
 
 .profile-paper {
   --team-accent: #ef86b6;
@@ -1370,14 +1374,7 @@ select {
   );
   color: var(--team-strong);
 }
-.paper-value-button,
-.paper-message-button {
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--ink);
-  border: 1px solid color-mix(in srgb, var(--team-accent) 18%, white);
-}
+
 .paper-item {
   display: grid;
   gap: 8px;
