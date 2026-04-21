@@ -1098,3 +1098,259 @@ select {
     0 10px 18px rgba(181, 132, 24, 0.24),
     0 2px 4px rgba(255, 255, 255, 0.22) inset;
 }
+
+.paper-section {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(126, 102, 151, 0.12);
+}
+
+.paper-section:first-of-type {
+  margin-top: 18px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.paper-section-title {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(247, 184, 212, 0.22), rgba(191, 228, 255, 0.22));
+  color: #5f4a72;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.paper-item-block,
+.paper-item,
+.paper-message {
+  position: relative;
+}
+
+.paper-item-block {
+  gap: 10px;
+  padding: 12px 12px 14px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.54), rgba(255,248,252,0.42));
+  border: 1px solid rgba(255,255,255,0.78);
+  box-shadow: 0 8px 20px rgba(101, 87, 130, 0.05);
+}
+
+.paper-label-button {
+  width: fit-content;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: #8a7898;
+}
+
+.paper-item {
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,250,246,0.52));
+  border: 1px solid rgba(255,255,255,0.82);
+}
+
+.paper-tag-button {
+  max-width: 100%;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(247, 184, 212, 0.22), rgba(247, 184, 212, 0.12));
+  border: 1px solid rgba(255,255,255,0.72);
+  color: #6f547b;
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 0 4px 10px rgba(120, 93, 143, 0.06);
+}
+
+.paper-tag-soft-button {
+  background: linear-gradient(180deg, rgba(191, 228, 255, 0.24), rgba(191, 228, 255, 0.12));
+}
+
+.paper-value-button,
+.paper-message-button {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255,255,255,0.88);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 6px 14px rgba(101, 87, 130, 0.05);
+  color: var(--ink);
+}
+
+.profile-paper {
+  --team-accent: #ef86b6;
+  --team-soft: rgba(247, 184, 212, 0.22);
+  --team-line: rgba(239, 134, 182, 0.22);
+  --team-strong: #6f547b;
+}
+
+.team-A {
+  --team-accent: #ef86b6;
+  --team-soft: rgba(247, 184, 212, 0.24);
+  --team-line: rgba(239, 134, 182, 0.24);
+  --team-strong: #7a4c66;
+}
+
+.team-B {
+  --team-accent: #77c7ff;
+  --team-soft: rgba(191, 228, 255, 0.26);
+  --team-line: rgba(119, 199, 255, 0.24);
+  --team-strong: #4f6883;
+}
+
+.team-C {
+  --team-accent: #b59ae8;
+  --team-soft: rgba(235, 224, 255, 0.36);
+  --team-line: rgba(181, 154, 232, 0.24);
+  --team-strong: #6c5b88;
+}
+
+.team-D {
+  --team-accent: #8ed9c4;
+  --team-soft: rgba(210, 243, 233, 0.44);
+  --team-line: rgba(142, 217, 196, 0.26);
+  --team-strong: #4f7a70;
+}
+
+.team-E {
+  --team-accent: #f3cf6b;
+  --team-soft: rgba(255, 245, 201, 0.58);
+  --team-line: rgba(243, 207, 107, 0.28);
+  --team-strong: #8a6b2f;
+}
+
+.team-F {
+  --team-accent: #f5b38f;
+  --team-soft: rgba(255, 227, 209, 0.52);
+  --team-line: rgba(245, 179, 143, 0.28);
+  --team-strong: #8a5f4d;
+}
+
+.team-G {
+  --team-accent: #f29ca3;
+  --team-soft: rgba(255, 221, 225, 0.48);
+  --team-line: rgba(242, 156, 163, 0.28);
+  --team-strong: #86545f;
+}
+
+.team-H {
+  --team-accent: #9fd6f7;
+  --team-soft: rgba(220, 241, 255, 0.52);
+  --team-line: rgba(159, 214, 247, 0.28);
+  --team-strong: #4f6f86;
+}
+
+.profile-paper-frame {
+  position: relative;
+  height: 100%;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 52%, var(--paper-3) 100%),
+    linear-gradient(135deg, var(--team-soft), rgba(255, 255, 255, 0));
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 220ms ease, filter 220ms ease;
+  filter: saturate(1);
+}
+
+.profile-paper.is-active .profile-paper-frame {
+  box-shadow: var(--shadow-lg);
+  filter: saturate(1.02);
+}
+
+.paper-spine {
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  bottom: 24px;
+  width: 7px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    var(--team-line),
+    color-mix(in srgb, var(--team-accent) 55%, white)
+  );
+  opacity: 0.92;
+}
+.paper-sparkle-a {
+  top: 76px;
+  right: 26px;
+  background: color-mix(in srgb, var(--team-accent) 88%, white);
+}
+
+.paper-sparkle-b {
+  top: 102px;
+  right: 42px;
+  background: color-mix(in srgb, var(--team-accent) 54%, white);
+}
+.paper-section-title {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: var(--team-strong);
+}
+.paper-label-button {
+  width: fit-content;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--team-strong) 88%, #7f738d);
+}
+.paper-tag-button {
+  max-width: 100%;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--team-accent) 24%, white),
+    color-mix(in srgb, var(--team-soft) 82%, white)
+  );
+  color: var(--team-strong);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.paper-tag-soft-button {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--team-accent) 16%, white),
+    color-mix(in srgb, var(--team-soft) 92%, white)
+  );
+  color: var(--team-strong);
+}
+.paper-value-button,
+.paper-message-button {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--team-accent) 18%, white);
+}
+.paper-item {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid color-mix(in srgb, var(--team-accent) 14%, white);
+}
+.paper-message {
+  padding: 14px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.72),
+    color-mix(in srgb, var(--team-soft) 38%, white)
+  );
+  border: 1px solid color-mix(in srgb, var(--team-accent) 16%, white);
+}

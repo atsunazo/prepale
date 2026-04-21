@@ -25,6 +25,12 @@ function clean(value) {
   return String(value).trim();
 }
 
+function normalizeTeam(value) {
+  const team = clean(value).toUpperCase();
+  const allowed = new Set(["A", "B", "C", "D", "E", "F", "G", "H"]);
+  return allowed.has(team) ? team : "A";
+}
+
 function splitMulti(value, max = MAX_TOKEN_COUNT) {
   const raw = clean(value);
   if (!raw) return [];
@@ -48,6 +54,7 @@ function buildSearchText(profile) {
   return [
     profile.name,
     profile.xId,
+    profile.team,
     ...profile.interests,
     ...profile.favorites,
     ...profile.foodTokens,
@@ -71,6 +78,7 @@ function normalizeRow(row, index) {
     slug,
     name: clean(row["名前"]),
     xId: clean(row["XのID (@含む) をご入力ください。"]),
+    team: normalizeTeam(row["チーム"]),
     interests: splitMulti(row["興味のあるものを選んでください。(複数回答可)"], 99),
     favorites: splitMulti(row["好きなこと・もの"], 8),
     foodTokens: splitMulti(row["好きな食べ物・飲み物"], 8),
@@ -96,6 +104,11 @@ function validateRow(row, index) {
     errors.push("名前が空です");
   }
 
+  const team = clean(row["チーム"]).toUpperCase();
+  if (team && !["A", "B", "C", "D", "E", "F", "G", "H"].includes(team)) {
+    errors.push(`チームが不正です: ${team}`);
+  }
+
   const knownHeaders = [
     "名前",
     "XのID (@含む) をご入力ください。",
@@ -108,6 +121,7 @@ function validateRow(row, index) {
     "オススメしたいコンテンツ(任意)",
     "興味のある話題(任意)",
     "何か一言！",
+    "チーム",
   ];
 
   const unknownKeys = Object.keys(row).filter((key) => !knownHeaders.includes(key));

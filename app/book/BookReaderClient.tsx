@@ -798,141 +798,108 @@ export default function BookReaderClient() {
             </div>
           </article>
 
-          {filteredProfiles.map((profile, index) => {
-            const xUrl = buildXUrl(profile.xId ?? "");
-            const pageIndex = index + 1;
-            const isActive = pageIndex === currentIndex;
-            const isFavorite = favoriteIdSet.has(profile.id);
-            const isBookmarked = bookmarkIdSet.has(profile.id);
+       {filteredProfiles.map((profile, index) => {
+          const xUrl = buildXUrl(profile.xId ?? "")
+          const pageIndex = index + 1
+          const isActive = pageIndex === currentIndex
+          const isFavorite = favoriteIdSet.has(profile.id)
+          const isBookmarked = bookmarkIdSet.has(profile.id)
+          const teamClass = `team-${profile.team ?? "A"}`
 
-            return (
-              <article
-                key={profile.id}
-                ref={(element) => {
-                  pageRefs.current[pageIndex] = element;
-                }}
-                className={`paper-sheet profile-paper ${
-                  isActive ? "is-active" : ""
-                } ${isBookmarked ? "is-bookmarked" : ""}`}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {isBookmarked ? (
-                  <div className="paper-bookmark-ribbon" aria-hidden="true">
-                    <BookmarkIcon filled />
-                  </div>
-                ) : null}
+          return (
+            <article
+              key={profile.id}
+              ref={(element) => {
+                pageRefs.current[pageIndex] = element
+              }}
+              className={`paper-sheet profile-paper ${
+                isActive ? "is-active" : ""
+              } ${isBookmarked ? "is-bookmarked" : ""} ${teamClass}`}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {isBookmarked ? (
+                <div className="paper-bookmark-ribbon" aria-hidden="true">
+                  <BookmarkIcon filled />
+                </div>
+              ) : null}
 
-                <div className="profile-paper-frame">
-                  <div className="paper-spine" aria-hidden="true" />
-                  <div className="paper-corner paper-corner-a" aria-hidden="true" />
-                  <div className="paper-corner paper-corner-b" aria-hidden="true" />
-                  <div className="paper-sparkle paper-sparkle-a" aria-hidden="true" />
-                  <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
+              <div className="profile-paper-frame">
+                <div className="paper-spine" aria-hidden="true" />
+                <div className="paper-corner paper-corner-a" aria-hidden="true" />
+                <div className="paper-corner paper-corner-b" aria-hidden="true" />
+                <div className="paper-sparkle paper-sparkle-a" aria-hidden="true" />
+                <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
 
-                  <div
-                    ref={(element) => {
-                      pageScrollRefs.current[pageIndex] = element;
-                    }}
-                    className="book-page-scroll profile-page-scroll"
-                  >
-                    <header className="profile-paper-header profile-paper-header-balanced">
-                      <div className="profile-top-row">
-                        <div className="profile-avatar-box">
-                          <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
-                        </div>
-
-                        <div className="profile-heading-copy">
-                          <div className="profile-kicker">PROFILE</div>
-                          <h2 className="profile-name">{profile.name}</h2>
-                        </div>
-
-                        <div className="profile-head-actions">
-                          <button
-                            type="button"
-                            className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
-                            aria-label={isFavorite ? "お気に入りを解除" : "お気に入りに追加"}
-                            onClick={() => toggleFavorite(profile.id)}
-                          >
-                            <HeartIcon filled={isFavorite} />
-                          </button>
-
-                          <button
-                            type="button"
-                            className={`icon-toggle-button ${isBookmarked ? "is-active" : ""}`}
-                            aria-label={isBookmarked ? "ブックマークを解除" : "ブックマークに追加"}
-                            onClick={() => toggleBookmark(profile.id)}
-                          >
-                            <BookmarkIcon filled={isBookmarked} />
-                          </button>
-
-                          {xUrl ? (
-                            <a
-                              href={xUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="profile-x-link"
-                              aria-label={`${profile.name}のXアカウント`}
-                            >
-                              <XIcon />
-                            </a>
-                          ) : null}
-                        </div>
+                <div
+                  ref={(element) => {
+                    pageScrollRefs.current[pageIndex] = element
+                  }}
+                  className="book-page-scroll profile-page-scroll"
+                >
+                  <header className="profile-paper-header profile-paper-header-balanced">
+                    <div className="profile-top-row">
+                      <div className="profile-avatar-box">
+                        <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
                       </div>
-                    </header>
+
+                      <div className="profile-heading-copy">
+                        <div className="profile-kicker">PROFILE</div>
+                        <h2 className="profile-name">{profile.name}</h2>
+                      </div>
+
+                      <div className="profile-head-actions">
+                        <button
+                          type="button"
+                          className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
+                          aria-label={isFavorite ? "お気に入りを外す" : "お気に入りに追加"}
+                          onClick={() => toggleFavorite(profile.id)}
+                        >
+                          <HeartIcon filled={isFavorite} />
+                        </button>
+
+                        <button
+                          type="button"
+                          className={`icon-toggle-button ${isBookmarked ? "is-active" : ""}`}
+                          aria-label={isBookmarked ? "しおりを外す" : "しおりに追加"}
+                          onClick={() => toggleBookmark(profile.id)}
+                        >
+                          <BookmarkIcon filled={isBookmarked} />
+                        </button>
+
+                        {xUrl ? (
+                          <a
+                            href={xUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="profile-x-link"
+                            aria-label={`${profile.name} のXを開く`}
+                          >
+                            <XIcon />
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  </header>
 
                     <section className="paper-section">
                       <h3 className="paper-section-title">この人らしさ</h3>
 
-                      <div className="paper-item-block">
-                        <button
-                          type="button"
-                          className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "interests", "興味のあるもの")}
-                        >
-                          興味のあるもの
-                        </button>
+                      <div className="paper-list-block">
+                        <TokenFieldBlock
+                          label="興味のあるもの"
+                          fieldKey="interests"
+                          items={profile.interests ?? []}
+                          onOpenField={openFieldInspector}
+                          onOpenValue={openValueInspector}
+                        />
 
-                        <div className="paper-tags">
-                          {(profile.interests ?? []).map((item, itemIndex) => (
-                            <button
-                              key={`interests-${profile.id}-${item}-${itemIndex}`}
-                              type="button"
-                              className="paper-tag-button"
-                              onClick={(e) =>
-                                openValueInspector(e, "interests", "興味のあるもの", item)
-                              }
-                            >
-                              {item}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="paper-item-block">
-                        <button
-                          type="button"
-                          className="paper-label-button"
-                          onClick={(e) => openFieldInspector(e, "favorites", "好きなこと・もの")}
-                        >
-                          好きなこと・もの
-                        </button>
-
-                        <div className="paper-tags paper-tags-inline">
-                          {(profile.favorites ?? [])
-                            .filter(Boolean)
-                            .map((item, itemIndex) => (
-                              <button
-                                key={`favorites-${profile.id}-${item}-${itemIndex}`}
-                                type="button"
-                                className="paper-tag-button paper-tag-soft-button"
-                                onClick={(e) =>
-                                  openValueInspector(e, "favorites", "好きなこと・もの", item)
-                                }
-                              >
-                                {item}
-                              </button>
-                            ))}
-                        </div>
+                        <TokenFieldBlock
+                          label="好きなこと・もの"
+                          fieldKey="favorites"
+                          items={(profile.favorites ?? []).filter(Boolean)}
+                          onOpenField={openFieldInspector}
+                          onOpenValue={openValueInspector}
+                        />
                       </div>
                     </section>
 
@@ -992,12 +959,7 @@ export default function BookReaderClient() {
                             type="button"
                             className="paper-value-button"
                             onClick={(e) =>
-                              openValueInspector(
-                                e,
-                                "recommendation",
-                                "おすすめしたいコンテンツ",
-                                profile.recommendation || ""
-                              )
+                              openFieldInspector(e, "recommendation", "おすすめしたいコンテンツ")
                             }
                             disabled={!profile.recommendation}
                           >
@@ -1016,14 +978,7 @@ export default function BookReaderClient() {
                           <button
                             type="button"
                             className="paper-value-button"
-                            onClick={(e) =>
-                              openValueInspector(
-                                e,
-                                "topics",
-                                "興味のある話題",
-                                profile.topics || ""
-                              )
-                            }
+                            onClick={(e) => openFieldInspector(e, "topics", "興味のある話題")}
                             disabled={!profile.topics}
                           >
                             {profile.topics || "―"}
@@ -1044,9 +999,7 @@ export default function BookReaderClient() {
                       <button
                         type="button"
                         className="paper-message-button"
-                        onClick={(e) =>
-                          openValueInspector(e, "message", "ひとこと", profile.message || "")
-                        }
+                        onClick={(e) => openFieldInspector(e, "message", "ひとこと")}
                         disabled={!profile.message}
                       >
                         {profile.message || "―"}
