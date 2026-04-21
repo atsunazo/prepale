@@ -1253,14 +1253,14 @@ select {
   --team-text-soft: color-mix(in srgb, var(--team-strong) 28%, #333333 72%);
 }
 
-.team-A { --team-accent: #ffadad; } /* pink */
-.team-B { --team-accent: #ffd6a5; } /* peach */
-.team-C { --team-accent: #fdffb6; } /* lemon */
-.team-D { --team-accent: #caffbf; } /* mint */
+.team-A { --team-accent: #faa6a6; } /* pink */
+.team-B { --team-accent: #f7c78c; } /* peach */
+.team-C { --team-accent: #e7ea88; } /* lemon */
+.team-D { --team-accent: #a3df97; } /* mint */
 .team-E { --team-accent: #9bf6ff; } /* aqua */
 .team-F { --team-accent: #a0c4ff; } /* sky */
 .team-G { --team-accent: #bdb2ff; } /* lavender */
-.team-H { --team-accent: #ffc6d9; } /* rose */
+.team-H { --team-accent: #ef89ab; } /* rose */
 
 .profile-paper .profile-name,
 .profile-paper .profile-kicker,
@@ -1438,4 +1438,8 @@ select {
   border: 1px solid color-mix(in srgb, var(--team-edge) 72%, white);
   background: color-mix(in srgb, var(--team-soft) 40%, white);
   color: var(--team-text);
+}
+
+.paper-bookmark-ribbon::after {
+  display: none;
 }
