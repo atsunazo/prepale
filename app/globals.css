@@ -1443,3 +1443,17 @@ select {
 .paper-bookmark-ribbon::after {
   display: none;
 }
+
+.icon-toggle-button,
+.profile-x-link {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(166, 146, 126, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #8f8478;
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
