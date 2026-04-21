@@ -359,7 +359,7 @@ function TokenFieldBlock({
   onOpenValue,
 }: {
   label: string;
-  fieldKey: Extract<FieldKey, "food" | "place" | "club" | "recent">;
+  fieldKey: Extract<FieldKey, "interests" | "favorites" | "food" | "place" | "club" | "recent">;
   items: string[];
   onOpenField: (event: MouseEvent<HTMLElement>, fieldKey: FieldKey, fieldLabel: string) => void;
   onOpenValue: (
