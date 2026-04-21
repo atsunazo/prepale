@@ -840,6 +840,18 @@ export default function BookReaderClient() {
                       </div>
 
                       <div className="profile-head-actions">
+                        {xUrl ? (
+                          <a
+                            href={xUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="profile-x-link"
+                            aria-label={`${profile.name} のXを開く`}
+                          >
+                            <XIcon />
+                          </a>
+                        ) : null}
+                        
                         <button
                           type="button"
                           className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
@@ -858,17 +870,7 @@ export default function BookReaderClient() {
                           <BookmarkIcon filled={isBookmarked} />
                         </button>
 
-                        {xUrl ? (
-                          <a
-                            href={xUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="profile-x-link"
-                            aria-label={`${profile.name} のXを開く`}
-                          >
-                            <XIcon />
-                          </a>
-                        ) : null}
+                        
                       </div>
                     </div>
                   </header>
