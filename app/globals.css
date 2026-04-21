@@ -1518,3 +1518,8 @@ select {
   background: #fff;
   border: 1px solid rgba(126, 102, 151, 0.14);
 }
+
+.paper-section,
+.paper-message {
+  margin-left: 7px;
+}
