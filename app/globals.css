@@ -1376,7 +1376,7 @@ select {
     color-mix(in srgb, var(--team-accent) 36%, white),
     color-mix(in srgb, var(--team-soft) 96%, white)
   );
-  border: 1px solid color-mix(in srgb, var(--team-edge) 62%, white);
+  border: 1px solid color-mix(in srgb, var(--team-edge) 62%, rgba(126, 102, 151, 0.14));
   color: var(--team-text);
   font-weight: 600;
   line-height: 1.35;
