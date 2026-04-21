@@ -24,14 +24,14 @@
   --bookmark-bg: #fff7df;
   --bookmark-border: #efd28a;
 
-  --rainbow-a: #ffadad;
-  --rainbow-b: #ffd6a5;
-  --rainbow-c: #fdffb6;
-  --rainbow-d: #caffbf;
+  --rainbow-a: #faa6a6;
+  --rainbow-b: #f7c78c;
+  --rainbow-c: #e7ea88;
+  --rainbow-d: #a3df97;
   --rainbow-e: #9bf6ff;
   --rainbow-f: #a0c4ff;
   --rainbow-g: #bdb2ff;
-  --rainbow-h: #ffc6d9;
+  --rainbow-h: #ef89ab;
 }
 
 * {
@@ -628,7 +628,7 @@ select {
 }
 
 .profile-name {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   font-size: clamp(1.6rem, 5vw, 2rem);
   line-height: 1.12;
 }
@@ -886,18 +886,6 @@ select {
   border-top: 10px solid #d99a1f;
 }
 
-.profile-paper .profile-name,
-.profile-paper .profile-kicker,
-.profile-paper .paper-label-button,
-.profile-paper .paper-label-button-message,
-.profile-paper .paper-value-button,
-.profile-paper .paper-message-button,
-.profile-paper .paper-tag-button,
-.profile-paper .paper-value-empty,
-.profile-paper .paper-section-title,
-.profile-paper .profile-x-link {
-  color: var(--team-text);
-}
 
 .bottom-dock {
   position: fixed;
@@ -1467,20 +1455,9 @@ select {
   align-items: start;
 }
 
-.profile-heading-copy {
-  min-width: 0;
-  padding-right: 164px;
-}
-
-.profile-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .profile-head-actions {
   position: absolute;
-  top: -20px;
+  top: -18px;
   right: -2px;
   display: inline-flex;
   align-items: center;
@@ -1490,10 +1467,6 @@ select {
 .profile-heading-copy {
   min-width: 0;
   padding-right: 40px;
+  margin-top: 6px;
 }
 
-.profile-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
