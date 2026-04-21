@@ -1450,3 +1450,64 @@ select {
   font-weight: 800;
   letter-spacing: 0.02em;
 }
+
+.book-cover-page {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 173, 173, 0.36), transparent 18%),
+    radial-gradient(circle at 82% 16%, rgba(255, 214, 165, 0.34), transparent 18%),
+    radial-gradient(circle at 78% 72%, rgba(160, 196, 255, 0.30), transparent 22%),
+    linear-gradient(180deg, #fffbff 0%, #fff8f3 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.book-cover-page::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  bottom: 14px;
+  width: 14px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    #ffadad 0%,
+    #ffd6a5 16%,
+    #fdffb6 32%,
+    #caffbf 48%,
+    #9bf6ff 64%,
+    #a0c4ff 80%,
+    #bdb2ff 100%
+  );
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.55),
+    -8px 0 18px rgba(130, 118, 168, 0.12);
+  opacity: 0.95;
+}
+
+.book-cover-page::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 22px 20px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0) 38%),
+    conic-gradient(
+      from 210deg,
+      #ffadad,
+      #ffd6a5,
+      #fdffb6,
+      #caffbf,
+      #9bf6ff,
+      #a0c4ff,
+      #bdb2ff,
+      #ffadad
+    );
+  opacity: 0.28;
+  filter: blur(1px);
+}
+

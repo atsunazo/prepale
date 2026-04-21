@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "プレパレ！プロフィール帳",
-  description: "スマホでめくって読めるプロフィール帳",
+  title: "プレパレ！",
+  description: "みんなのプロフィール帳",
 };
 
 export default function RootLayout({

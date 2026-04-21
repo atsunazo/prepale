@@ -782,18 +782,10 @@ export default function BookReaderClient() {
                 <h1 className="cover-title">プレパレ！</h1>
                 <p className="cover-subtitle">みんなのプロフィール帳</p>
                 <p className="cover-copy">
-                  ページをめくりながら、参加メンバーのことをゆっくり知れるプロフィール帳です。
+                  参加メンバーのことをゆっくり知れるプロフィール帳です！
                 </p>
-                <button
-                  type="button"
-                  className="cover-button"
-                  onClick={() => scrollToIndex(1)}
-                >
-                  1ページ目へ
-                </button>
-                <p className="cover-hint">
-                  左へフリックすると、そのままプロフィール帳へ進めます。
-                </p>
+                
+                
               </section>
             </div>
           </article>
