@@ -651,14 +651,6 @@ select {
   background: rgba(191, 228, 255, 0.26);
 }
 
-.paper-value-button,
-.paper-message-button {
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--ink);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-}
 
 .paper-value-empty {
   display: inline-flex;
@@ -1197,6 +1189,9 @@ select {
   --team-paper-bottom: #fff3f7;
   --team-glow: rgba(239, 134, 182, 0.14);
   --team-edge: rgba(239, 134, 182, 0.18);
+
+  --team-text: color-mix(in srgb, var(--team-strong) 32%, #282424 68%);
+  --team-text-soft: color-mix(in srgb, var(--team-strong) 18%, #333 82%);
 }
 
 .team-A {
@@ -1285,6 +1280,26 @@ select {
   --team-paper-bottom: #edf7ff;
   --team-glow: rgba(159, 214, 247, 0.16);
   --team-edge: rgba(159, 214, 247, 0.22);
+}
+
+
+.profile-paper .profile-name,
+.profile-paper .profile-kicker,
+.profile-paper .profile-meta,
+.profile-paper .profile-xid,
+.profile-paper .paper-label-button,
+.profile-paper .paper-label-button-message,
+.profile-paper .paper-value-button,
+.profile-paper .paper-message-button,
+.profile-paper .paper-tag-button,
+.profile-paper .paper-value-empty,
+.profile-paper .paper-section-title {
+  color: var(--team-text);
+}
+
+.profile-paper .profile-hint,
+.profile-paper .paper-subtle {
+  color: var(--team-text-soft);
 }
 
 .profile-paper-frame {
