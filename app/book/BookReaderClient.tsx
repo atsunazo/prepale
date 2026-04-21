@@ -207,6 +207,22 @@ function XIcon() {
   );
 }
 
+function ChevronIcon({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {dir === "left" ? <path d="m15 18-6-6 6-6" /> : <path d="m9 18 6-6-6-6" />}
+    </svg>
+  );
+}
+
 function HeartIcon({ filled = false }: { filled?: boolean }) {
   return (
     <svg
@@ -472,10 +488,6 @@ export default function BookReaderClient() {
     [filteredProfiles]
   );
 
-  const progressMax = Math.max(bookPages.length - 1, 1);
-  const progressValue = Math.min(currentIndex, progressMax);
-  const progressPercent = (progressValue / progressMax) * 100;
-
   useEffect(() => {
     if (bookPages.length === 0) {
       setCurrentIndex(0);
@@ -576,6 +588,16 @@ export default function BookReaderClient() {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
     }, behavior === "smooth" ? 380 : 40);
+  }
+
+  function goPrev() {
+    if (currentIndex <= 0) return;
+    scrollToIndex(currentIndex - 1);
+  }
+
+  function goNext() {
+    if (currentIndex >= bookPages.length - 1) return;
+    scrollToIndex(currentIndex + 1);
   }
 
   function jumpToProfileById(profileId: string) {
@@ -1038,12 +1060,17 @@ export default function BookReaderClient() {
         </div>
       </section>
 
-      <nav className="bottom-dock bottom-dock-compact" aria-label="操作">
-        <div className="dock-progress dock-progress-simple" aria-label="現在位置">
-          <div className="dock-progress-bar" aria-hidden="true">
-            <span className="dock-progress-fill" style={{ width: `${progressPercent}%` }} />
-          </div>
-        </div>
+      <nav className="bottom-dock" aria-label="ページ移動">
+        <button
+          type="button"
+          className="nav-button"
+          onClick={goPrev}
+          disabled={currentIndex === 0}
+          aria-label="前のページへ"
+        >
+          <ChevronIcon dir="left" />
+          <span>前へ</span>
+        </button>
 
         <button
           type="button"
@@ -1052,6 +1079,17 @@ export default function BookReaderClient() {
           aria-label="一覧を開く"
         >
           <span>一覧</span>
+        </button>
+
+        <button
+          type="button"
+          className="nav-button"
+          onClick={goNext}
+          disabled={currentIndex === bookPages.length - 1}
+          aria-label="次のページへ"
+        >
+          <span>次へ</span>
+          <ChevronIcon dir="right" />
         </button>
       </nav>
 
