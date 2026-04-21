@@ -1238,3 +1238,113 @@ select {
     transform: none;
   }
 }
+
+@media (max-width: 420px) {
+  .profile-paper {
+    --team-soft: color-mix(in srgb, var(--team-accent) 34%, white);
+    --team-line: color-mix(in srgb, var(--team-accent) 24%, white);
+    --team-edge: color-mix(in srgb, var(--team-accent) 32%, white);
+    --team-glow: color-mix(in srgb, var(--team-accent) 24%, white);
+    --team-text: color-mix(in srgb, var(--team-strong) 42%, #241f26 58%);
+    --team-text-soft: color-mix(in srgb, var(--team-strong) 28%, #4a4450 72%);
+  }
+
+  .profile-paper-frame {
+    background:
+      radial-gradient(circle at 14% 12%, var(--team-glow), transparent 30%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--team-paper-top) 86%, var(--team-soft)),
+        color-mix(in srgb, var(--team-paper-bottom) 72%, var(--team-soft))
+      );
+    border-color: color-mix(in srgb, var(--team-edge) 74%, white);
+    filter: saturate(1.05) contrast(1.01);
+  }
+
+  .paper-section {
+    border-top-color: color-mix(in srgb, var(--team-edge) 68%, white);
+  }
+
+  .paper-section-title {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--team-accent) 24%, white),
+      color-mix(in srgb, var(--team-soft) 90%, white)
+    );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 4px 10px color-mix(in srgb, var(--team-accent) 14%, transparent);
+  }
+
+  .paper-item-block {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--team-soft) 34%, white),
+      color-mix(in srgb, var(--team-soft) 18%, white)
+    );
+    border-color: color-mix(in srgb, var(--team-edge) 66%, white);
+  }
+
+  .paper-item {
+    background: color-mix(in srgb, var(--team-soft) 40%, white);
+    border-color: color-mix(in srgb, var(--team-edge) 70%, white);
+  }
+
+  .paper-message {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--team-soft) 30%, white),
+      color-mix(in srgb, var(--team-soft) 50%, white)
+    );
+    border-color: color-mix(in srgb, var(--team-edge) 72%, white);
+  }
+
+  .paper-tag-button {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--team-accent) 32%, white),
+      color-mix(in srgb, var(--team-soft) 92%, white)
+    );
+    border-color: color-mix(in srgb, var(--team-edge) 62%, white);
+    color: var(--team-text);
+  }
+
+  .paper-tag-soft-button {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--team-accent) 24%, white),
+      color-mix(in srgb, var(--team-soft) 96%, white)
+    );
+  }
+
+  .paper-label-button,
+  .paper-label-button-message,
+  .paper-value-button,
+  .paper-message-button,
+  .paper-value-empty,
+  .profile-kicker,
+  .profile-name {
+    color: var(--team-text);
+  }
+
+  .profile-x-link {
+    background: color-mix(in srgb, var(--team-soft) 34%, white);
+    border-color: color-mix(in srgb, var(--team-edge) 68%, white);
+  }
+
+  .paper-spine {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--team-accent) 42%, white),
+      color-mix(in srgb, var(--team-accent) 68%, white)
+    );
+  }
+
+  .paper-sparkle-a {
+    background: color-mix(in srgb, var(--team-accent) 96%, white);
+  }
+
+  .paper-sparkle-b {
+    background: color-mix(in srgb, var(--team-accent) 72%, white);
+  }
+}
