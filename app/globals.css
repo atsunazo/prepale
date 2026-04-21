@@ -1500,3 +1500,20 @@ select {
   border: 1px solid color-mix(in srgb, var(--team-edge) 68%, white);
   box-shadow: 0 8px 20px rgba(101, 87, 130, 0.05);
 }
+
+.paper-item {
+  background: #fff;
+  border: 1px solid rgba(126, 102, 151, 0.14);
+}
+
+.paper-item-block {
+  background: #fff;
+  border: 1px solid rgba(126, 102, 151, 0.14);
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.paper-message {
+  background: #fff;
+  border: 1px solid rgba(126, 102, 151, 0.14);
+}
