@@ -431,7 +431,7 @@ select {
 }
 
 .cover-title {
-  margin: 16px 0 8px;
+  margin: 11px 0 8px;
   font-size: clamp(2.2rem, 7vw, 3.3rem);
   line-height: 1.05;
   color: #5d465f;
@@ -697,7 +697,7 @@ select {
 }
 
 .paper-section {
-  margin-top: 26px;
+  margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid color-mix(in srgb, var(--team-edge) 54%, white);
 }
@@ -765,7 +765,7 @@ select {
   background: transparent;
   padding: 0;
   text-align: left;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: none;
@@ -773,7 +773,7 @@ select {
 }
 
 .paper-label-button-message {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   color: var(--team-text-soft);
 }
 
@@ -1321,7 +1321,7 @@ select {
 .paper-section-title {
   display: inline-flex;
   align-items: center;
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   padding: 6px 10px;
   border-radius: 999px;
   background: linear-gradient(
@@ -1367,7 +1367,7 @@ select {
 
 .paper-tag-button {
   max-width: 100%;
-  padding: 10px 12px;
+  padding: 7px 10px;
   border-radius: 999px;
   background: linear-gradient(
     180deg,
@@ -1376,9 +1376,10 @@ select {
   );
   border: 1px solid color-mix(in srgb, var(--team-edge) 62%, white);
   color: var(--team-text);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   box-shadow: 0 4px 10px rgba(120, 93, 143, 0.06);
+  font-size: 13px;
 }
 
 .paper-tag-soft-button {
@@ -1470,3 +1471,31 @@ select {
   margin-top: 6px;
 }
 
+.paper-item {
+  display: grid;
+  gap: 5px;
+  padding: 12px 12px 14px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--team-soft) 38%, white),
+    color-mix(in srgb, var(--team-soft) 18%, white)
+  );
+  border: 1px solid color-mix(in srgb, var(--team-edge) 68%, white);
+  box-shadow: 0 8px 20px rgba(101, 87, 130, 0.05);
+}
+
+.paper-message {
+  margin-top: 12px;
+  display: grid;
+  gap: 0px;
+  padding: 12px 12px 14px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--team-soft) 38%, white),
+    color-mix(in srgb, var(--team-soft) 18%, white)
+  );
+  border: 1px solid color-mix(in srgb, var(--team-edge) 68%, white);
+  box-shadow: 0 8px 20px rgba(101, 87, 130, 0.05);
+}
