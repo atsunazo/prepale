@@ -1053,13 +1053,13 @@ export default function BookReaderClient() {
                         <h3 className="paper-section-title">メモ</h3>
                         <span className="paper-note-caption">この端末(ブラウザ)に保存されます</span>
                       </div>
-
+                    
                       <textarea
                         className="paper-note-textarea"
                         value={profileNotes[profile.id] ?? ""}
                         onChange={(e) => updateProfileNote(profile.id, e.target.value)}
                         placeholder="話したこと、あとで聞きたいこと、印象などを残せます。"
-                        rows={5}
+                        rows={4}
                       />
                     </section>
                   </div>
