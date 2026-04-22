@@ -419,6 +419,7 @@ export default function BookReaderClient() {
   const suppressScrollSync = useRef(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+  const tocListRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
@@ -501,6 +502,13 @@ export default function BookReaderClient() {
       [profileId]: value,
     }));
   }
+  
+  useEffect(() => {
+    if (panel?.mode !== "toc") return;
+    if (!tocListRef.current) return;
+
+    tocListRef.current.scrollTop = 0;
+  }, [tocFilter, panel]);
 
   const favoriteIdSet = useMemo(() => new Set(favoriteIds), [favoriteIds]);
   const bookmarkIdSet = useMemo(() => new Set(bookmarkIds), [bookmarkIds]);
@@ -1150,7 +1158,8 @@ export default function BookReaderClient() {
                   </button>
                 </div>
 
-                <div className="floating-list floating-list-topless">
+                <div ref={tocListRef}
+                className="floating-list floating-list-topless">
                   <button
                     type="button"
                     className="toc-item toc-item-cover"
