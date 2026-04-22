@@ -1664,8 +1664,8 @@ select {
 }
 
 .paper-note-textarea:focus {
-  border-color: rgba(65, 65, 65, 0.72);
-  box-shadow: 0 0 0 4px rgba(191, 228, 255, 0.24);
+  border-color: rgba(71, 70, 76, 0.72);
+  box-shadow: 0 0 0 2px rgba(193, 212, 255, 0.63);
 }
 
 
