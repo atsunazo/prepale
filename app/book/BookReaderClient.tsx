@@ -829,7 +829,7 @@ export default function BookReaderClient() {
                 />
                 <p className="cover-subtitle">~ みんなのプロフィール帳 ~</p>
                 <p className="cover-copy">
-                  参加メンバーのことを知れるプロフィール帳です！いろいろ触ってみよう！
+                  参加メンバーのことを知れるプロフィール帳です！
                 </p>
                 
                 
@@ -925,7 +925,7 @@ export default function BookReaderClient() {
                   </header>
 
                     <section className="paper-section">
-                      <h3 className="paper-section-title">この人らしさ</h3>
+                      <h3 className="paper-section-title">この人の成分</h3>
 
                       <div className="paper-list-block">
                         <TokenFieldBlock
@@ -979,7 +979,7 @@ export default function BookReaderClient() {
                     </section>
 
                     <section className="paper-section">
-                      <h3 className="paper-section-title">話しかけるヒント</h3>
+                      <h3 className="paper-section-title">話題のタネ</h3>
 
                       <div className="paper-list-block">
                         <div className="paper-item">
@@ -1044,7 +1044,7 @@ export default function BookReaderClient() {
                     </section>
                     <section className="paper-section">
                       <div className="paper-note-head">
-                        <h3 className="paper-section-title">メモ</h3>
+                        <h3 className="paper-section-title">ひとことメモ</h3>
                         <span className="paper-note-caption">※この端末(ブラウザ)にのみ保存されます</span>
                       </div>
                     
