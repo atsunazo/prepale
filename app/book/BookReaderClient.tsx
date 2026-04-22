@@ -943,13 +943,7 @@ export default function BookReaderClient() {
                           onOpenField={openFieldInspector}
                           onOpenValue={openValueInspector}
                         />
-                      </div>
-                    </section>
-
-                    <section className="paper-section">
-                      <h3 className="paper-section-title">話しかけるヒント</h3>
-
-                      <div className="paper-list-block">
+                     
                         <TokenFieldBlock
                           label="好きな食べ物・飲み物"
                           fieldKey="food"
@@ -985,7 +979,7 @@ export default function BookReaderClient() {
                     </section>
 
                     <section className="paper-section">
-                      <h3 className="paper-section-title">もっと知りたい</h3>
+                      <h3 className="paper-section-title">話しかけるヒント</h3>
 
                       <div className="paper-list-block">
                         <div className="paper-item">
