@@ -1094,7 +1094,7 @@ export default function BookReaderClient() {
                     className={`toc-filter-chip ${tocFilter === "favorites" ? "is-active" : ""}`}
                     onClick={() => setTocFilter("favorites")}
                   >
-                    当日話した！
+                    話せた人
                   </button>
                   <button
                     type="button"
