@@ -790,8 +790,7 @@ export default function BookReaderClient() {
                   alt="プレパレ！ Playful Palette のロゴ"
                   className="cover-logo-image"
                 />
-                <h1 className="cover-title">プレパレ！</h1>
-                <p className="cover-subtitle">みんなのプロフィール帳</p>
+                <p className="cover-subtitle">~みんなのプロフィール帳~</p>
                 <p className="cover-copy">
                   参加メンバーのことをゆっくり知れるプロフィール帳です！
                 </p>
