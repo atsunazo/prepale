@@ -786,7 +786,7 @@ export default function BookReaderClient() {
                 </div>
                 <div className="cover-kicker">PROFILE BOOK</div>
                 <img
-                  src="/prepale.jpg"
+                  src="/prepale.png"
                   alt="プレパレ！ Playful Palette のロゴ"
                   className="cover-logo-image"
                 />
