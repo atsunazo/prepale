@@ -1520,7 +1520,8 @@ select {
 }
 
 .paper-section,
-.paper-message {
+.paper-message,
+.paper-note-section {
   margin-left: 7px;
 }
 
@@ -1662,7 +1663,7 @@ select {
   width: 100%;
   min-height: 120px;
   resize: vertical;
-  border: 1px solid rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(165, 164, 164, 0.84);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--ink);
