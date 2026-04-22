@@ -790,7 +790,7 @@ export default function BookReaderClient() {
                   alt="プレパレ！ Playful Palette のロゴ"
                   className="cover-logo-image"
                 />
-                <p className="cover-subtitle">~みんなのプロフィール帳~</p>
+                <p className="cover-subtitle">~ みんなのプロフィール帳 ~</p>
                 <p className="cover-copy">
                   参加メンバーのことをゆっくり知れるプロフィール帳です！
                 </p>
@@ -1087,14 +1087,14 @@ export default function BookReaderClient() {
                     className={`toc-filter-chip ${tocFilter === "all" ? "is-active" : ""}`}
                     onClick={() => setTocFilter("all")}
                   >
-                    全員
+                    全員(五十音順)
                   </button>
                   <button
                     type="button"
                     className={`toc-filter-chip ${tocFilter === "favorites" ? "is-active" : ""}`}
                     onClick={() => setTocFilter("favorites")}
                   >
-                    お気に入り
+                    当日話した！
                   </button>
                   <button
                     type="button"
