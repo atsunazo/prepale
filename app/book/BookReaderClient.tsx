@@ -70,6 +70,8 @@ const ALL_FIELDS: { key: FieldKey; label: string }[] = [
 
 const FAVORITES_STORAGE_KEY = "prepale:favorites";
 const BOOKMARKS_STORAGE_KEY = "prepale:bookmarks";
+const PROFILE_NOTES_STORAGE_KEY = "prepale:profile-notes";
+
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -409,7 +411,7 @@ export default function BookReaderClient() {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
   const [bookmarkIds, setBookmarkIds] = useState<string[]>([]);
   const [tocFilter, setTocFilter] = useState<"all" | "favorites" | "bookmarks">("all");
-
+  const [profileNotes, setProfileNotes] = useState<Record<string, string>>({});
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const pageRefs = useRef<(HTMLElement | null)[]>([]);
   const pageScrollRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -464,6 +466,38 @@ export default function BookReaderClient() {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(BOOKMARKS_STORAGE_KEY, JSON.stringify(bookmarkIds));
   }, [bookmarkIds]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      const raw = window.localStorage.getItem(PROFILE_NOTES_STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        const sanitized = Object.fromEntries(
+          Object.entries(parsed).filter(
+            ([key, value]) => typeof key === "string" && typeof value === "string"
+          )
+        );
+        setProfileNotes(sanitized);
+      }
+    } catch {
+      setProfileNotes({});
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(PROFILE_NOTES_STORAGE_KEY, JSON.stringify(profileNotes));
+  }, [profileNotes]);
+
+  function updateProfileNote(profileId: string, value: string) {
+    setProfileNotes((prev) => ({
+      ...prev,
+      [profileId]: value,
+    }));
+  }
 
   const favoriteIdSet = useMemo(() => new Set(favoriteIds), [favoriteIds]);
   const bookmarkIdSet = useMemo(() => new Set(bookmarkIds), [bookmarkIds]);
@@ -1010,6 +1044,20 @@ export default function BookReaderClient() {
                       >
                         {profile.message || "―"}
                       </button>
+                    </section>
+                    <section className="paper-note-section">
+                      <div className="paper-note-head">
+                        <h3 className="paper-section-title">自分用メモ</h3>
+                        <span className="paper-note-caption">この端末にだけ保存されます</span>
+                      </div>
+
+                      <textarea
+                        className="paper-note-textarea"
+                        value={profileNotes[profile.id] ?? ""}
+                        onChange={(e) => updateProfileNote(profile.id, e.target.value)}
+                        placeholder="話したこと、あとで聞きたいこと、印象メモなどを書けます"
+                        rows={5}
+                      />
                     </section>
                   </div>
                 </div>

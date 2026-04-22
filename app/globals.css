@@ -1631,3 +1631,51 @@ select {
   object-fit: contain;
   filter: drop-shadow(0 10px 22px rgba(98, 86, 126, 0.14));
 }
+
+.paper-note-section {
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.74),
+    rgba(255, 248, 252, 0.72)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.82);
+}
+
+.paper-note-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.paper-note-caption {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.paper-note-textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--ink);
+  padding: 12px 14px;
+  line-height: 1.7;
+  outline: none;
+}
+
+.paper-note-textarea:focus {
+  border-color: rgba(119, 199, 255, 0.72);
+  box-shadow: 0 0 0 4px rgba(191, 228, 255, 0.24);
+}
+
+.paper-note-textarea::placeholder {
+  color: rgba(127, 115, 141, 0.72);
+}
