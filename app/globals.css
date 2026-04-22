@@ -1633,29 +1633,20 @@ select {
   filter: drop-shadow(0 10px 22px rgba(98, 86, 126, 0.14));
 }
 
-.paper-note-section {
-  margin-top: 15px;
-  padding: 14px;
-  border-radius: 20px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.74),
-    rgba(254, 254, 254, 0.76)
-  );
-  border: 1px solid rgba(222, 222, 222, 0.82);
-}
+
 
 .paper-note-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 4px;
+  margin-bottom: 0%;
 }
 
 .paper-note-caption {
+  margin-top: 4px;
   font-size: 11px;
-  color: var(--muted);
+  color: rgba(0, 0, 0, 0.94);
   font-weight: 600;
 }
 
@@ -1665,7 +1656,7 @@ select {
   resize: vertical;
   border: 1px solid rgba(165, 164, 164, 0.84);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.98);
   color: var(--ink);
   padding: 12px 14px;
   line-height: 1.7;
@@ -1673,10 +1664,10 @@ select {
 }
 
 .paper-note-textarea:focus {
-  border-color: rgba(119, 199, 255, 0.72);
+  border-color: rgba(65, 65, 65, 0.72);
   box-shadow: 0 0 0 4px rgba(191, 228, 255, 0.24);
 }
 
 .paper-note-textarea::placeholder {
-  color: rgba(127, 115, 141, 0.72);
+  color: rgba(6, 3, 9, 0.72);
 }

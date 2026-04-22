@@ -1048,7 +1048,7 @@ export default function BookReaderClient() {
                         {profile.message || "―"}
                       </button>
                     </section>
-                    <section className="paper-note-section">
+                    <section className="paper-section">
                       <div className="paper-note-head">
                         <h3 className="paper-section-title">メモ</h3>
                         <span className="paper-note-caption">この端末(ブラウザ)に保存されます</span>
