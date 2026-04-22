@@ -1623,3 +1623,11 @@ select {
   animation: bubbleFloat 6.8s ease-in-out infinite;
 }
 
+.cover-logo-image {
+  display: block;
+  width: min(100%, 320px);
+  height: auto;
+  margin: 18px auto 12px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 22px rgba(98, 86, 126, 0.14));
+}

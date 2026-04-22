@@ -2,943 +2,6 @@
   {
     "order": 1,
     "slug": "member-001",
-    "name": "るっく",
-    "xId": "@looklucklook",
-    "team": "A",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "アカペラ",
-      "文房具",
-      "お菓子作り"
-    ],
-    "foodTokens": [
-      "紅茶"
-    ],
-    "placeTokens": [
-      "大須"
-    ],
-    "clubTokens": [
-      "合唱部"
-    ],
-    "recentTokens": [
-      "カクテル作り"
-    ],
-    "recommendation": "Studio Escapeの『女王と国のために』",
-    "topics": "みんなのおすすめの飲食店",
-    "message": "プレパレ！参加ありがとう！楽しんでいってね！",
-    "searchText": "るっく @looklucklook A マダミス 謎解き イマーシブ アカペラ 文房具 お菓子作り 紅茶 大須 合唱部 カクテル作り Studio Escapeの『女王と国のために』 みんなのおすすめの飲食店 プレパレ！参加ありがとう！楽しんでいってね！"
-  },
-  {
-    "order": 2,
-    "slug": "member-002",
-    "name": "なーさん",
-    "xId": "@776_nanamu",
-    "team": "B",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "マダミス",
-      "謎解き",
-      "推し活(いろいろ)"
-    ],
-    "foodTokens": [
-      "甘い物"
-    ],
-    "placeTokens": [
-      "栄周辺"
-    ],
-    "clubTokens": [
-      "卓球部"
-    ],
-    "recentTokens": [
-      "今の最大の沼は中華ドラマ"
-    ],
-    "recommendation": "スワンダイブはいいぞ…",
-    "topics": "知らない事は糧になるので何でも聞きたい",
-    "message": "明るい人見知りです！よろしくお願いします！",
-    "searchText": "なーさん @776_nanamu B マダミス 謎解き ボドゲ イマーシブ マダミス 謎解き 推し活(いろいろ) 甘い物 栄周辺 卓球部 今の最大の沼は中華ドラマ スワンダイブはいいぞ… 知らない事は糧になるので何でも聞きたい 明るい人見知りです！よろしくお願いします！"
-  },
-  {
-    "order": 3,
-    "slug": "member-003",
-    "name": "りょー",
-    "xId": "@Ryo1000medal",
-    "team": "C",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "ボドゲ",
-      "謎解き",
-      "山登り",
-      "スノボ"
-    ],
-    "foodTokens": [
-      "カレー",
-      "コロッケ",
-      "おいなりさん"
-    ],
-    "placeTokens": [
-      "なぞねこ"
-    ],
-    "clubTokens": [],
-    "recentTokens": [
-      "友達と遊ぶ"
-    ],
-    "recommendation": "M-1",
-    "topics": "知らない話はなんでも楽しい！",
-    "message": "ほんとにお気軽にお声がけくださいましね",
-    "searchText": "りょー @Ryo1000medal C マダミス 謎解き ボドゲ ボドゲ 謎解き 山登り スノボ カレー コロッケ おいなりさん なぞねこ 友達と遊ぶ M-1 知らない話はなんでも楽しい！ ほんとにお気軽にお声がけくださいましね"
-  },
-  {
-    "order": 4,
-    "slug": "member-004",
-    "name": "裕",
-    "xId": "@yuusinomiya",
-    "team": "D",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "漫画",
-      "アニメ",
-      "猫"
-    ],
-    "foodTokens": [
-      "コーヒー"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "バスケ部"
-    ],
-    "recentTokens": [
-      "スポーツ観戦"
-    ],
-    "recommendation": "",
-    "topics": "",
-    "message": "物語の謎解きから,絶品スコーン探しやスポーツ観戦,参加まで🏃‍♀️心惹かれる『面白いもの』を日々開拓中です！",
-    "searchText": "裕 @yuusinomiya D マダミス 謎解き ボドゲ イマーシブ 漫画 アニメ 猫 コーヒー バスケ部 スポーツ観戦 物語の謎解きから,絶品スコーン探しやスポーツ観戦,参加まで🏃‍♀️心惹かれる『面白いもの』を日々開拓中です！"
-  },
-  {
-    "order": 5,
-    "slug": "member-005",
-    "name": "まーくん",
-    "xId": "@MaClain0613",
-    "team": "E",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "山（夏：登山）",
-      "山（冬：スノボ）",
-      "プロ野球（広島東洋カープ）",
-      "人狼ゲーム（しんたろー）"
-    ],
-    "foodTokens": [
-      "麻婆飯",
-      "アセロラジュース"
-    ],
-    "placeTokens": [
-      "リアル脱出ゲーム名古屋店"
-    ],
-    "clubTokens": [
-      "バレーボール部"
-    ],
-    "recentTokens": [
-      "ボールペン字（書きちらしさん）"
-    ],
-    "recommendation": "ギア（ノンバーバルシアター,京都）",
-    "topics": "プロ野球,バレーボール,ボドゲ",
-    "message": "謎解きもマダミスも大好きです！！全員と交流できたらいいなと思っています！！",
-    "searchText": "まーくん @MaClain0613 E マダミス 謎解き ボドゲ イマーシブ 山（夏：登山） 山（冬：スノボ） プロ野球（広島東洋カープ） 人狼ゲーム（しんたろー） 麻婆飯 アセロラジュース リアル脱出ゲーム名古屋店 バレーボール部 ボールペン字（書きちらしさん） ギア（ノンバーバルシアター,京都） プロ野球,バレーボール,ボドゲ 謎解きもマダミスも大好きです！！全員と交流できたらいいなと思っています！！"
-  },
-  {
-    "order": 6,
-    "slug": "member-006",
-    "name": "はと",
-    "xId": "@Dollhato",
-    "team": "F",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
-    ],
-    "favorites": [
-      "ポケモン",
-      "最近ポケモン関連のコンテンツにはまっています。"
-    ],
-    "foodTokens": [
-      "牡蠣"
-    ],
-    "placeTokens": [
-      "トレカキャンプ大須店"
-    ],
-    "clubTokens": [
-      "テニス部"
-    ],
-    "recentTokens": [
-      "ポケカ",
-      "ぽこポケ",
-      "ポケチャンなど"
-    ],
-    "recommendation": "ポケモン関連コンテンツ",
-    "topics": "",
-    "message": "人に勧められたことが趣味になることが多いのでいろんなお話が聞けると嬉しいです！",
-    "searchText": "はと @Dollhato F マダミス 謎解き ボドゲ イマーシブ トレカ ポケモン 最近ポケモン関連のコンテンツにはまっています。 牡蠣 トレカキャンプ大須店 テニス部 ポケカ ぽこポケ ポケチャンなど ポケモン関連コンテンツ 人に勧められたことが趣味になることが多いのでいろんなお話が聞けると嬉しいです！"
-  },
-  {
-    "order": 7,
-    "slug": "member-007",
-    "name": "こじこじ",
-    "xId": "@CozyKozy_escape",
-    "team": "G",
-    "interests": [
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "美味しい物"
-    ],
-    "foodTokens": [
-      "ラーメン"
-    ],
-    "placeTokens": [
-      "名古屋駅"
-    ],
-    "clubTokens": [],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "日本酒,みんなで遊べるボドゲ,推理小説",
-    "message": "頭の中がお花畑ですが,仲良くしてやってください。気軽に声かけてもらえるとうれしいです。",
-    "searchText": "こじこじ @CozyKozy_escape G 謎解き ボドゲ 美味しい物 ラーメン 名古屋駅 日本酒,みんなで遊べるボドゲ,推理小説 頭の中がお花畑ですが,仲良くしてやってください。気軽に声かけてもらえるとうれしいです。"
-  },
-  {
-    "order": 8,
-    "slug": "member-008",
-    "name": "しろくま",
-    "xId": "@me_ko_dai",
-    "team": "H",
-    "interests": [
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "謎制作",
-      "読書",
-      "パズル"
-    ],
-    "foodTokens": [
-      "全て"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "水泳部",
-      "科学部"
-    ],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "謎解き/ボドゲ/本/ゲーム/プログラミング",
-    "message": "謎を作ってる人です！！！貴方の趣味のおすすめを教えて下さい！！",
-    "searchText": "しろくま @me_ko_dai H 謎解き ボドゲ 謎制作 読書 パズル 全て 水泳部 科学部 謎解き/ボドゲ/本/ゲーム/プログラミング 謎を作ってる人です！！！貴方の趣味のおすすめを教えて下さい！！"
-  },
-  {
-    "order": 9,
-    "slug": "member-009",
-    "name": "ふれんちとーすと",
-    "xId": "@comb_again",
-    "team": "A",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "謎解き",
-      "観劇",
-      "合唱"
-    ],
-    "foodTokens": [
-      "ホタルイカ"
-    ],
-    "placeTokens": [
-      "タンブルウィードナゾベース"
-    ],
-    "clubTokens": [
-      "合唱部"
-    ],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "",
-    "message": "いろいろなことに興味を持っています！ぜひよろしくお願いします！！",
-    "searchText": "ふれんちとーすと @comb_again A マダミス 謎解き ボドゲ イマーシブ 謎解き 観劇 合唱 ホタルイカ タンブルウィードナゾベース 合唱部 いろいろなことに興味を持っています！ぜひよろしくお願いします！！"
-  },
-  {
-    "order": 10,
-    "slug": "member-010",
-    "name": "ふぉん",
-    "xId": "@Fondeu_fonfon",
-    "team": "B",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
-    ],
-    "favorites": [
-      "謎解き",
-      "ピアノ",
-      "歌うこと"
-    ],
-    "foodTokens": [
-      "ドーナツ"
-    ],
-    "placeTokens": [
-      "愛知"
-    ],
-    "clubTokens": [
-      "ソフトテニス部",
-      "演劇部",
-      "軽音部"
-    ],
-    "recentTokens": [
-      "寝ること"
-    ],
-    "recommendation": "テンリグ",
-    "topics": "雑食なのでなんでも喰いつきます",
-    "message": "超絶人見知りですが,この機会にお話しできたら嬉しいです！よろしくお願いします！",
-    "searchText": "ふぉん @Fondeu_fonfon B マダミス 謎解き ボドゲ イマーシブ トレカ 謎解き ピアノ 歌うこと ドーナツ 愛知 ソフトテニス部 演劇部 軽音部 寝ること テンリグ 雑食なのでなんでも喰いつきます 超絶人見知りですが,この機会にお話しできたら嬉しいです！よろしくお願いします！"
-  },
-  {
-    "order": 11,
-    "slug": "member-011",
-    "name": "momizi",
-    "xId": "@_____tranquilo",
-    "team": "C",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "旅行",
-      "カフェ",
-      "写真"
-    ],
-    "foodTokens": [
-      "からあげ"
-    ],
-    "placeTokens": [
-      "スタジオオール"
-    ],
-    "clubTokens": [
-      "陸上部"
-    ],
-    "recentTokens": [
-      "日常侵食型イベント"
-    ],
-    "recommendation": "クローズシアター CLEAR",
-    "topics": "",
-    "message": "気軽に声をかけてください",
-    "searchText": "momizi @_____tranquilo C マダミス 謎解き ボドゲ イマーシブ 旅行 カフェ 写真 からあげ スタジオオール 陸上部 日常侵食型イベント クローズシアター CLEAR 気軽に声をかけてください"
-  },
-  {
-    "order": 12,
-    "slug": "member-012",
-    "name": "ヒミラグ",
-    "xId": "@himiragu_yoshi",
-    "team": "D",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
-    ],
-    "favorites": [
-      "謎解き",
-      "システム制作",
-      "ボドゲ"
-    ],
-    "foodTokens": [
-      "メロン"
-    ],
-    "placeTokens": [],
-    "clubTokens": [],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "面白いコンテンツ",
-    "message": "いろんなことやってる人です。気軽に声かけてくれると嬉しいです！",
-    "searchText": "ヒミラグ @himiragu_yoshi D マダミス 謎解き ボドゲ イマーシブ トレカ 謎解き システム制作 ボドゲ メロン 面白いコンテンツ いろんなことやってる人です。気軽に声かけてくれると嬉しいです！"
-  },
-  {
-    "order": 13,
-    "slug": "member-013",
-    "name": "まなこ",
-    "xId": "@nazotokitoka",
-    "team": "E",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "楽しければ何でも！"
-    ],
-    "foodTokens": [
-      "ほとんど何でも美味しく食べられますがお酒は飲めません"
-    ],
-    "placeTokens": [],
-    "clubTokens": [],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "ミステリ,ホラー系の小説や映画は好きです(最近は触れる時間が減りましたが…)",
-    "message": "マダミスでも謎解きでもあまりこだわらず雑食でやっていこうとと思っていますので,人が足りない時など気軽に声をかけて貰えると嬉しく思います",
-    "searchText": "まなこ @nazotokitoka E マダミス 謎解き ボドゲ イマーシブ 楽しければ何でも！ ほとんど何でも美味しく食べられますがお酒は飲めません ミステリ,ホラー系の小説や映画は好きです(最近は触れる時間が減りましたが…) マダミスでも謎解きでもあまりこだわらず雑食でやっていこうとと思っていますので,人が足りない時など気軽に声をかけて貰えると嬉しく思います"
-  },
-  {
-    "order": 14,
-    "slug": "member-014",
-    "name": "さんた",
-    "xId": "@evesanta1224",
-    "team": "F",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "プログラミング",
-      "宇宙兄弟",
-      "沖縄"
-    ],
-    "foodTokens": [
-      "もも"
-    ],
-    "placeTokens": [
-      "リアル脱出ゲーム名古屋店"
-    ],
-    "clubTokens": [
-      "メカトロ部"
-    ],
-    "recentTokens": [],
-    "recommendation": "パズバコ3",
-    "topics": "",
-    "message": "よろしくお願いします",
-    "searchText": "さんた @evesanta1224 F マダミス 謎解き ボドゲ イマーシブ プログラミング 宇宙兄弟 沖縄 もも リアル脱出ゲーム名古屋店 メカトロ部 パズバコ3 よろしくお願いします"
-  },
-  {
-    "order": 15,
-    "slug": "member-015",
-    "name": "ジーフォン",
-    "xId": "@gr_foon",
-    "team": "G",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "格闘ゲーム",
-      "マダミス"
-    ],
-    "foodTokens": [
-      "唐揚げ",
-      "日本酒"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "器械体操部"
-    ],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "ボドゲ,居酒屋",
-    "message": "格ゲーのことなら任せて下さい！",
-    "searchText": "ジーフォン @gr_foon G マダミス 謎解き ボドゲ イマーシブ 格闘ゲーム マダミス 唐揚げ 日本酒 器械体操部 ボドゲ,居酒屋 格ゲーのことなら任せて下さい！"
-  },
-  {
-    "order": 16,
-    "slug": "member-016",
-    "name": "まり",
-    "xId": "@kmrk427",
-    "team": "H",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "映画",
-      "漫画",
-      "ホラー"
-    ],
-    "foodTokens": [
-      "果物"
-    ],
-    "placeTokens": [
-      "図書館"
-    ],
-    "clubTokens": [
-      "吹奏楽部"
-    ],
-    "recentTokens": [
-      "ラジオ"
-    ],
-    "recommendation": "ロボット,ドリームズ",
-    "topics": "行ってよかった旅行先,おすすめのレシピ",
-    "message": "好きなショートカットキーはwindows＋Dです",
-    "searchText": "まり @kmrk427 H マダミス 謎解き ボドゲ イマーシブ 映画 漫画 ホラー 果物 図書館 吹奏楽部 ラジオ ロボット,ドリームズ 行ってよかった旅行先,おすすめのレシピ 好きなショートカットキーはwindows＋Dです"
-  },
-  {
-    "order": 17,
-    "slug": "member-017",
-    "name": "あんちょび",
-    "xId": "@cyobi_hobby",
-    "team": "A",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
-    ],
-    "favorites": [
-      "スポーツ",
-      "ゲーム",
-      "体験型コンテンツ"
-    ],
-    "foodTokens": [
-      "日本酒"
-    ],
-    "placeTokens": [
-      "栄"
-    ],
-    "clubTokens": [
-      "サッカー部"
-    ],
-    "recentTokens": [
-      "オーディブル"
-    ],
-    "recommendation": "slay the spire 2",
-    "topics": "美味しいご飯屋さん,体験型コンテンツ",
-    "message": "最近面白かった本,映画教えてください！",
-    "searchText": "あんちょび @cyobi_hobby A マダミス 謎解き ボドゲ イマーシブ トレカ スポーツ ゲーム 体験型コンテンツ 日本酒 栄 サッカー部 オーディブル slay the spire 2 美味しいご飯屋さん,体験型コンテンツ 最近面白かった本,映画教えてください！"
-  },
-  {
-    "order": 18,
-    "slug": "member-018",
-    "name": "やち",
-    "xId": "@yatinonazotoki",
-    "team": "B",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "音楽",
-      "よつばと！",
-      "マヨネーズ"
-    ],
-    "foodTokens": [
-      "ケンタッキーフライドチキン",
-      "バーガーキング"
-    ],
-    "placeTokens": [
-      "バンド"
-    ],
-    "clubTokens": [
-      "アンチエイジング部"
-    ],
-    "recentTokens": [
-      "文字遊戯"
-    ],
-    "recommendation": "",
-    "topics": "",
-    "message": "お話した事のない方ともたくさん交流したいです。よろしくお願いします！",
-    "searchText": "やち @yatinonazotoki B マダミス 謎解き イマーシブ 音楽 よつばと！ マヨネーズ ケンタッキーフライドチキン バーガーキング バンド アンチエイジング部 文字遊戯 お話した事のない方ともたくさん交流したいです。よろしくお願いします！"
-  },
-  {
-    "order": 19,
-    "slug": "member-019",
-    "name": "みゆ",
-    "xId": "@mi_ma__cha",
-    "team": "C",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "イマーシブ",
-      "謎解き",
-      "ボドゲ",
-      "地下アイドル"
-    ],
-    "foodTokens": [
-      "コーヒー"
-    ],
-    "placeTokens": [
-      "東京のイマーシブ公演"
-    ],
-    "clubTokens": [
-      "映画研究会"
-    ],
-    "recentTokens": [
-      "勝利の女神NIKKE"
-    ],
-    "recommendation": "東京のホラー,サスペンス系のイマーシブ公演",
-    "topics": "",
-    "message": "ほぼ知り合いいません！笑　気軽に話しかけてください〜！",
-    "searchText": "みゆ @mi_ma__cha C マダミス 謎解き ボドゲ イマーシブ イマーシブ 謎解き ボドゲ 地下アイドル コーヒー 東京のイマーシブ公演 映画研究会 勝利の女神NIKKE 東京のホラー,サスペンス系のイマーシブ公演 ほぼ知り合いいません！笑　気軽に話しかけてください〜！"
-  },
-  {
-    "order": 20,
-    "slug": "member-020",
-    "name": "なお",
-    "xId": "@ow26953",
-    "team": "D",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "旅行",
-      "謎解き"
-    ],
-    "foodTokens": [
-      "かき氷",
-      "パン"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "ハンドボール部"
-    ],
-    "recentTokens": [
-      "ピラティス"
-    ],
-    "recommendation": "",
-    "topics": "",
-    "message": "人見知りですがどうぞよろしくお願いします！",
-    "searchText": "なお @ow26953 D マダミス 謎解き ボドゲ 旅行 謎解き かき氷 パン ハンドボール部 ピラティス 人見知りですがどうぞよろしくお願いします！"
-  },
-  {
-    "order": 21,
-    "slug": "member-021",
-    "name": "しーどら",
-    "xId": "@0624kai",
-    "team": "E",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
-    ],
-    "favorites": [
-      "トレカ",
-      "ライトノベル",
-      "ゲーム"
-    ],
-    "foodTokens": [
-      "お寿司"
-    ],
-    "placeTokens": [
-      "大須"
-    ],
-    "clubTokens": [
-      "卓球部"
-    ],
-    "recentTokens": [
-      "原神"
-    ],
-    "recommendation": "",
-    "topics": "マダミス,謎解き,ボドゲ,イマーシブ",
-    "message": "友達,面白いこと大募集！！",
-    "searchText": "しーどら @0624kai E マダミス 謎解き ボドゲ イマーシブ トレカ トレカ ライトノベル ゲーム お寿司 大須 卓球部 原神 マダミス,謎解き,ボドゲ,イマーシブ 友達,面白いこと大募集！！"
-  },
-  {
-    "order": 22,
-    "slug": "member-022",
-    "name": "ゑろす",
-    "xId": "@gn_bbj",
-    "team": "F",
-    "interests": [
-      "マダミス",
-      "ゲーム"
-    ],
-    "favorites": [],
-    "foodTokens": [
-      "ウイスキー"
-    ],
-    "placeTokens": [],
-    "clubTokens": [],
-    "recentTokens": [],
-    "recommendation": "",
-    "topics": "",
-    "message": "（多分）お酒何個か持って来たから飲んでください！🥃",
-    "searchText": "ゑろす @gn_bbj F マダミス ゲーム ウイスキー （多分）お酒何個か持って来たから飲んでください！🥃"
-  },
-  {
-    "order": 23,
-    "slug": "member-023",
-    "name": "Lot",
-    "xId": "@redescaper",
-    "team": "G",
-    "interests": [
-      "謎解き",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "謎解き",
-      "ゲーム",
-      "旅行"
-    ],
-    "foodTokens": [
-      "コーン",
-      "CCレモン"
-    ],
-    "placeTokens": [
-      "謎がある場所"
-    ],
-    "clubTokens": [
-      "剣道部",
-      "自然科学部"
-    ],
-    "recentTokens": [
-      "各種ポケモンがやめられない"
-    ],
-    "recommendation": "IMMORTAL,ARG,都市伝説解体センター",
-    "topics": "マダミス,ボドゲ",
-    "message": "お気軽にお声がけくださいませ。星と深淵と脱出成功を目指せ！",
-    "searchText": "Lot @redescaper G 謎解き イマーシブ 謎解き ゲーム 旅行 コーン CCレモン 謎がある場所 剣道部 自然科学部 各種ポケモンがやめられない IMMORTAL,ARG,都市伝説解体センター マダミス,ボドゲ お気軽にお声がけくださいませ。星と深淵と脱出成功を目指せ！"
-  },
-  {
-    "order": 24,
-    "slug": "member-024",
-    "name": "多田",
-    "xId": "@tada_rdg_bg",
-    "team": "H",
-    "interests": [
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "謎解き",
-      "早押しクイズ",
-      "Vtuber"
-    ],
-    "foodTokens": [
-      "油そば"
-    ],
-    "placeTokens": [
-      "謎解き施設(名古屋・東京)",
-      "クイズバー スアール"
-    ],
-    "clubTokens": [
-      "剣道部",
-      "TRPG・ボドゲサークル"
-    ],
-    "recentTokens": [
-      "献血"
-    ],
-    "recommendation": "QuizKnock,リドラの謎解きチャンネル",
-    "topics": "旅行・遠征のための遠出ってする？",
-    "message": "人見知りですがよろしくお願いします",
-    "searchText": "多田 @tada_rdg_bg H 謎解き ボドゲ 謎解き 早押しクイズ Vtuber 油そば 謎解き施設(名古屋・東京) クイズバー スアール 剣道部 TRPG・ボドゲサークル 献血 QuizKnock,リドラの謎解きチャンネル 旅行・遠征のための遠出ってする？ 人見知りですがよろしくお願いします"
-  },
-  {
-    "order": 25,
-    "slug": "member-025",
-    "name": "かんな",
-    "xId": "@kannatak1",
-    "team": "A",
-    "interests": [
-      "謎解き"
-    ],
-    "favorites": [
-      "ダンス",
-      "推理小説",
-      "オープンワールドアクションRPG"
-    ],
-    "foodTokens": [
-      "レアチーズケーキ"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "応援団のチア"
-    ],
-    "recentTokens": [
-      "パペットスンスン",
-      "オカルト話"
-    ],
-    "recommendation": "ミステリー,ホラー小説",
-    "topics": "ブラジル",
-    "message": "話し下手ですが,よろしくお願いします！",
-    "searchText": "かんな @kannatak1 A 謎解き ダンス 推理小説 オープンワールドアクションRPG レアチーズケーキ 応援団のチア パペットスンスン オカルト話 ミステリー,ホラー小説 ブラジル 話し下手ですが,よろしくお願いします！"
-  },
-  {
-    "order": 26,
-    "slug": "member-026",
-    "name": "Rivi",
-    "xId": "@rivi_mtqr",
-    "team": "B",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "音楽(電子音楽・同人音楽・邦ロック)",
-      "音ゲー",
-      "パズルゲーム",
-      "アナログゲーム",
-      "ゼンゼロなどの海外ゲーム",
-      "お笑い"
-    ],
-    "foodTokens": [
-      "麺類",
-      "生魚",
-      "コーヒー"
-    ],
-    "placeTokens": [
-      "大須"
-    ],
-    "clubTokens": [
-      "吹奏楽部",
-      "吹奏楽部(打楽器コントラバス)",
-      "クイズ研究会"
-    ],
-    "recentTokens": [
-      "トリッカル(ゲーム)"
-    ],
-    "recommendation": "BPL(音楽ゲームのプロリーグ),Marpril(Vtuber)",
-    "topics": "コーヒー, お酒, ボドゲ,本,麻雀,ボルダリング",
-    "message": "ハマってるもの気軽に布教してください！面白そうなものに飛びつきます\nボドゲとか行きたいところを気軽に誘える仲間探してます",
-    "searchText": "Rivi @rivi_mtqr B マダミス 謎解き ボドゲ 音楽(電子音楽・同人音楽・邦ロック) 音ゲー パズルゲーム アナログゲーム ゼンゼロなどの海外ゲーム お笑い 麺類 生魚 コーヒー 大須 吹奏楽部 吹奏楽部(打楽器コントラバス) クイズ研究会 トリッカル(ゲーム) BPL(音楽ゲームのプロリーグ),Marpril(Vtuber) コーヒー, お酒, ボドゲ,本,麻雀,ボルダリング ハマってるもの気軽に布教してください！面白そうなものに飛びつきます\nボドゲとか行きたいところを気軽に誘える仲間探してます"
-  },
-  {
-    "order": 27,
-    "slug": "member-027",
-    "name": "bubu",
-    "xId": "@bubu_nazotoki",
-    "team": "C",
-    "interests": [
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "謎解き",
-      "シャチ"
-    ],
-    "foodTokens": [
-      "抹茶"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "オーケストラ部",
-      "優雅なお嬢様に憧れてオーケストラ部のフルート"
-    ],
-    "recentTokens": [
-      "人の名前が思い出しにくくなって、友達(医師)に相談したら、年相応って言われて悔しかったので、脳トレ頑張ってます✊"
-    ],
-    "recommendation": "ぽこあ！",
-    "topics": "",
-    "message": "気軽に声をかけてください！\nおすすめの脳トレあったら教えてください！",
-    "searchText": "bubu @bubu_nazotoki C 謎解き ボドゲ 謎解き シャチ 抹茶 オーケストラ部 優雅なお嬢様に憧れてオーケストラ部のフルート 人の名前が思い出しにくくなって、友達(医師)に相談したら、年相応って言われて悔しかったので、脳トレ頑張ってます✊ ぽこあ！ 気軽に声をかけてください！\nおすすめの脳トレあったら教えてください！"
-  },
-  {
-    "order": 28,
-    "slug": "member-028",
-    "name": "ぴゅーまー",
-    "xId": "@pyuritan2021",
-    "team": "D",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "TRPGなど推理が含まれるもの"
-    ],
-    "foodTokens": [
-      "ハヤシライス"
-    ],
-    "placeTokens": [],
-    "clubTokens": [
-      "吹奏楽部"
-    ],
-    "recentTokens": [
-      "Dr.Stone",
-      "プロジェクト・ヘイル・メアリー"
-    ],
-    "recommendation": "",
-    "topics": "",
-    "message": "人見知りですがよろしくお願いします！",
-    "searchText": "ぴゅーまー @pyuritan2021 D マダミス 謎解き ボドゲ TRPGなど推理が含まれるもの ハヤシライス 吹奏楽部 Dr.Stone プロジェクト・ヘイル・メアリー 人見知りですがよろしくお願いします！"
-  },
-  {
-    "order": 29,
-    "slug": "member-029",
-    "name": "まさ",
-    "xId": "@TCmasaro813",
-    "team": "A",
-    "interests": [
-      "謎解き",
-      "ボドゲ"
-    ],
-    "favorites": [
-      "工作",
-      "スキムボード",
-      "コント"
-    ],
-    "foodTokens": [
-      "お茶漬け"
-    ],
-    "placeTokens": [
-      "書店",
-      "海"
-    ],
-    "clubTokens": [
-      "弓道部"
-    ],
-    "recentTokens": [
-      "犬動画"
-    ],
-    "recommendation": "ゆる言語学ラジオ",
-    "topics": "人が専門的な話してるのを聞くのが大好きです",
-    "message": "いえい！",
-    "searchText": "まさ @TCmasaro813 A 謎解き ボドゲ 工作 スキムボード コント お茶漬け 書店 海 弓道部 犬動画 ゆる言語学ラジオ 人が専門的な話してるのを聞くのが大好きです いえい！"
-  },
-  {
-    "order": 30,
-    "slug": "member-030",
     "name": "茜",
     "xId": "@madder_B13546",
     "team": "B",
@@ -978,8 +41,461 @@
     "searchText": "茜 @madder_B13546 B マダミス 謎解き ボドゲ イマーシブ CoC ポーカー ガチャガチャ 海老 ハンズ LOFT ソフトテニス部 ハンドボール部 弓道部 芸術鑑賞 絵画 舞台 映画 詩歌 劇団四季『ゴースト＆レディ』 映画,小説,旅行,レシピ,カフェ,居酒屋 困ったら｢茜ちゃん〜！｣って叫んでください！！行きます🏃‍♀️\n叫ぶのが苦手な人はこっそり教えてください🙌"
   },
   {
-    "order": 31,
-    "slug": "member-031",
+    "order": 2,
+    "slug": "member-002",
+    "name": "あつし",
+    "xId": "@nagashatsu",
+    "team": "D",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "昼寝",
+      "ごろごろ",
+      "長電話"
+    ],
+    "foodTokens": [
+      "うなぎ",
+      "お寿司",
+      "ケーキ",
+      "プリン",
+      "チョコ"
+    ],
+    "placeTokens": [
+      "高田馬場",
+      "下北沢",
+      "図書館",
+      "カネスエ"
+    ],
+    "clubTokens": [
+      "サッカー部",
+      "科学部",
+      "馬術部"
+    ],
+    "recentTokens": [
+      "謎解き",
+      "ポーカー",
+      "アプリ制作",
+      "岩盤浴"
+    ],
+    "recommendation": "嘘喰い、天使の卵、STARBUCKS RESERVE(R) ROASTERY TOKYO",
+    "topics": "謎の作り方、カフェ巡り、お菓子作り、データサイエンス、大勢での周遊の楽しみ方、記憶力向上方法",
+    "message": "「あつし」か「@ie」って気軽に呼んでね！\nとにかくなんでも楽しめるタイプなので、いっしょにわいわいやりたい！",
+    "searchText": "あつし @nagashatsu D マダミス 謎解き ボドゲ イマーシブ 昼寝 ごろごろ 長電話 うなぎ お寿司 ケーキ プリン チョコ 高田馬場 下北沢 図書館 カネスエ サッカー部 科学部 馬術部 謎解き ポーカー アプリ制作 岩盤浴 嘘喰い、天使の卵、STARBUCKS RESERVE(R) ROASTERY TOKYO 謎の作り方、カフェ巡り、お菓子作り、データサイエンス、大勢での周遊の楽しみ方、記憶力向上方法 「あつし」か「@ie」って気軽に呼んでね！\nとにかくなんでも楽しめるタイプなので、いっしょにわいわいやりたい！"
+  },
+  {
+    "order": 3,
+    "slug": "member-003",
+    "name": "あんちょび",
+    "xId": "@cyobi_hobby",
+    "team": "A",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "スポーツ",
+      "ゲーム",
+      "体験型コンテンツ"
+    ],
+    "foodTokens": [
+      "日本酒"
+    ],
+    "placeTokens": [
+      "栄"
+    ],
+    "clubTokens": [
+      "サッカー部"
+    ],
+    "recentTokens": [
+      "オーディブル"
+    ],
+    "recommendation": "slay the spire 2",
+    "topics": "美味しいご飯屋さん,体験型コンテンツ",
+    "message": "最近面白かった本,映画教えてください！",
+    "searchText": "あんちょび @cyobi_hobby A マダミス 謎解き ボドゲ イマーシブ トレカ スポーツ ゲーム 体験型コンテンツ 日本酒 栄 サッカー部 オーディブル slay the spire 2 美味しいご飯屋さん,体験型コンテンツ 最近面白かった本,映画教えてください！"
+  },
+  {
+    "order": 4,
+    "slug": "member-004",
+    "name": "ゑろす",
+    "xId": "@gn_bbj",
+    "team": "F",
+    "interests": [
+      "マダミス",
+      "ゲーム"
+    ],
+    "favorites": [],
+    "foodTokens": [
+      "ウイスキー"
+    ],
+    "placeTokens": [],
+    "clubTokens": [],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "",
+    "message": "（多分）お酒何個か持って来たから飲んでください！🥃",
+    "searchText": "ゑろす @gn_bbj F マダミス ゲーム ウイスキー （多分）お酒何個か持って来たから飲んでください！🥃"
+  },
+  {
+    "order": 5,
+    "slug": "member-005",
+    "name": "おくむ",
+    "xId": "@okumu_marder",
+    "team": "H",
+    "interests": [
+      "マダミス",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "カラオケ",
+      "嵐",
+      "マジック"
+    ],
+    "foodTokens": [
+      "唐揚げ"
+    ],
+    "placeTokens": [
+      "栄",
+      "新宿"
+    ],
+    "clubTokens": [
+      "水泳部"
+    ],
+    "recentTokens": [
+      "スレスパ2",
+      "ポーカー"
+    ],
+    "recommendation": "NetflixのARASHI's diary voyage",
+    "topics": "コーヒー,TRPG,野球",
+    "message": "神奈川在住ですが,何卒よろしくお願いします！",
+    "searchText": "おくむ @okumu_marder H マダミス ボドゲ イマーシブ カラオケ 嵐 マジック 唐揚げ 栄 新宿 水泳部 スレスパ2 ポーカー NetflixのARASHI's diary voyage コーヒー,TRPG,野球 神奈川在住ですが,何卒よろしくお願いします！"
+  },
+  {
+    "order": 6,
+    "slug": "member-006",
+    "name": "かんな",
+    "xId": "@kannatak1",
+    "team": "A",
+    "interests": [
+      "謎解き"
+    ],
+    "favorites": [
+      "ダンス",
+      "推理小説",
+      "オープンワールドアクションRPG"
+    ],
+    "foodTokens": [
+      "レアチーズケーキ"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "応援団のチア"
+    ],
+    "recentTokens": [
+      "パペットスンスン",
+      "オカルト話"
+    ],
+    "recommendation": "ミステリー,ホラー小説",
+    "topics": "ブラジル",
+    "message": "話し下手ですが,よろしくお願いします！",
+    "searchText": "かんな @kannatak1 A 謎解き ダンス 推理小説 オープンワールドアクションRPG レアチーズケーキ 応援団のチア パペットスンスン オカルト話 ミステリー,ホラー小説 ブラジル 話し下手ですが,よろしくお願いします！"
+  },
+  {
+    "order": 7,
+    "slug": "member-007",
+    "name": "こじこじ",
+    "xId": "@CozyKozy_escape",
+    "team": "G",
+    "interests": [
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "美味しい物"
+    ],
+    "foodTokens": [
+      "ラーメン"
+    ],
+    "placeTokens": [
+      "名古屋駅"
+    ],
+    "clubTokens": [],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "日本酒,みんなで遊べるボドゲ,推理小説",
+    "message": "頭の中がお花畑ですが,仲良くしてやってください。気軽に声かけてもらえるとうれしいです。",
+    "searchText": "こじこじ @CozyKozy_escape G 謎解き ボドゲ 美味しい物 ラーメン 名古屋駅 日本酒,みんなで遊べるボドゲ,推理小説 頭の中がお花畑ですが,仲良くしてやってください。気軽に声かけてもらえるとうれしいです。"
+  },
+  {
+    "order": 8,
+    "slug": "member-008",
+    "name": "Sakura",
+    "xId": "@Sakura__mystery",
+    "team": "F",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "謎解き",
+      "読書(推理小説)",
+      "コナン"
+    ],
+    "foodTokens": [
+      "紅茶",
+      "ローストビーフ"
+    ],
+    "placeTokens": [
+      "謎のあるところ！"
+    ],
+    "clubTokens": [],
+    "recentTokens": [
+      "ぽこポケ(可愛い町には程遠い…！)"
+    ],
+    "recommendation": "M!LK(最近激推ししてます…！)",
+    "topics": "おすすめの本,手帳(自作リフィル),ぬい活",
+    "message": "人見知りですが気軽に話しかけて貰えたら嬉しいです🌸",
+    "searchText": "Sakura @Sakura__mystery F マダミス 謎解き イマーシブ 謎解き 読書(推理小説) コナン 紅茶 ローストビーフ 謎のあるところ！ ぽこポケ(可愛い町には程遠い…！) M!LK(最近激推ししてます…！) おすすめの本,手帳(自作リフィル),ぬい活 人見知りですが気軽に話しかけて貰えたら嬉しいです🌸"
+  },
+  {
+    "order": 9,
+    "slug": "member-009",
+    "name": "さんた",
+    "xId": "@evesanta1224",
+    "team": "F",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "プログラミング",
+      "宇宙兄弟",
+      "沖縄"
+    ],
+    "foodTokens": [
+      "もも"
+    ],
+    "placeTokens": [
+      "リアル脱出ゲーム名古屋店"
+    ],
+    "clubTokens": [
+      "メカトロ部"
+    ],
+    "recentTokens": [],
+    "recommendation": "パズバコ3",
+    "topics": "",
+    "message": "よろしくお願いします",
+    "searchText": "さんた @evesanta1224 F マダミス 謎解き ボドゲ イマーシブ プログラミング 宇宙兄弟 沖縄 もも リアル脱出ゲーム名古屋店 メカトロ部 パズバコ3 よろしくお願いします"
+  },
+  {
+    "order": 10,
+    "slug": "member-010",
+    "name": "しーどら",
+    "xId": "@0624kai",
+    "team": "E",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "トレカ",
+      "ライトノベル",
+      "ゲーム"
+    ],
+    "foodTokens": [
+      "お寿司"
+    ],
+    "placeTokens": [
+      "大須"
+    ],
+    "clubTokens": [
+      "卓球部"
+    ],
+    "recentTokens": [
+      "原神"
+    ],
+    "recommendation": "",
+    "topics": "マダミス,謎解き,ボドゲ,イマーシブ",
+    "message": "友達,面白いこと大募集！！",
+    "searchText": "しーどら @0624kai E マダミス 謎解き ボドゲ イマーシブ トレカ トレカ ライトノベル ゲーム お寿司 大須 卓球部 原神 マダミス,謎解き,ボドゲ,イマーシブ 友達,面白いこと大募集！！"
+  },
+  {
+    "order": 11,
+    "slug": "member-011",
+    "name": "ジーフォン",
+    "xId": "@gr_foon",
+    "team": "G",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "格闘ゲーム",
+      "マダミス"
+    ],
+    "foodTokens": [
+      "唐揚げ",
+      "日本酒"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "器械体操部"
+    ],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "ボドゲ,居酒屋",
+    "message": "格ゲーのことなら任せて下さい！",
+    "searchText": "ジーフォン @gr_foon G マダミス 謎解き ボドゲ イマーシブ 格闘ゲーム マダミス 唐揚げ 日本酒 器械体操部 ボドゲ,居酒屋 格ゲーのことなら任せて下さい！"
+  },
+  {
+    "order": 12,
+    "slug": "member-012",
+    "name": "じゅん",
+    "xId": "＠Jun86nZ",
+    "team": "A",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "謎解き",
+      "オンラインゲーム",
+      "BUMP OF CHICKEN"
+    ],
+    "foodTokens": [
+      "ネギ塩牛タン",
+      "モンエナ(青)"
+    ],
+    "placeTokens": [
+      "スシロー"
+    ],
+    "clubTokens": [
+      "遊☆戯☆王"
+    ],
+    "recentTokens": [
+      "ポーカー"
+    ],
+    "recommendation": "",
+    "topics": "面白いWEB謎・面白いマダミス・面白いYouTubeチャンネル",
+    "message": "スタートと入力すると始まります",
+    "searchText": "じゅん ＠Jun86nZ A マダミス 謎解き ボドゲ イマーシブ トレカ 謎解き オンラインゲーム BUMP OF CHICKEN ネギ塩牛タン モンエナ(青) スシロー 遊☆戯☆王 ポーカー 面白いWEB謎・面白いマダミス・面白いYouTubeチャンネル スタートと入力すると始まります"
+  },
+  {
+    "order": 13,
+    "slug": "member-013",
+    "name": "しろくま",
+    "xId": "@me_ko_dai",
+    "team": "H",
+    "interests": [
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "謎制作",
+      "読書",
+      "パズル"
+    ],
+    "foodTokens": [
+      "全て"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "水泳部",
+      "科学部"
+    ],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "謎解き/ボドゲ/本/ゲーム/プログラミング",
+    "message": "謎を作ってる人です！！！貴方の趣味のおすすめを教えて下さい！！",
+    "searchText": "しろくま @me_ko_dai H 謎解き ボドゲ 謎制作 読書 パズル 全て 水泳部 科学部 謎解き/ボドゲ/本/ゲーム/プログラミング 謎を作ってる人です！！！貴方の趣味のおすすめを教えて下さい！！"
+  },
+  {
+    "order": 14,
+    "slug": "member-014",
+    "name": "ぜふぃ",
+    "xId": "@Zephy1201",
+    "team": "G",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "NieRシリーズ",
+      "EGOIST",
+      "ファイナルファンタジー14"
+    ],
+    "foodTokens": [
+      "特にこだわりはないです"
+    ],
+    "placeTokens": [],
+    "clubTokens": [],
+    "recentTokens": [
+      "超かぐや姫！"
+    ],
+    "recommendation": "第四境界(ARG)",
+    "topics": "NieRとかマダミスなど",
+    "message": "人見知りですが,気軽に声をかけていただけると嬉しいです。特にここにあげた好きなものなどの話とかしたいです。",
+    "searchText": "ぜふぃ @Zephy1201 G マダミス 謎解き ボドゲ イマーシブ トレカ NieRシリーズ EGOIST ファイナルファンタジー14 特にこだわりはないです 超かぐや姫！ 第四境界(ARG) NieRとかマダミスなど 人見知りですが,気軽に声をかけていただけると嬉しいです。特にここにあげた好きなものなどの話とかしたいです。"
+  },
+  {
+    "order": 15,
+    "slug": "member-015",
+    "name": "多田",
+    "xId": "@tada_rdg_bg",
+    "team": "H",
+    "interests": [
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "謎解き",
+      "早押しクイズ",
+      "Vtuber"
+    ],
+    "foodTokens": [
+      "油そば"
+    ],
+    "placeTokens": [
+      "謎解き施設(名古屋・東京)",
+      "クイズバー スアール"
+    ],
+    "clubTokens": [
+      "剣道部",
+      "TRPG・ボドゲサークル"
+    ],
+    "recentTokens": [
+      "献血"
+    ],
+    "recommendation": "QuizKnock,リドラの謎解きチャンネル",
+    "topics": "旅行・遠征のための遠出ってする？",
+    "message": "人見知りですがよろしくお願いします",
+    "searchText": "多田 @tada_rdg_bg H 謎解き ボドゲ 謎解き 早押しクイズ Vtuber 油そば 謎解き施設(名古屋・東京) クイズバー スアール 剣道部 TRPG・ボドゲサークル 献血 QuizKnock,リドラの謎解きチャンネル 旅行・遠征のための遠出ってする？ 人見知りですがよろしくお願いします"
+  },
+  {
+    "order": 16,
+    "slug": "member-016",
     "name": "ちゃい",
     "xId": "@saint_chaint",
     "team": "C",
@@ -1008,6 +524,497 @@
     "topics": "",
     "message": "増える体重と減る体力に怯えて筋トレ再開しました。おすすめ宅トレあったら教えてください！",
     "searchText": "ちゃい @saint_chaint C マダミス 謎解き ボドゲ イマーシブ 演劇 筋肉 じゃがいも 焼き菓子 栄〜大須近辺 放送部 西園寺（鉄道系youtuber） 増える体重と減る体力に怯えて筋トレ再開しました。おすすめ宅トレあったら教えてください！"
+  },
+  {
+    "order": 17,
+    "slug": "member-017",
+    "name": "なーさん",
+    "xId": "@776_nanamu",
+    "team": "B",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "マダミス",
+      "謎解き",
+      "推し活(いろいろ)"
+    ],
+    "foodTokens": [
+      "甘い物"
+    ],
+    "placeTokens": [
+      "栄周辺"
+    ],
+    "clubTokens": [
+      "卓球部"
+    ],
+    "recentTokens": [
+      "今の最大の沼は中華ドラマ"
+    ],
+    "recommendation": "スワンダイブはいいぞ…",
+    "topics": "知らない事は糧になるので何でも聞きたい",
+    "message": "明るい人見知りです！よろしくお願いします！",
+    "searchText": "なーさん @776_nanamu B マダミス 謎解き ボドゲ イマーシブ マダミス 謎解き 推し活(いろいろ) 甘い物 栄周辺 卓球部 今の最大の沼は中華ドラマ スワンダイブはいいぞ… 知らない事は糧になるので何でも聞きたい 明るい人見知りです！よろしくお願いします！"
+  },
+  {
+    "order": 18,
+    "slug": "member-018",
+    "name": "なお",
+    "xId": "@ow26953",
+    "team": "D",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "旅行",
+      "謎解き"
+    ],
+    "foodTokens": [
+      "かき氷",
+      "パン"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "ハンドボール部"
+    ],
+    "recentTokens": [
+      "ピラティス"
+    ],
+    "recommendation": "",
+    "topics": "",
+    "message": "人見知りですがどうぞよろしくお願いします！",
+    "searchText": "なお @ow26953 D マダミス 謎解き ボドゲ 旅行 謎解き かき氷 パン ハンドボール部 ピラティス 人見知りですがどうぞよろしくお願いします！"
+  },
+  {
+    "order": 19,
+    "slug": "member-019",
+    "name": "はと",
+    "xId": "@Dollhato",
+    "team": "F",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "ポケモン",
+      "最近ポケモン関連のコンテンツにはまっています。"
+    ],
+    "foodTokens": [
+      "牡蠣"
+    ],
+    "placeTokens": [
+      "トレカキャンプ大須店"
+    ],
+    "clubTokens": [
+      "テニス部"
+    ],
+    "recentTokens": [
+      "ポケカ",
+      "ぽこポケ",
+      "ポケチャンなど"
+    ],
+    "recommendation": "ポケモン関連コンテンツ",
+    "topics": "",
+    "message": "人に勧められたことが趣味になることが多いのでいろんなお話が聞けると嬉しいです！",
+    "searchText": "はと @Dollhato F マダミス 謎解き ボドゲ イマーシブ トレカ ポケモン 最近ポケモン関連のコンテンツにはまっています。 牡蠣 トレカキャンプ大須店 テニス部 ポケカ ぽこポケ ポケチャンなど ポケモン関連コンテンツ 人に勧められたことが趣味になることが多いのでいろんなお話が聞けると嬉しいです！"
+  },
+  {
+    "order": 20,
+    "slug": "member-020",
+    "name": "ヒミラグ",
+    "xId": "@himiragu_yoshi",
+    "team": "D",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "謎解き",
+      "システム制作",
+      "ボドゲ"
+    ],
+    "foodTokens": [
+      "メロン"
+    ],
+    "placeTokens": [],
+    "clubTokens": [],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "面白いコンテンツ",
+    "message": "いろんなことやってる人です。気軽に声かけてくれると嬉しいです！",
+    "searchText": "ヒミラグ @himiragu_yoshi D マダミス 謎解き ボドゲ イマーシブ トレカ 謎解き システム制作 ボドゲ メロン 面白いコンテンツ いろんなことやってる人です。気軽に声かけてくれると嬉しいです！"
+  },
+  {
+    "order": 21,
+    "slug": "member-021",
+    "name": "ぴゅーまー",
+    "xId": "@pyuritan2021",
+    "team": "D",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "TRPGなど推理が含まれるもの"
+    ],
+    "foodTokens": [
+      "ハヤシライス"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "吹奏楽部"
+    ],
+    "recentTokens": [
+      "Dr.Stone",
+      "プロジェクト・ヘイル・メアリー"
+    ],
+    "recommendation": "",
+    "topics": "",
+    "message": "人見知りですがよろしくお願いします！",
+    "searchText": "ぴゅーまー @pyuritan2021 D マダミス 謎解き ボドゲ TRPGなど推理が含まれるもの ハヤシライス 吹奏楽部 Dr.Stone プロジェクト・ヘイル・メアリー 人見知りですがよろしくお願いします！"
+  },
+  {
+    "order": 22,
+    "slug": "member-022",
+    "name": "ふぉん",
+    "xId": "@Fondeu_fonfon",
+    "team": "B",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ",
+      "トレカ"
+    ],
+    "favorites": [
+      "謎解き",
+      "ピアノ",
+      "歌うこと"
+    ],
+    "foodTokens": [
+      "ドーナツ"
+    ],
+    "placeTokens": [
+      "愛知"
+    ],
+    "clubTokens": [
+      "ソフトテニス部",
+      "演劇部",
+      "軽音部"
+    ],
+    "recentTokens": [
+      "寝ること"
+    ],
+    "recommendation": "テンリグ",
+    "topics": "雑食なのでなんでも喰いつきます",
+    "message": "超絶人見知りですが,この機会にお話しできたら嬉しいです！よろしくお願いします！",
+    "searchText": "ふぉん @Fondeu_fonfon B マダミス 謎解き ボドゲ イマーシブ トレカ 謎解き ピアノ 歌うこと ドーナツ 愛知 ソフトテニス部 演劇部 軽音部 寝ること テンリグ 雑食なのでなんでも喰いつきます 超絶人見知りですが,この機会にお話しできたら嬉しいです！よろしくお願いします！"
+  },
+  {
+    "order": 23,
+    "slug": "member-023",
+    "name": "bubu",
+    "xId": "@bubu_nazotoki",
+    "team": "C",
+    "interests": [
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "謎解き",
+      "シャチ"
+    ],
+    "foodTokens": [
+      "抹茶"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "オーケストラ部",
+      "優雅なお嬢様に憧れてオーケストラ部のフルート"
+    ],
+    "recentTokens": [
+      "人の名前が思い出しにくくなって、友達(医師)に相談したら、年相応って言われて悔しかったので、脳トレ頑張ってます✊"
+    ],
+    "recommendation": "ぽこあ！",
+    "topics": "",
+    "message": "気軽に声をかけてください！\nおすすめの脳トレあったら教えてください！",
+    "searchText": "bubu @bubu_nazotoki C 謎解き ボドゲ 謎解き シャチ 抹茶 オーケストラ部 優雅なお嬢様に憧れてオーケストラ部のフルート 人の名前が思い出しにくくなって、友達(医師)に相談したら、年相応って言われて悔しかったので、脳トレ頑張ってます✊ ぽこあ！ 気軽に声をかけてください！\nおすすめの脳トレあったら教えてください！"
+  },
+  {
+    "order": 24,
+    "slug": "member-024",
+    "name": "ふれんちとーすと",
+    "xId": "@comb_again",
+    "team": "A",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "謎解き",
+      "観劇",
+      "合唱"
+    ],
+    "foodTokens": [
+      "ホタルイカ"
+    ],
+    "placeTokens": [
+      "タンブルウィードナゾベース"
+    ],
+    "clubTokens": [
+      "合唱部"
+    ],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "",
+    "message": "いろいろなことに興味を持っています！ぜひよろしくお願いします！！",
+    "searchText": "ふれんちとーすと @comb_again A マダミス 謎解き ボドゲ イマーシブ 謎解き 観劇 合唱 ホタルイカ タンブルウィードナゾベース 合唱部 いろいろなことに興味を持っています！ぜひよろしくお願いします！！"
+  },
+  {
+    "order": 25,
+    "slug": "member-025",
+    "name": "まーくん",
+    "xId": "@MaClain0613",
+    "team": "E",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "山（夏：登山）",
+      "山（冬：スノボ）",
+      "プロ野球（広島東洋カープ）",
+      "人狼ゲーム（しんたろー）"
+    ],
+    "foodTokens": [
+      "麻婆飯",
+      "アセロラジュース"
+    ],
+    "placeTokens": [
+      "リアル脱出ゲーム名古屋店"
+    ],
+    "clubTokens": [
+      "バレーボール部"
+    ],
+    "recentTokens": [
+      "ボールペン字（書きちらしさん）"
+    ],
+    "recommendation": "ギア（ノンバーバルシアター,京都）",
+    "topics": "プロ野球,バレーボール,ボドゲ",
+    "message": "謎解きもマダミスも大好きです！！全員と交流できたらいいなと思っています！！",
+    "searchText": "まーくん @MaClain0613 E マダミス 謎解き ボドゲ イマーシブ 山（夏：登山） 山（冬：スノボ） プロ野球（広島東洋カープ） 人狼ゲーム（しんたろー） 麻婆飯 アセロラジュース リアル脱出ゲーム名古屋店 バレーボール部 ボールペン字（書きちらしさん） ギア（ノンバーバルシアター,京都） プロ野球,バレーボール,ボドゲ 謎解きもマダミスも大好きです！！全員と交流できたらいいなと思っています！！"
+  },
+  {
+    "order": 26,
+    "slug": "member-026",
+    "name": "まさ",
+    "xId": "@TCmasaro813",
+    "team": "A",
+    "interests": [
+      "謎解き",
+      "ボドゲ"
+    ],
+    "favorites": [
+      "工作",
+      "スキムボード",
+      "コント"
+    ],
+    "foodTokens": [
+      "お茶漬け"
+    ],
+    "placeTokens": [
+      "書店",
+      "海"
+    ],
+    "clubTokens": [
+      "弓道部"
+    ],
+    "recentTokens": [
+      "犬動画"
+    ],
+    "recommendation": "ゆる言語学ラジオ",
+    "topics": "人が専門的な話してるのを聞くのが大好きです",
+    "message": "いえい！",
+    "searchText": "まさ @TCmasaro813 A 謎解き ボドゲ 工作 スキムボード コント お茶漬け 書店 海 弓道部 犬動画 ゆる言語学ラジオ 人が専門的な話してるのを聞くのが大好きです いえい！"
+  },
+  {
+    "order": 27,
+    "slug": "member-027",
+    "name": "まなこ",
+    "xId": "@nazotokitoka",
+    "team": "E",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "楽しければ何でも！"
+    ],
+    "foodTokens": [
+      "ほとんど何でも美味しく食べられますがお酒は飲めません"
+    ],
+    "placeTokens": [],
+    "clubTokens": [],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "ミステリ,ホラー系の小説や映画は好きです(最近は触れる時間が減りましたが…)",
+    "message": "マダミスでも謎解きでもあまりこだわらず雑食でやっていこうとと思っていますので,人が足りない時など気軽に声をかけて貰えると嬉しく思います",
+    "searchText": "まなこ @nazotokitoka E マダミス 謎解き ボドゲ イマーシブ 楽しければ何でも！ ほとんど何でも美味しく食べられますがお酒は飲めません ミステリ,ホラー系の小説や映画は好きです(最近は触れる時間が減りましたが…) マダミスでも謎解きでもあまりこだわらず雑食でやっていこうとと思っていますので,人が足りない時など気軽に声をかけて貰えると嬉しく思います"
+  },
+  {
+    "order": 28,
+    "slug": "member-028",
+    "name": "まり",
+    "xId": "@kmrk427",
+    "team": "H",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "映画",
+      "漫画",
+      "ホラー"
+    ],
+    "foodTokens": [
+      "果物"
+    ],
+    "placeTokens": [
+      "図書館"
+    ],
+    "clubTokens": [
+      "吹奏楽部"
+    ],
+    "recentTokens": [
+      "ラジオ"
+    ],
+    "recommendation": "ロボット,ドリームズ",
+    "topics": "行ってよかった旅行先,おすすめのレシピ",
+    "message": "好きなショートカットキーはwindows＋Dです",
+    "searchText": "まり @kmrk427 H マダミス 謎解き ボドゲ イマーシブ 映画 漫画 ホラー 果物 図書館 吹奏楽部 ラジオ ロボット,ドリームズ 行ってよかった旅行先,おすすめのレシピ 好きなショートカットキーはwindows＋Dです"
+  },
+  {
+    "order": 29,
+    "slug": "member-029",
+    "name": "みゆ",
+    "xId": "@mi_ma__cha",
+    "team": "C",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "イマーシブ",
+      "謎解き",
+      "ボドゲ",
+      "地下アイドル"
+    ],
+    "foodTokens": [
+      "コーヒー"
+    ],
+    "placeTokens": [
+      "東京のイマーシブ公演"
+    ],
+    "clubTokens": [
+      "映画研究会"
+    ],
+    "recentTokens": [
+      "勝利の女神NIKKE"
+    ],
+    "recommendation": "東京のホラー,サスペンス系のイマーシブ公演",
+    "topics": "",
+    "message": "ほぼ知り合いいません！笑　気軽に話しかけてください〜！",
+    "searchText": "みゆ @mi_ma__cha C マダミス 謎解き ボドゲ イマーシブ イマーシブ 謎解き ボドゲ 地下アイドル コーヒー 東京のイマーシブ公演 映画研究会 勝利の女神NIKKE 東京のホラー,サスペンス系のイマーシブ公演 ほぼ知り合いいません！笑　気軽に話しかけてください〜！"
+  },
+  {
+    "order": 30,
+    "slug": "member-030",
+    "name": "momizi",
+    "xId": "@_____tranquilo",
+    "team": "C",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "旅行",
+      "カフェ",
+      "写真"
+    ],
+    "foodTokens": [
+      "からあげ"
+    ],
+    "placeTokens": [
+      "スタジオオール"
+    ],
+    "clubTokens": [
+      "陸上部"
+    ],
+    "recentTokens": [
+      "日常侵食型イベント"
+    ],
+    "recommendation": "クローズシアター CLEAR",
+    "topics": "",
+    "message": "気軽に声をかけてください",
+    "searchText": "momizi @_____tranquilo C マダミス 謎解き ボドゲ イマーシブ 旅行 カフェ 写真 からあげ スタジオオール 陸上部 日常侵食型イベント クローズシアター CLEAR 気軽に声をかけてください"
+  },
+  {
+    "order": 31,
+    "slug": "member-031",
+    "name": "やち",
+    "xId": "@yatinonazotoki",
+    "team": "B",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "音楽",
+      "よつばと！",
+      "マヨネーズ"
+    ],
+    "foodTokens": [
+      "ケンタッキーフライドチキン",
+      "バーガーキング"
+    ],
+    "placeTokens": [
+      "バンド"
+    ],
+    "clubTokens": [
+      "アンチエイジング部"
+    ],
+    "recentTokens": [
+      "文字遊戯"
+    ],
+    "recommendation": "",
+    "topics": "",
+    "message": "お話した事のない方ともたくさん交流したいです。よろしくお願いします！",
+    "searchText": "やち @yatinonazotoki B マダミス 謎解き イマーシブ 音楽 よつばと！ マヨネーズ ケンタッキーフライドチキン バーガーキング バンド アンチエイジング部 文字遊戯 お話した事のない方ともたくさん交流したいです。よろしくお願いします！"
   },
   {
     "order": 32,
@@ -1046,6 +1053,38 @@
   {
     "order": 33,
     "slug": "member-033",
+    "name": "裕",
+    "xId": "@yuusinomiya",
+    "team": "D",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "漫画",
+      "アニメ",
+      "猫"
+    ],
+    "foodTokens": [
+      "コーヒー"
+    ],
+    "placeTokens": [],
+    "clubTokens": [
+      "バスケ部"
+    ],
+    "recentTokens": [
+      "スポーツ観戦"
+    ],
+    "recommendation": "",
+    "topics": "",
+    "message": "物語の謎解きから,絶品スコーン探しやスポーツ観戦,参加まで🏃‍♀️心惹かれる『面白いもの』を日々開拓中です！",
+    "searchText": "裕 @yuusinomiya D マダミス 謎解き ボドゲ イマーシブ 漫画 アニメ 猫 コーヒー バスケ部 スポーツ観戦 物語の謎解きから,絶品スコーン探しやスポーツ観戦,参加まで🏃‍♀️心惹かれる『面白いもの』を日々開拓中です！"
+  },
+  {
+    "order": 34,
+    "slug": "member-034",
     "name": "ラスク",
     "xId": "@saqsak_no_rusk",
     "team": "E",
@@ -1078,183 +1117,144 @@
     "searchText": "ラスク @saqsak_no_rusk E 謎解き ボドゲ 言葉遊び MBTI スタンプ スイーツ全般 紅茶 カフェ ケーキ屋 弓道部 ガチャガチャ うそ探偵トマント🍅 MBTI MBTI詳しい方いたら語りたいです！\nおすすめのカフェ,スイーツあったら教えてください！"
   },
   {
-    "order": 34,
-    "slug": "member-034",
-    "name": "Sakura",
-    "xId": "@Sakura__mystery",
-    "team": "F",
-    "interests": [
-      "マダミス",
-      "謎解き",
-      "イマーシブ"
-    ],
-    "favorites": [
-      "謎解き",
-      "読書(推理小説)",
-      "コナン"
-    ],
-    "foodTokens": [
-      "紅茶",
-      "ローストビーフ"
-    ],
-    "placeTokens": [
-      "謎のあるところ！"
-    ],
-    "clubTokens": [],
-    "recentTokens": [
-      "ぽこポケ(可愛い町には程遠い…！)"
-    ],
-    "recommendation": "M!LK(最近激推ししてます…！)",
-    "topics": "おすすめの本,手帳(自作リフィル),ぬい活",
-    "message": "人見知りですが気軽に話しかけて貰えたら嬉しいです🌸",
-    "searchText": "Sakura @Sakura__mystery F マダミス 謎解き イマーシブ 謎解き 読書(推理小説) コナン 紅茶 ローストビーフ 謎のあるところ！ ぽこポケ(可愛い町には程遠い…！) M!LK(最近激推ししてます…！) おすすめの本,手帳(自作リフィル),ぬい活 人見知りですが気軽に話しかけて貰えたら嬉しいです🌸"
-  },
-  {
     "order": 35,
     "slug": "member-035",
-    "name": "ぜふぃ",
-    "xId": "@Zephy1201",
-    "team": "G",
+    "name": "Rivi",
+    "xId": "@rivi_mtqr",
+    "team": "B",
     "interests": [
       "マダミス",
       "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
+      "ボドゲ"
     ],
     "favorites": [
-      "NieRシリーズ",
-      "EGOIST",
-      "ファイナルファンタジー14"
+      "音楽(電子音楽・同人音楽・邦ロック)",
+      "音ゲー",
+      "パズルゲーム",
+      "アナログゲーム",
+      "ゼンゼロなどの海外ゲーム",
+      "お笑い"
     ],
     "foodTokens": [
-      "特にこだわりはないです"
+      "麺類",
+      "生魚",
+      "コーヒー"
     ],
-    "placeTokens": [],
-    "clubTokens": [],
+    "placeTokens": [
+      "大須"
+    ],
+    "clubTokens": [
+      "吹奏楽部",
+      "吹奏楽部(打楽器コントラバス)",
+      "クイズ研究会"
+    ],
     "recentTokens": [
-      "超かぐや姫！"
+      "トリッカル(ゲーム)"
     ],
-    "recommendation": "第四境界(ARG)",
-    "topics": "NieRとかマダミスなど",
-    "message": "人見知りですが,気軽に声をかけていただけると嬉しいです。特にここにあげた好きなものなどの話とかしたいです。",
-    "searchText": "ぜふぃ @Zephy1201 G マダミス 謎解き ボドゲ イマーシブ トレカ NieRシリーズ EGOIST ファイナルファンタジー14 特にこだわりはないです 超かぐや姫！ 第四境界(ARG) NieRとかマダミスなど 人見知りですが,気軽に声をかけていただけると嬉しいです。特にここにあげた好きなものなどの話とかしたいです。"
+    "recommendation": "BPL(音楽ゲームのプロリーグ),Marpril(Vtuber)",
+    "topics": "コーヒー, お酒, ボドゲ,本,麻雀,ボルダリング",
+    "message": "ハマってるもの気軽に布教してください！面白そうなものに飛びつきます\nボドゲとか行きたいところを気軽に誘える仲間探してます",
+    "searchText": "Rivi @rivi_mtqr B マダミス 謎解き ボドゲ 音楽(電子音楽・同人音楽・邦ロック) 音ゲー パズルゲーム アナログゲーム ゼンゼロなどの海外ゲーム お笑い 麺類 生魚 コーヒー 大須 吹奏楽部 吹奏楽部(打楽器コントラバス) クイズ研究会 トリッカル(ゲーム) BPL(音楽ゲームのプロリーグ),Marpril(Vtuber) コーヒー, お酒, ボドゲ,本,麻雀,ボルダリング ハマってるもの気軽に布教してください！面白そうなものに飛びつきます\nボドゲとか行きたいところを気軽に誘える仲間探してます"
   },
   {
     "order": 36,
     "slug": "member-036",
-    "name": "おくむ",
-    "xId": "@okumu_marder",
-    "team": "H",
+    "name": "りょー",
+    "xId": "@Ryo1000medal",
+    "team": "C",
     "interests": [
       "マダミス",
-      "ボドゲ",
-      "イマーシブ"
+      "謎解き",
+      "ボドゲ"
     ],
     "favorites": [
-      "カラオケ",
-      "嵐",
-      "マジック"
+      "ボドゲ",
+      "謎解き",
+      "山登り",
+      "スノボ"
     ],
     "foodTokens": [
-      "唐揚げ"
+      "カレー",
+      "コロッケ",
+      "おいなりさん"
     ],
     "placeTokens": [
-      "栄",
-      "新宿"
+      "なぞねこ"
     ],
-    "clubTokens": [
-      "水泳部"
-    ],
+    "clubTokens": [],
     "recentTokens": [
-      "スレスパ2",
-      "ポーカー"
+      "友達と遊ぶ"
     ],
-    "recommendation": "NetflixのARASHI's diary voyage",
-    "topics": "コーヒー,TRPG,野球",
-    "message": "神奈川在住ですが,何卒よろしくお願いします！",
-    "searchText": "おくむ @okumu_marder H マダミス ボドゲ イマーシブ カラオケ 嵐 マジック 唐揚げ 栄 新宿 水泳部 スレスパ2 ポーカー NetflixのARASHI's diary voyage コーヒー,TRPG,野球 神奈川在住ですが,何卒よろしくお願いします！"
+    "recommendation": "M-1",
+    "topics": "知らない話はなんでも楽しい！",
+    "message": "ほんとにお気軽にお声がけくださいましね",
+    "searchText": "りょー @Ryo1000medal C マダミス 謎解き ボドゲ ボドゲ 謎解き 山登り スノボ カレー コロッケ おいなりさん なぞねこ 友達と遊ぶ M-1 知らない話はなんでも楽しい！ ほんとにお気軽にお声がけくださいましね"
   },
   {
     "order": 37,
     "slug": "member-037",
-    "name": "じゅん",
-    "xId": "@Jun86nZ",
+    "name": "るっく",
+    "xId": "@looklucklook",
     "team": "A",
     "interests": [
       "マダミス",
       "謎解き",
-      "ボドゲ",
-      "イマーシブ",
-      "トレカ"
+      "イマーシブ"
     ],
     "favorites": [
-      "謎解き",
-      "オンラインゲーム",
-      "BUMP OF CHICKEN"
+      "アカペラ",
+      "文房具",
+      "お菓子作り"
     ],
     "foodTokens": [
-      "ネギ塩牛タン",
-      "モンエナ(青)"
+      "紅茶"
     ],
     "placeTokens": [
-      "スシロー"
+      "大須"
     ],
     "clubTokens": [
-      "遊☆戯☆王"
+      "合唱部"
     ],
     "recentTokens": [
-      "ポーカー"
+      "カクテル作り"
     ],
-    "recommendation": "",
-    "topics": "面白いWEB謎・面白いマダミス・面白いYouTubeチャンネル",
-    "message": "スタートと入力すると始まります",
-    "searchText": "じゅん @Jun86nZ A マダミス 謎解き ボドゲ イマーシブ トレカ 謎解き オンラインゲーム BUMP OF CHICKEN ネギ塩牛タン モンエナ(青) スシロー 遊☆戯☆王 ポーカー 面白いWEB謎・面白いマダミス・面白いYouTubeチャンネル スタートと入力すると始まります"
+    "recommendation": "Studio Escapeの『女王と国のために』",
+    "topics": "みんなのおすすめの飲食店",
+    "message": "プレパレ！参加ありがとう！楽しんでいってね！",
+    "searchText": "るっく @looklucklook A マダミス 謎解き イマーシブ アカペラ 文房具 お菓子作り 紅茶 大須 合唱部 カクテル作り Studio Escapeの『女王と国のために』 みんなのおすすめの飲食店 プレパレ！参加ありがとう！楽しんでいってね！"
   },
   {
     "order": 38,
     "slug": "member-038",
-    "name": "あつし@ie",
-    "xId": "@nagashatsu",
-    "team": "D",
+    "name": "Lot",
+    "xId": "@redescaper",
+    "team": "G",
     "interests": [
-      "マダミス",
       "謎解き",
-      "ボドゲ",
       "イマーシブ"
     ],
     "favorites": [
-      "昼寝",
-      "ごろごろ",
-      "長電話"
+      "謎解き",
+      "ゲーム",
+      "旅行"
     ],
     "foodTokens": [
-      "うなぎ",
-      "お寿司",
-      "ケーキ",
-      "プリン",
-      "チョコ"
+      "コーン",
+      "CCレモン"
     ],
     "placeTokens": [
-      "高田馬場",
-      "下北沢",
-      "図書館",
-      "カネスエ"
+      "謎がある場所"
     ],
     "clubTokens": [
-      "サッカー部",
-      "科学部",
-      "馬術部"
+      "剣道部",
+      "自然科学部"
     ],
     "recentTokens": [
-      "謎解き",
-      "ポーカー",
-      "アプリ制作",
-      "岩盤浴"
+      "各種ポケモンがやめられない"
     ],
-    "recommendation": "嘘喰い、天使の卵、STARBUCKS RESERVE(R) ROASTERY TOKYO、",
-    "topics": "謎の作り方、カフェ巡り、お菓子作り、データサイエンス、大勢での周遊の楽しみ方、記憶力向上方法",
-    "message": "「あつし」か「@ie」って気軽に呼んでね！\nとにかくなんでも楽しめるタイプなので、いっしょにわいわいやりたい！",
-    "searchText": "あつし@ie @nagashatsu D マダミス 謎解き ボドゲ イマーシブ 昼寝 ごろごろ 長電話 うなぎ お寿司 ケーキ プリン チョコ 高田馬場 下北沢 図書館 カネスエ サッカー部 科学部 馬術部 謎解き ポーカー アプリ制作 岩盤浴 嘘喰い、天使の卵、STARBUCKS RESERVE(R) ROASTERY TOKYO、 謎の作り方、カフェ巡り、お菓子作り、データサイエンス、大勢での周遊の楽しみ方、記憶力向上方法 「あつし」か「@ie」って気軽に呼んでね！\nとにかくなんでも楽しめるタイプなので、いっしょにわいわいやりたい！"
+    "recommendation": "IMMORTAL,ARG,都市伝説解体センター",
+    "topics": "マダミス,ボドゲ",
+    "message": "お気軽にお声がけくださいませ。星と深淵と脱出成功を目指せ！",
+    "searchText": "Lot @redescaper G 謎解き イマーシブ 謎解き ゲーム 旅行 コーン CCレモン 謎がある場所 剣道部 自然科学部 各種ポケモンがやめられない IMMORTAL,ARG,都市伝説解体センター マダミス,ボドゲ お気軽にお声がけくださいませ。星と深淵と脱出成功を目指せ！"
   }
 ]

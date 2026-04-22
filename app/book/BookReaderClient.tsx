@@ -785,6 +785,11 @@ export default function BookReaderClient() {
                   <span className="bubble bubble-c3" />
                 </div>
                 <div className="cover-kicker">PROFILE BOOK</div>
+                <img
+                  src="/prepale.jpg"
+                  alt="プレパレ！ Playful Palette のロゴ"
+                  className="cover-logo-image"
+                />
                 <h1 className="cover-title">プレパレ！</h1>
                 <p className="cover-subtitle">みんなのプロフィール帳</p>
                 <p className="cover-copy">
