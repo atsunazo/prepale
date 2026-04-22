@@ -1634,15 +1634,15 @@ select {
 }
 
 .paper-note-section {
-  margin-top: 22px;
+  margin-top: 15px;
   padding: 14px;
   border-radius: 20px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.74),
-    rgba(255, 248, 252, 0.72)
+    rgba(255, 255, 255, 0.80),
+    rgba(254, 254, 254, 0.82)
   );
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(222, 222, 222, 0.82);
 }
 
 .paper-note-head {
@@ -1650,13 +1650,13 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
 .paper-note-caption {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .paper-note-textarea {
