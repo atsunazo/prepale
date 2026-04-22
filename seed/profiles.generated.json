@@ -330,8 +330,8 @@
     ],
     "recommendation": "",
     "topics": "マダミス、謎解き、ボドゲ、イマーシブ",
-    "message": "友達,面白いこと大募集！！",
-    "searchText": "しーどら @0624kai E マダミス 謎解き ボドゲ イマーシブ トレカ トレカ ライトノベル ゲーム お寿司 大須 卓球部 原神 マダミス、謎解き、ボドゲ、イマーシブ 友達,面白いこと大募集！！"
+    "message": "友達、面白いこと大募集！！",
+    "searchText": "しーどら @0624kai E マダミス 謎解き ボドゲ イマーシブ トレカ トレカ ライトノベル ゲーム お寿司 大須 卓球部 原神 マダミス、謎解き、ボドゲ、イマーシブ 友達、面白いこと大募集！！"
   },
   {
     "order": 11,
@@ -916,6 +916,35 @@
   {
     "order": 29,
     "slug": "member-029",
+    "name": "みやこ",
+    "xId": "@3_miya_d",
+    "team": "A",
+    "interests": [
+      "マダミス",
+      "謎解き",
+      "ボドゲ",
+      "イマーシブ"
+    ],
+    "favorites": [
+      "体験型イベント",
+      "くま",
+      "文房具"
+    ],
+    "foodTokens": [
+      "紅茶",
+      "カフェオレ"
+    ],
+    "placeTokens": [],
+    "clubTokens": [],
+    "recentTokens": [],
+    "recommendation": "",
+    "topics": "本、映画、和装、謎解き、お菓子作り、ハンドメイドなど",
+    "message": "何でも興味あるのでたくさんお話したいです！",
+    "searchText": "みやこ @3_miya_d A マダミス 謎解き ボドゲ イマーシブ 体験型イベント くま 文房具 紅茶 カフェオレ 本、映画、和装、謎解き、お菓子作り、ハンドメイドなど 何でも興味あるのでたくさんお話したいです！"
+  },
+  {
+    "order": 30,
+    "slug": "member-030",
     "name": "みゆ",
     "xId": "@mi_ma__cha",
     "team": "C",
@@ -949,8 +978,8 @@
     "searchText": "みゆ @mi_ma__cha C マダミス 謎解き ボドゲ イマーシブ イマーシブ 謎解き ボドゲ 地下アイドル コーヒー 東京のイマーシブ公演 映画研究会 勝利の女神NIKKE 東京のホラー、サスペンス系のイマーシブ公演 ほぼ知り合いいません！笑　気軽に話しかけてください〜！"
   },
   {
-    "order": 30,
-    "slug": "member-030",
+    "order": 31,
+    "slug": "member-031",
     "name": "momizi",
     "xId": "@_____tranquilo",
     "team": "C",
@@ -983,8 +1012,8 @@
     "searchText": "momizi @_____tranquilo C マダミス 謎解き ボドゲ イマーシブ 旅行 カフェ 写真 からあげ スタジオオール 陸上部 日常侵食型イベント クローズシアター CLEAR 気軽に声をかけてください"
   },
   {
-    "order": 31,
-    "slug": "member-031",
+    "order": 32,
+    "slug": "member-032",
     "name": "やち",
     "xId": "@yatinonazotoki",
     "team": "B",
@@ -1017,8 +1046,8 @@
     "searchText": "やち @yatinonazotoki B マダミス 謎解き イマーシブ 音楽 よつばと！ マヨネーズ ケンタッキーフライドチキン バーガーキング バンド アンチエイジング部 文字遊戯 お話した事のない方ともたくさん交流したいです。よろしくお願いします！"
   },
   {
-    "order": 32,
-    "slug": "member-032",
+    "order": 33,
+    "slug": "member-033",
     "name": "yahamasa",
     "xId": "@dassyutunazo4",
     "team": "D",
@@ -1051,8 +1080,8 @@
     "searchText": "yahamasa @dassyutunazo4 D マダミス 謎解き ボドゲ イマーシブ 脱出ゲーム 謎解き 珈琲 名古屋 吹奏楽部 クイ研 脱出ゲーム リドラ、QuizKnock 気軽に話しかけてください！"
   },
   {
-    "order": 33,
-    "slug": "member-033",
+    "order": 34,
+    "slug": "member-034",
     "name": "裕",
     "xId": "@yuusinomiya",
     "team": "D",
@@ -1083,8 +1112,8 @@
     "searchText": "裕 @yuusinomiya D マダミス 謎解き ボドゲ イマーシブ 漫画 アニメ 猫 コーヒー バスケ部 スポーツ観戦 物語の謎解きから、絶品スコーン探しやスポーツ観戦、参加まで🏃‍♀️心惹かれる『面白いもの』を日々開拓中です！"
   },
   {
-    "order": 34,
-    "slug": "member-034",
+    "order": 35,
+    "slug": "member-035",
     "name": "ラスク",
     "xId": "@saqsak_no_rusk",
     "team": "E",
@@ -1117,8 +1146,8 @@
     "searchText": "ラスク @saqsak_no_rusk E 謎解き ボドゲ 言葉遊び MBTI スタンプ スイーツ全般 紅茶 カフェ ケーキ屋 弓道部 ガチャガチャ うそ探偵トマント🍅 MBTI MBTI詳しい方いたら語りたいです！\nおすすめのカフェ、スイーツあったら教えてください！"
   },
   {
-    "order": 35,
-    "slug": "member-035",
+    "order": 36,
+    "slug": "member-036",
     "name": "Rivi",
     "xId": "@rivi_mtqr",
     "team": "B",
@@ -1157,8 +1186,8 @@
     "searchText": "Rivi @rivi_mtqr B マダミス 謎解き ボドゲ 音楽(電子音楽・同人音楽・邦ロック) 音ゲー パズルゲーム アナログゲーム ゼンゼロなどの海外ゲーム お笑い 麺類 生魚 コーヒー 大須 吹奏楽部 吹奏楽部(打楽器コントラバス) クイズ研究会 トリッカル(ゲーム) BPL(音楽ゲームのプロリーグ)、Marpril(Vtuber) コーヒー、お酒、ボドゲ、本、麻雀、ボルダリング ハマってるもの気軽に布教してください！面白そうなものに飛びつきます\nボドゲとか行きたいところを気軽に誘える仲間探してます"
   },
   {
-    "order": 36,
-    "slug": "member-036",
+    "order": 37,
+    "slug": "member-037",
     "name": "りょー",
     "xId": "@Ryo1000medal",
     "team": "C",
@@ -1191,8 +1220,8 @@
     "searchText": "りょー @Ryo1000medal C マダミス 謎解き ボドゲ ボドゲ 謎解き 山登り スノボ カレー コロッケ おいなりさん なぞねこ 友達と遊ぶ M-1 知らない話はなんでも楽しい！ ほんとにお気軽にお声がけくださいましね"
   },
   {
-    "order": 37,
-    "slug": "member-037",
+    "order": 38,
+    "slug": "member-038",
     "name": "るっく",
     "xId": "@looklucklook",
     "team": "A",
@@ -1224,8 +1253,8 @@
     "searchText": "るっく @looklucklook A マダミス 謎解き イマーシブ アカペラ 文房具 お菓子作り 紅茶 大須 合唱部 カクテル作り Studio Escapeの『女王と国のために』 みんなのおすすめの飲食店 プレパレ！参加ありがとう！楽しんでいってね！"
   },
   {
-    "order": 38,
-    "slug": "member-038",
+    "order": 39,
+    "slug": "member-039",
     "name": "Lot",
     "xId": "@redescaper",
     "team": "G",

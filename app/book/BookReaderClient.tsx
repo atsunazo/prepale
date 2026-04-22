@@ -829,7 +829,7 @@ export default function BookReaderClient() {
                 />
                 <p className="cover-subtitle">~ みんなのプロフィール帳 ~</p>
                 <p className="cover-copy">
-                  参加メンバーのことをゆっくり知れるプロフィール帳です！
+                  参加メンバーのことを知れるプロフィール帳です！いろいろ触ってみよう！
                 </p>
                 
                 
@@ -1045,7 +1045,7 @@ export default function BookReaderClient() {
                     <section className="paper-section">
                       <div className="paper-note-head">
                         <h3 className="paper-section-title">メモ</h3>
-                        <span className="paper-note-caption">この端末(ブラウザ)に保存されます</span>
+                        <span className="paper-note-caption">※この端末(ブラウザ)にのみ保存されます</span>
                       </div>
                     
                       <textarea
