@@ -473,13 +473,16 @@ export default function BookReaderClient() {
     try {
       const raw = window.localStorage.getItem(PROFILE_NOTES_STORAGE_KEY);
       if (!raw) return;
+
       const parsed = JSON.parse(raw);
       if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-        const sanitized = Object.fromEntries(
+        const sanitized: Record<string, string> = Object.fromEntries(
           Object.entries(parsed).filter(
-            ([key, value]) => typeof key === "string" && typeof value === "string"
+            (entry): entry is [string, string] =>
+              typeof entry[0] === "string" && typeof entry[1] === "string"
           )
         );
+
         setProfileNotes(sanitized);
       }
     } catch {
