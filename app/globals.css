@@ -1639,8 +1639,8 @@ select {
   border-radius: 20px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.80),
-    rgba(254, 254, 254, 0.82)
+    rgba(255, 255, 255, 0.74),
+    rgba(254, 254, 254, 0.76)
   );
   border: 1px solid rgba(222, 222, 222, 0.82);
 }
