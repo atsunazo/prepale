@@ -773,11 +773,17 @@ export default function BookReaderClient() {
               }}
               className="book-page-scroll cover-page-scroll"
             >
+              
               <div className="cover-ornament cover-ornament-a" />
               <div className="cover-ornament cover-ornament-b" />
               <div className="cover-ornament cover-ornament-c" />
 
               <section className="cover-sheet-inner">
+                <div className="bubble-layer bubble-layer-cover" aria-hidden="true">
+                  <span className="bubble bubble-c1" />
+                  <span className="bubble bubble-c2" />
+                  <span className="bubble bubble-c3" />
+                </div>
                 <div className="cover-kicker">PROFILE BOOK</div>
                 <h1 className="cover-title">プレパレ！</h1>
                 <p className="cover-subtitle">みんなのプロフィール帳</p>
@@ -816,6 +822,7 @@ export default function BookReaderClient() {
               ) : null}
 
               <div className="profile-paper-frame">
+                
                 <div className="paper-spine" aria-hidden="true" />
                 <div className="paper-corner paper-corner-a" aria-hidden="true" />
                 <div className="paper-corner paper-corner-b" aria-hidden="true" />
@@ -833,6 +840,7 @@ export default function BookReaderClient() {
                       <div className="profile-avatar-box">
                         <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
                       </div>
+                      
 
                       <div className="profile-heading-copy">
                         <div className="profile-kicker">PROFILE</div>
