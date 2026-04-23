@@ -1052,8 +1052,8 @@ export default function BookReaderClient() {
                     </section>
                     <section className="paper-section">
                       <div className="paper-note-head">
-                        <h3 className="paper-section-title">ひとことメモ</h3>
-                        <span className="paper-note-caption">※この端末(ブラウザ)にのみ保存されます</span>
+                        <h3 className="paper-section-title">メモ</h3>
+                        <span className="paper-note-caption">※この端末にのみ保存されます</span>
                       </div>
                     
                       <textarea
