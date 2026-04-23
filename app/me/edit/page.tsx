@@ -152,17 +152,17 @@ export default function EditMyProfilePage() {
     	const found = snap.docs[0];
     	const data = found.data() as Profile;
 
-    	setDocId(found.id);
-    	setProfile({
-      	id: found.id,
-      	...data,
-      	interests: data.interests ?? [],
-      	favorites: data.favorites ?? [],
-      	foodTokens: data.foodTokens ?? [],
-      	placeTokens: data.placeTokens ?? [],
-      	clubTokens: data.clubTokens ?? [],
-      	recentTokens: data.recentTokens ?? [],
-    	});
+        setDocId(found.id);
+        setProfile({
+        ...data,
+        id: found.id,
+        interests: data.interests ?? [],
+        favorites: data.favorites ?? [],
+        foodTokens: data.foodTokens ?? [],
+        placeTokens: data.placeTokens ?? [],
+        clubTokens: data.clubTokens ?? [],
+        recentTokens: data.recentTokens ?? [],
+        });
   	} catch (err) {
     	console.error(err);
     	setError("プロフィールの読み込みに失敗しました。");

@@ -1,7 +1,6 @@
 export type TeamKey = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
 
-export type Profile = {
-  id: string;
+export type ProfileDoc = {
   order: number;
   slug: string;
   name: string;
@@ -21,4 +20,8 @@ export type Profile = {
   authUid?: string;
   authEmail?: string;
   needsPasswordChange?: boolean;
+};
+
+export type Profile = ProfileDoc & {
+  id: string;
 };
