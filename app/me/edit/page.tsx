@@ -127,18 +127,26 @@ export default function EditMyProfilePage() {
   const [newPassword2, setNewPassword2] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
 
+
+
+  useEffect(() => {
+	document.body.style.overflow = "auto";
+	document.documentElement.style.overflow = "auto";
+
+	return () => {
+		document.body.style.overflow = "auto";
+		document.documentElement.style.overflow = "auto";
+	};
+	}, []);
+
+
   useEffect(() => {
 	const unsub = onAuthStateChanged(auth, async (user) => {
   	if (!user) {
     	router.replace("/login");
     	return;
   	}
-	useEffect(() => {
-	document.body.style.overflow = "auto";
-	document.documentElement.style.overflow = "auto";
-	return () => {};
-	}, []);
-	
+
   	try {
     	const q = query(
       	collection(db, "profiles"),
