@@ -443,6 +443,7 @@ select {
   font-size: clamp(1.2rem, 4vw, 1.5rem);
   font-weight: 700;
   color: #8b7598;
+  width: min(100%, 22ch);
 }
 
 .cover-copy {
