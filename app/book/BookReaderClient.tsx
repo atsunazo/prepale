@@ -837,8 +837,9 @@ export default function BookReaderClient() {
                 />
                 <p className="cover-subtitle">~ みんなのプロフィール帳 ~</p>
                 <p className="cover-copy">
-                  参加メンバーのことを知れる<br />プロフィール帳です！
+                  2026/5/16/(Sat)
                 </p>
+                
                 
                 
               </section>

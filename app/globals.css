@@ -440,15 +440,16 @@ select {
 
 .cover-subtitle {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(1rem, 4vw, 1.5rem);
   font-weight: 700;
   color: #8b7598;
 }
 
 .cover-copy {
-  margin: 18px 0 0;
+  margin: 20px 0 0;
   max-width: 22ch;
   line-height: 1.8;
+  margin-top: 20px;
 }
 
 .cover-button {
