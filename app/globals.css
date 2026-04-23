@@ -440,7 +440,7 @@ select {
 
 .cover-subtitle {
   margin: 0;
-  font-size: clamp(1.5rem, 4vw, 1.6rem);
+  font-size: clamp(1.3rem, 4vw, 1.5rem);
   font-weight: 700;
   color: #8b7598;
 }
