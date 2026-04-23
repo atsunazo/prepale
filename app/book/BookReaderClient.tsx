@@ -837,7 +837,7 @@ export default function BookReaderClient() {
                 />
                 <p className="cover-subtitle">~ みんなのプロフィール帳 ~</p>
                 <p className="cover-copy">
-                  2026/5/16/(Sat)
+                  2026/5/16(Sat)
                 </p>
                 
                 
