@@ -52,7 +52,7 @@ export default function LoginPage() {
         	<input
           	value={loginId}
           	onChange={(e) => setLoginId(e.target.value)}
-          	placeholder="例: nagashatsu"
+          	placeholder="例: prepale"
           	autoComplete="username"
           	className="input"
         	/>
