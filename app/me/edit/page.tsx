@@ -133,7 +133,12 @@ export default function EditMyProfilePage() {
     	router.replace("/login");
     	return;
   	}
-
+	useEffect(() => {
+	document.body.style.overflow = "auto";
+	document.documentElement.style.overflow = "auto";
+	return () => {};
+	}, []);
+	
   	try {
     	const q = query(
       	collection(db, "profiles"),

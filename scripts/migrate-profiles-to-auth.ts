@@ -3,7 +3,7 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 
 const COLLECTION = "profiles";
-const DEFAULT_PASSWORD = "9999";
+const DEFAULT_PASSWORD = "260516";
 const DOMAIN = "profiles.local"; // 疑似メール用
 const DRY_RUN = process.argv.includes("--dry-run");
 
