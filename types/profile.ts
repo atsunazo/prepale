@@ -1,6 +1,7 @@
 export type TeamKey = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
 
 export type Profile = {
+  id: string;
   order: number;
   slug: string;
   name: string;
@@ -16,8 +17,6 @@ export type Profile = {
   topics?: string;
   message: string;
   searchText: string;
-
-  // 認証用に追加
   loginId?: string;
   authUid?: string;
   authEmail?: string;
