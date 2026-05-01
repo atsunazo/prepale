@@ -1334,7 +1334,7 @@ select {
     color-mix(in srgb, var(--team-soft) 92%, white)
   );
   color: var(--team-text);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.04em;
   box-shadow:
