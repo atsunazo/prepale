@@ -455,6 +455,42 @@ export default function BookReaderClient() {
     };
   }, []);
 
+  useEffect(() => {
+  async function loadProfiles() {
+    try {
+      const q = query(collection(db, "profiles"), orderBy("order", "asc"));
+
+      const [snapshot, linksSnapshot] = await Promise.all([
+        getDocs(q),
+        getDoc(doc(db, "settings", "publicLinks")),
+      ]);
+
+      const items: Profile[] = snapshot.docs.map((docItem) => ({
+        id: docItem.id,
+        ...(docItem.data() as Omit<Profile, "id">),
+      }));
+      setProfiles(items);
+
+      if (linksSnapshot.exists()) {
+        const data = linksSnapshot.data() as Partial<PublicLinksSettings>;
+        setPublicLinks({
+          showPostButton: Boolean(data.showPostButton),
+          postUrl: typeof data.postUrl === "string" ? data.postUrl : "",
+          showSurveyButton: Boolean(data.showSurveyButton),
+          surveyUrl: typeof data.surveyUrl === "string" ? data.surveyUrl : "",
+        });
+      } else {
+        setPublicLinks(DEFAULT_PUBLIC_LINKS);
+      }
+    } catch (error) {
+      console.error("failed to load profiles", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  loadProfiles();
+}, []);
 useEffect(() => {
   const unsub = onSnapshot(doc(db, "settings", "publicLinks"), (snapshot) => {
     if (snapshot.exists()) {
@@ -472,7 +508,6 @@ useEffect(() => {
 
   return () => unsub();
 }, []);
-
   useEffect(() => {
     setFavoriteIds(readStoredIds(FAVORITES_STORAGE_KEY));
     setBookmarkIds(readStoredIds(BOOKMARKS_STORAGE_KEY));
