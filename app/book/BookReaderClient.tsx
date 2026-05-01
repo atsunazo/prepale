@@ -447,7 +447,7 @@ export default function BookReaderClient() {
 
   function openXPost() {
   const shareUrl = postUrl.trim();
-  const text = ["プレパレでつながろう！", shareUrl].filter(Boolean).join("\n");
+  const text = ["【ここにプレパレの感想を】", shareUrl].filter(Boolean).join("\n");
   const appUrl = `twitter://post?message=${encodeURIComponent(text)}`;
   window.location.href = appUrl;
 }
