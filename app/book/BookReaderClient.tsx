@@ -411,8 +411,6 @@ export default function BookReaderClient() {
   const [bookmarkIds, setBookmarkIds] = useState<string[]>([]);
   const [tocFilter, setTocFilter] = useState<"all" | "favorites" | "bookmarks">("all");
   const [profileNotes, setProfileNotes] = useState<Record<string, string>>({});
-  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
-
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const pageRefs = useRef<(HTMLElement | null)[]>([]);
   const pageScrollRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -421,19 +419,6 @@ export default function BookReaderClient() {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const tocListRef = useRef<HTMLDivElement | null>(null);
-  const swipeTriggeredRef = useRef(false);
-  const scrollEndTimer = useRef<number | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (scrollFrame.current !== null) {
-        window.cancelAnimationFrame(scrollFrame.current);
-      }
-      if (scrollEndTimer.current !== null) {
-        window.clearTimeout(scrollEndTimer.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
@@ -613,7 +598,6 @@ export default function BookReaderClient() {
   function syncIndexFromScroll() {
     const scroller = scrollerRef.current;
     if (!scroller || suppressScrollSync.current) return;
-
     const center = scroller.scrollLeft + scroller.clientWidth / 2;
 
     let closestIndex = 0;
@@ -637,36 +621,25 @@ export default function BookReaderClient() {
     const page = pageRefs.current[index];
     if (!scroller || !page) return;
 
-    const targetLeft =
-      page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
-
     suppressScrollSync.current = true;
-    setIsAutoScrolling(behavior === "smooth");
-
     scroller.scrollTo({
-      left: targetLeft,
+      left: page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2,
       behavior,
     });
+    setCurrentIndex(index);
 
-    if (scrollEndTimer.current !== null) {
-      window.clearTimeout(scrollEndTimer.current);
-    }
-
-    scrollEndTimer.current = window.setTimeout(() => {
+    window.setTimeout(() => {
       suppressScrollSync.current = false;
-      setIsAutoScrolling(false);
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 320 : 40);
+    }, behavior === "smooth" ? 280 : 40);
   }
 
   function goPrev() {
-    if (isAutoScrolling) return;
     if (currentIndex <= 0) return;
     scrollToIndex(currentIndex - 1);
   }
 
   function goNext() {
-    if (isAutoScrolling) return;
     if (currentIndex >= bookPages.length - 1) return;
     scrollToIndex(currentIndex + 1);
   }
@@ -677,49 +650,37 @@ export default function BookReaderClient() {
   }
 
   function handleScrollerScroll() {
-    if (scrollFrame.current) {
-      window.cancelAnimationFrame(scrollFrame.current);
-    }
+    if (scrollFrame.current) window.cancelAnimationFrame(scrollFrame.current);
     scrollFrame.current = window.requestAnimationFrame(syncIndexFromScroll);
   }
 
   function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
-    if (isAutoScrolling) return;
-
     const touch = event.touches[0];
     touchStartX.current = touch.clientX;
     touchStartY.current = touch.clientY;
-    swipeTriggeredRef.current = false;
   }
 
-  function handleTouchMove(event: TouchEvent<HTMLDivElement>) {
-    if (isAutoScrolling) return;
-    if (swipeTriggeredRef.current) return;
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
     if (touchStartX.current === null || touchStartY.current === null) return;
 
-    const touch = event.touches[0];
+    const touch = event.changedTouches[0];
     const deltaX = touch.clientX - touchStartX.current;
     const deltaY = touch.clientY - touchStartY.current;
 
-    if (Math.abs(deltaX) < 18) return;
-    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.05) return;
+    touchStartX.current = null;
+    touchStartY.current = null;
 
-    swipeTriggeredRef.current = true;
+    if (Math.abs(deltaX) < 28) return;
+    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
 
     if (deltaX < 0 && currentIndex < bookPages.length - 1) {
-      scrollToIndex(currentIndex + 1, "smooth");
+      scrollToIndex(currentIndex + 1);
       return;
     }
 
     if (deltaX > 0 && currentIndex > 0) {
-      scrollToIndex(currentIndex - 1, "smooth");
+      scrollToIndex(currentIndex - 1);
     }
-  }
-
-  function handleTouchEnd() {
-    touchStartX.current = null;
-    touchStartY.current = null;
-    swipeTriggeredRef.current = false;
   }
 
   function openToc(event: MouseEvent<HTMLElement>) {
@@ -828,9 +789,7 @@ export default function BookReaderClient() {
   return (
     <main className="book-app-shell book-app-shell-fixed book-app-shell-balanced">
       <section
-        className={`book-stage book-stage-fixed book-stage-balanced ${
-          isAutoScrolling ? "is-auto-scrolling" : ""
-        }`}
+        className="book-stage book-stage-fixed book-stage-balanced"
         aria-label="プロフィールブック"
       >
         <div className="book-shelf-glow book-shelf-glow-a" />
@@ -841,7 +800,6 @@ export default function BookReaderClient() {
           className="book-carousel"
           onScroll={handleScrollerScroll}
           onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           <article
@@ -1115,7 +1073,7 @@ export default function BookReaderClient() {
           type="button"
           className="nav-button"
           onClick={goPrev}
-          disabled={currentIndex === 0 || isAutoScrolling}
+          disabled={currentIndex === 0}
           aria-label="前のページへ"
         >
           <ChevronIcon dir="left" />
@@ -1135,7 +1093,7 @@ export default function BookReaderClient() {
           type="button"
           className="nav-button"
           onClick={goNext}
-          disabled={currentIndex === bookPages.length - 1 || isAutoScrolling}
+          disabled={currentIndex === bookPages.length - 1}
           aria-label="次のページへ"
         >
           <span>次へ</span>
