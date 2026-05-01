@@ -1729,12 +1729,6 @@ select {
   margin-bottom: 14px;
 }
 
-.paper-section-head .paper-section-title {
-  margin: 0;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
 .paper-section-cta-slot {
   flex: 0 0 188px;
   width: 188px;
