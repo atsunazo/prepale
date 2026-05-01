@@ -1766,7 +1766,10 @@ select {
   background: linear-gradient(180deg, #fff9ef 0%, #fff3d8 100%);
 }
 
-
+@media (max-width: 320px) {
+  .paper-section-head {
+    align-items: flex-start;
+  }
 
   .paper-section-cta-slot {
     flex: 0 0 172px;
