@@ -631,7 +631,7 @@ export default function BookReaderClient() {
     window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 200 : 80);
+    }, behavior === "smooth" ? 200 : 0);
   }
 
   function goPrev() {
