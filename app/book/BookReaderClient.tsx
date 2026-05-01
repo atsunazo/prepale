@@ -86,22 +86,7 @@ const DEFAULT_PUBLIC_LINKS: PublicLinksSettings = {
   surveyUrl: "",
 };
 
-function openXPost() {
-  const shareUrl = postUrl?.trim() ?? "";
-  const text = [`プレパレでつながろう！`, shareUrl].filter(Boolean).join("\n");
-  const appUrl = `twitter://post?message=${encodeURIComponent(text)}`;
-  const webUrl = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
 
-  const start = Date.now();
-  window.location.href = appUrl;
-
-  window.setTimeout(() => {
-    const elapsed = Date.now() - start;
-    if (elapsed < 1200) {
-      window.location.href = webUrl;
-    }
-  }, 700);
-}
 
 function sanitizeExternalUrl(value?: string) {
   const url = (value ?? "").trim();
@@ -459,6 +444,23 @@ export default function BookReaderClient() {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const tocListRef = useRef<HTMLDivElement | null>(null);
+
+  function openXPost() {
+  const shareUrl = postUrl.trim();
+  const text = ["プレパレでつながろう！", shareUrl].filter(Boolean).join("\n");
+  const appUrl = `twitter://post?message=${encodeURIComponent(text)}`;
+  const webUrl = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
+
+  const start = Date.now();
+  window.location.href = appUrl;
+
+  window.setTimeout(() => {
+    const elapsed = Date.now() - start;
+    if (elapsed < 1200) {
+      window.location.href = webUrl;
+    }
+  }, 700);
+}
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
