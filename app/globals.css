@@ -1726,14 +1726,14 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 0px;
 }
 
 
 .paper-section-cta-slot {
   flex: 0 0 188px;
   width: 188px;
-  min-width: 188px;
+  min-width: 100px;
   min-height: 34px;
   display: flex;
   align-items: center;
@@ -1758,6 +1758,7 @@ select {
   white-space: nowrap;
   text-decoration: none;
   box-shadow: 0 6px 14px rgba(101, 87, 130, 0.08);
+  margin-bottom: 10px;
 }
 
 .paper-mini-cta:hover {
