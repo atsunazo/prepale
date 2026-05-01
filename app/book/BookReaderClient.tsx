@@ -632,7 +632,7 @@ export default function BookReaderClient() {
     window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 380 : 40);
+    }, behavior === "smooth" ? 280 : 40);
   }
 
   function goPrev() {
@@ -852,7 +852,8 @@ export default function BookReaderClient() {
           const isActive = pageIndex === currentIndex
           const isFavorite = favoriteIdSet.has(profile.id)
           const isBookmarked = bookmarkIdSet.has(profile.id)
-          const teamClass = `team-${profile.team ?? "A"}`
+          const isRainbowTeam = !profile.team
+          const teamClass = profile.team ? `team-${profile.team}` : ""
 
           return (
             <article
@@ -862,7 +863,9 @@ export default function BookReaderClient() {
               }}
               className={`paper-sheet profile-paper ${
                 isActive ? "is-active" : ""
-              } ${isBookmarked ? "is-bookmarked" : ""} ${teamClass}`}
+              } ${isBookmarked ? "is-bookmarked" : ""} ${teamClass} ${
+                isRainbowTeam ? "is-rainbow-team" : ""
+              }`}
               aria-current={isActive ? "page" : undefined}
             >
               {isBookmarked ? (
@@ -893,7 +896,9 @@ export default function BookReaderClient() {
                       
 
                       <div className="profile-heading-copy">
-                        <div className="profile-kicker">PROFILE</div>
+                        <div className="profile-kicker">
+                          {profile.team ? `${profile.team}チーム` : "運営"}
+                        </div>
                         <h2 className="profile-name">{profile.name}</h2>
                       </div>
 

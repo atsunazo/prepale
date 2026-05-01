@@ -1674,3 +1674,49 @@ select {
 .paper-note-textarea::placeholder {
   color: rgba(80, 80, 80, 0.56);
 }
+
+
+.profile-paper.is-rainbow-team .profile-paper-frame {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 120, 160, 0.26) 0%,
+      rgba(255, 183, 77, 0.24) 18%,
+      rgba(255, 235, 120, 0.22) 34%,
+      rgba(120, 214, 138, 0.22) 50%,
+      rgba(119, 199, 255, 0.24) 68%,
+      rgba(160, 140, 255, 0.24) 84%,
+      rgba(255, 160, 210, 0.24) 100%
+    ),
+    linear-gradient(180deg, #fffafc 0%, #fff8f1 52%, #f8fbff 100%);
+}
+
+.profile-paper.is-rainbow-team .paper-spine {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 105, 180, 0.58),
+    rgba(255, 183, 77, 0.48),
+    rgba(120, 214, 138, 0.44),
+    rgba(119, 199, 255, 0.46),
+    rgba(160, 140, 255, 0.48)
+  );
+}
+
+.profile-paper.is-rainbow-team .paper-item,
+.profile-paper.is-rainbow-team .paper-message {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 245, 250, 0.7),
+      rgba(244, 250, 255, 0.72)
+    );
+}
+
+.profile-paper.is-rainbow-team .paper-tag-button {
+  background: rgba(255, 182, 193, 0.28);
+}
+
+.profile-paper.is-rainbow-team .paper-tag-soft-button {
+  background: rgba(173, 216, 255, 0.28);
+}
