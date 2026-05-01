@@ -696,7 +696,7 @@ function animateScrollTo(targetLeft: number, duration = 240) {
     return;
   }
 
-  animateScrollTo(targetLeft, 240);
+  animateScrollTo(targetLeft, 320);
 }
 
   function goPrev() {
@@ -738,7 +738,7 @@ function animateScrollTo(targetLeft: number, duration = 240) {
     touchStartX.current = null;
     touchStartY.current = null;
 
-    if (Math.abs(deltaX) < 20) return;
+    if (Math.abs(deltaX) < 28) return;
     if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
 
     if (deltaX < 0 && currentIndex < bookPages.length - 1) {
