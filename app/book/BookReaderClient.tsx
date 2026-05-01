@@ -989,9 +989,7 @@ useEffect(() => {
                     </header>
 
                     <section className="paper-section">
-                      <h3 className="paper-section-title">この人の成分</h3>
                       <div className="paper-section-head">
-                        
 
                         <div className="paper-section-cta-slot" aria-live="polite">
                           {showPostButton ? (
@@ -1017,6 +1015,7 @@ useEffect(() => {
                           ) : null}
                         </div>
                       </div>
+                      <h3 className="paper-section-title">この人の成分</h3>
 
                       <div className="paper-list-block">
                         <TokenFieldBlock
