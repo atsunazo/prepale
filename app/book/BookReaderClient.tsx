@@ -605,8 +605,10 @@ export default function BookReaderClient() {
       .filter((item) => item.matchedFields.length > 0);
   }, [profiles, panel]);
 
-  function easeOutCubic(t: number) {
-  return 1 - Math.pow(1 - t, 3);
+  function easeInOutCubic(t: number) {
+  return t < 0.5
+    ? 4 * t * t * t
+    : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
 function stopScrollAnimation() {
@@ -638,7 +640,7 @@ function animateScrollTo(targetLeft: number, duration = 240) {
   const tick = (now: number) => {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const eased = easeOutCubic(progress);
+    const eased = easeInOutCubic(progress);
 
     scroller.scrollLeft = startLeft + distance * eased;
 
