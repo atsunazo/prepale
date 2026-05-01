@@ -1766,7 +1766,7 @@ select {
   background: linear-gradient(180deg, #fff9ef 0%, #fff3d8 100%);
 }
 
-@media (max-width: 320px) {
+@media (max-width: 420px) {
   .paper-section-head {
     align-items: flex-start;
   }
