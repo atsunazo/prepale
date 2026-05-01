@@ -632,7 +632,7 @@ export default function BookReaderClient() {
     window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 200 : 40);
+    }, behavior === "auto" ? 280 : 40);
   }
 
   function goPrev() {
@@ -671,7 +671,7 @@ export default function BookReaderClient() {
     touchStartX.current = null;
     touchStartY.current = null;
 
-    if (Math.abs(deltaX) < 10) return;
+    if (Math.abs(deltaX) < 28) return;
     if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
 
     if (deltaX < 0 && currentIndex < bookPages.length - 1) {
