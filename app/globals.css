@@ -1720,3 +1720,25 @@ select {
 .profile-paper.is-rainbow-team .paper-tag-soft-button {
   background: rgba(173, 216, 255, 0.28);
 }
+
+.book-stage.is-auto-scrolling .book-shelf-glow {
+  opacity: 0.16;
+  filter: none;
+}
+
+.book-stage.is-auto-scrolling .profile-paper-frame,
+.book-stage.is-auto-scrolling .book-cover-page {
+  box-shadow: var(--shadow);
+  filter: none;
+  transition: none;
+}
+
+.book-stage.is-auto-scrolling .paper-sparkle,
+.book-stage.is-auto-scrolling .paper-corner {
+  opacity: 0.45;
+}
+
+.book-stage.is-auto-scrolling + .bottom-dock,
+.book-stage.is-auto-scrolling ~ .bottom-dock {
+  backdrop-filter: none;
+}
