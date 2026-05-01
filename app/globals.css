@@ -1729,17 +1729,6 @@ select {
   margin-bottom: 14px;
 }
 
-.paper-section-cta-slot {
-  flex: 0 0 188px;
-  width: 188px;
-  min-width: 188px;
-  min-height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
 .paper-mini-cta {
   min-width: 90px;
   height: 34px;
