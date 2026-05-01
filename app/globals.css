@@ -1722,20 +1722,23 @@ select {
 }
 
 .paper-section-head {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 14px;
 }
 
-.paper-section-head .paper-section-title {
-  margin: 0;
-}
 
 .paper-section-cta-slot {
+  flex: 0 0 188px;
+  width: 188px;
+  min-width: 188px;
+  min-height: 34px;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 8px;
-  flex-wrap: wrap;
-  width: 100%;
 }
 
 .paper-mini-cta {
