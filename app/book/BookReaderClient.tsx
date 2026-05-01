@@ -618,7 +618,11 @@ function stopScrollAnimation() {
   }
 }
 
-function animateScrollTo(targetLeft: number, duration = 240) {
+function animateScrollTo(
+  targetLeft: number,
+  duration = 340,
+  onComplete?: () => void
+) {
   const scroller = scrollerRef.current;
   if (!scroller) return;
 
@@ -630,6 +634,7 @@ function animateScrollTo(targetLeft: number, duration = 240) {
   if (Math.abs(distance) < 1) {
     scroller.scrollLeft = targetLeft;
     suppressScrollSync.current = false;
+    onComplete?.();
     syncIndexFromScroll();
     return;
   }
@@ -652,6 +657,7 @@ function animateScrollTo(targetLeft: number, duration = 240) {
     scroller.scrollLeft = targetLeft;
     scrollAnimFrame.current = null;
     suppressScrollSync.current = false;
+    onComplete?.();
     syncIndexFromScroll();
   };
 
@@ -687,18 +693,19 @@ function animateScrollTo(targetLeft: number, duration = 240) {
   const targetLeft =
     page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
 
-  setCurrentIndex(index);
-
   if (mode === "instant") {
     stopScrollAnimation();
     suppressScrollSync.current = true;
     scroller.scrollLeft = targetLeft;
     suppressScrollSync.current = false;
+    setCurrentIndex(index);
     syncIndexFromScroll();
     return;
   }
 
-  animateScrollTo(targetLeft, 400);
+  animateScrollTo(targetLeft, 340, () => {
+    setCurrentIndex(index);
+  });
 }
 
   function goPrev() {
