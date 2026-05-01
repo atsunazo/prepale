@@ -420,6 +420,15 @@ export default function BookReaderClient() {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const tocListRef = useRef<HTMLDivElement | null>(null);
+  const scrollAnimFrame = useRef<number | null>(null);
+
+  useEffect(() => {
+  return () => {
+    if (scrollAnimFrame.current !== null) {
+      window.cancelAnimationFrame(scrollAnimFrame.current);
+    }
+  };
+}, []);
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
@@ -596,6 +605,57 @@ export default function BookReaderClient() {
       .filter((item) => item.matchedFields.length > 0);
   }, [profiles, panel]);
 
+  function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function stopScrollAnimation() {
+  if (scrollAnimFrame.current !== null) {
+    window.cancelAnimationFrame(scrollAnimFrame.current);
+    scrollAnimFrame.current = null;
+  }
+}
+
+function animateScrollTo(targetLeft: number, duration = 240) {
+  const scroller = scrollerRef.current;
+  if (!scroller) return;
+
+  stopScrollAnimation();
+
+  const startLeft = scroller.scrollLeft;
+  const distance = targetLeft - startLeft;
+
+  if (Math.abs(distance) < 1) {
+    scroller.scrollLeft = targetLeft;
+    suppressScrollSync.current = false;
+    syncIndexFromScroll();
+    return;
+  }
+
+  const startTime = performance.now();
+  suppressScrollSync.current = true;
+
+  const tick = (now: number) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutCubic(progress);
+
+    scroller.scrollLeft = startLeft + distance * eased;
+
+    if (progress < 1) {
+      scrollAnimFrame.current = window.requestAnimationFrame(tick);
+      return;
+    }
+
+    scroller.scrollLeft = targetLeft;
+    scrollAnimFrame.current = null;
+    suppressScrollSync.current = false;
+    syncIndexFromScroll();
+  };
+
+  scrollAnimFrame.current = window.requestAnimationFrame(tick);
+}
+
   function syncIndexFromScroll() {
     const scroller = scrollerRef.current;
     if (!scroller || suppressScrollSync.current) return;
@@ -617,23 +677,27 @@ export default function BookReaderClient() {
     setCurrentIndex(closestIndex);
   }
 
-  function scrollToIndex(index: number, behavior: ScrollBehavior = "smooth") {
-    const scroller = scrollerRef.current;
-    const page = pageRefs.current[index];
-    if (!scroller || !page) return;
+  function scrollToIndex(index: number, mode: "smooth" | "instant" = "smooth") {
+  const scroller = scrollerRef.current;
+  const page = pageRefs.current[index];
+  if (!scroller || !page) return;
 
+  const targetLeft =
+    page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
+
+  setCurrentIndex(index);
+
+  if (mode === "instant") {
+    stopScrollAnimation();
     suppressScrollSync.current = true;
-    scroller.scrollTo({
-      left: page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2,
-      behavior,
-    });
-    setCurrentIndex(index);
-
-    window.setTimeout(() => {
-      suppressScrollSync.current = false;
-      syncIndexFromScroll();
-    }, behavior === "auto" ? 280 : 40);
+    scroller.scrollLeft = targetLeft;
+    suppressScrollSync.current = false;
+    syncIndexFromScroll();
+    return;
   }
+
+  animateScrollTo(targetLeft, 240);
+}
 
   function goPrev() {
     if (currentIndex <= 0) return;
@@ -656,10 +720,13 @@ export default function BookReaderClient() {
   }
 
   function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
-    const touch = event.touches[0];
-    touchStartX.current = touch.clientX;
-    touchStartY.current = touch.clientY;
-  }
+  stopScrollAnimation();
+  suppressScrollSync.current = false;
+
+  const touch = event.touches[0];
+  touchStartX.current = touch.clientX;
+  touchStartY.current = touch.clientY;
+}
 
   function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
     if (touchStartX.current === null || touchStartY.current === null) return;
@@ -671,7 +738,7 @@ export default function BookReaderClient() {
     touchStartX.current = null;
     touchStartY.current = null;
 
-    if (Math.abs(deltaX) < 28) return;
+    if (Math.abs(deltaX) < 20) return;
     if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
 
     if (deltaX < 0 && currentIndex < bookPages.length - 1) {
