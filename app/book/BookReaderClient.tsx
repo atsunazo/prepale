@@ -72,7 +72,6 @@ const FAVORITES_STORAGE_KEY = "prepale:favorites";
 const BOOKMARKS_STORAGE_KEY = "prepale:bookmarks";
 const PROFILE_NOTES_STORAGE_KEY = "prepale:profile-notes";
 
-
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
@@ -412,6 +411,8 @@ export default function BookReaderClient() {
   const [bookmarkIds, setBookmarkIds] = useState<string[]>([]);
   const [tocFilter, setTocFilter] = useState<"all" | "favorites" | "bookmarks">("all");
   const [profileNotes, setProfileNotes] = useState<Record<string, string>>({});
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const pageRefs = useRef<(HTMLElement | null)[]>([]);
   const pageScrollRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -420,15 +421,19 @@ export default function BookReaderClient() {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const tocListRef = useRef<HTMLDivElement | null>(null);
-  const scrollAnimFrame = useRef<number | null>(null);
+  const swipeTriggeredRef = useRef(false);
+  const scrollEndTimer = useRef<number | null>(null);
 
   useEffect(() => {
-  return () => {
-    if (scrollAnimFrame.current !== null) {
-      window.cancelAnimationFrame(scrollAnimFrame.current);
-    }
-  };
-}, []);
+    return () => {
+      if (scrollFrame.current !== null) {
+        window.cancelAnimationFrame(scrollFrame.current);
+      }
+      if (scrollEndTimer.current !== null) {
+        window.clearTimeout(scrollEndTimer.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const prevBodyOverflow = document.body.style.overflow;
@@ -511,7 +516,7 @@ export default function BookReaderClient() {
       [profileId]: value,
     }));
   }
-  
+
   useEffect(() => {
     if (panel?.mode !== "toc") return;
     if (!tocListRef.current) return;
@@ -605,68 +610,10 @@ export default function BookReaderClient() {
       .filter((item) => item.matchedFields.length > 0);
   }, [profiles, panel]);
 
-  function easeInOutCubic(t: number) {
-  return t < 0.5
-    ? 4 * t * t * t
-    : 1 - Math.pow(-2 * t + 2, 3) / 2;
-}
-
-function stopScrollAnimation() {
-  if (scrollAnimFrame.current !== null) {
-    window.cancelAnimationFrame(scrollAnimFrame.current);
-    scrollAnimFrame.current = null;
-  }
-}
-
-function animateScrollTo(
-  targetLeft: number,
-  duration = 340,
-  onComplete?: () => void
-) {
-  const scroller = scrollerRef.current;
-  if (!scroller) return;
-
-  stopScrollAnimation();
-
-  const startLeft = scroller.scrollLeft;
-  const distance = targetLeft - startLeft;
-
-  if (Math.abs(distance) < 1) {
-    scroller.scrollLeft = targetLeft;
-    suppressScrollSync.current = false;
-    onComplete?.();
-    syncIndexFromScroll();
-    return;
-  }
-
-  const startTime = performance.now();
-  suppressScrollSync.current = true;
-
-  const tick = (now: number) => {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easeInOutCubic(progress);
-
-    scroller.scrollLeft = startLeft + distance * eased;
-
-    if (progress < 1) {
-      scrollAnimFrame.current = window.requestAnimationFrame(tick);
-      return;
-    }
-
-    scroller.scrollLeft = targetLeft;
-    scrollAnimFrame.current = null;
-    suppressScrollSync.current = false;
-    onComplete?.();
-    syncIndexFromScroll();
-  };
-
-  scrollAnimFrame.current = window.requestAnimationFrame(tick);
-}
-
   function syncIndexFromScroll() {
     const scroller = scrollerRef.current;
     if (!scroller || suppressScrollSync.current) return;
+
     const center = scroller.scrollLeft + scroller.clientWidth / 2;
 
     let closestIndex = 0;
@@ -685,35 +632,41 @@ function animateScrollTo(
     setCurrentIndex(closestIndex);
   }
 
-  function scrollToIndex(index: number, mode: "smooth" | "instant" = "smooth") {
-  const scroller = scrollerRef.current;
-  const page = pageRefs.current[index];
-  if (!scroller || !page) return;
+  function scrollToIndex(index: number, behavior: ScrollBehavior = "smooth") {
+    const scroller = scrollerRef.current;
+    const page = pageRefs.current[index];
+    if (!scroller || !page) return;
 
-  const targetLeft =
-    page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
+    const targetLeft =
+      page.offsetLeft - (scroller.clientWidth - page.offsetWidth) / 2;
 
-  if (mode === "instant") {
-    stopScrollAnimation();
     suppressScrollSync.current = true;
-    scroller.scrollLeft = targetLeft;
-    suppressScrollSync.current = false;
-    setCurrentIndex(index);
-    syncIndexFromScroll();
-    return;
+    setIsAutoScrolling(behavior === "smooth");
+
+    scroller.scrollTo({
+      left: targetLeft,
+      behavior,
+    });
+
+    if (scrollEndTimer.current !== null) {
+      window.clearTimeout(scrollEndTimer.current);
+    }
+
+    scrollEndTimer.current = window.setTimeout(() => {
+      suppressScrollSync.current = false;
+      setIsAutoScrolling(false);
+      syncIndexFromScroll();
+    }, behavior === "smooth" ? 320 : 40);
   }
 
-  animateScrollTo(targetLeft, 340, () => {
-    setCurrentIndex(index);
-  });
-}
-
   function goPrev() {
+    if (isAutoScrolling) return;
     if (currentIndex <= 0) return;
     scrollToIndex(currentIndex - 1);
   }
 
   function goNext() {
+    if (isAutoScrolling) return;
     if (currentIndex >= bookPages.length - 1) return;
     scrollToIndex(currentIndex + 1);
   }
@@ -724,40 +677,49 @@ function animateScrollTo(
   }
 
   function handleScrollerScroll() {
-    if (scrollFrame.current) window.cancelAnimationFrame(scrollFrame.current);
+    if (scrollFrame.current) {
+      window.cancelAnimationFrame(scrollFrame.current);
+    }
     scrollFrame.current = window.requestAnimationFrame(syncIndexFromScroll);
   }
 
   function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
-  stopScrollAnimation();
-  suppressScrollSync.current = false;
+    if (isAutoScrolling) return;
 
-  const touch = event.touches[0];
-  touchStartX.current = touch.clientX;
-  touchStartY.current = touch.clientY;
-}
+    const touch = event.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+    swipeTriggeredRef.current = false;
+  }
 
-  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+  function handleTouchMove(event: TouchEvent<HTMLDivElement>) {
+    if (isAutoScrolling) return;
+    if (swipeTriggeredRef.current) return;
     if (touchStartX.current === null || touchStartY.current === null) return;
 
-    const touch = event.changedTouches[0];
+    const touch = event.touches[0];
     const deltaX = touch.clientX - touchStartX.current;
     const deltaY = touch.clientY - touchStartY.current;
 
-    touchStartX.current = null;
-    touchStartY.current = null;
+    if (Math.abs(deltaX) < 18) return;
+    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.05) return;
 
-    if (Math.abs(deltaX) < 28) return;
-    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
+    swipeTriggeredRef.current = true;
 
     if (deltaX < 0 && currentIndex < bookPages.length - 1) {
-      scrollToIndex(currentIndex + 1);
+      scrollToIndex(currentIndex + 1, "smooth");
       return;
     }
 
     if (deltaX > 0 && currentIndex > 0) {
-      scrollToIndex(currentIndex - 1);
+      scrollToIndex(currentIndex - 1, "smooth");
     }
+  }
+
+  function handleTouchEnd() {
+    touchStartX.current = null;
+    touchStartY.current = null;
+    swipeTriggeredRef.current = false;
   }
 
   function openToc(event: MouseEvent<HTMLElement>) {
@@ -866,7 +828,9 @@ function animateScrollTo(
   return (
     <main className="book-app-shell book-app-shell-fixed book-app-shell-balanced">
       <section
-        className="book-stage book-stage-fixed book-stage-balanced"
+        className={`book-stage book-stage-fixed book-stage-balanced ${
+          isAutoScrolling ? "is-auto-scrolling" : ""
+        }`}
         aria-label="プロフィールブック"
       >
         <div className="book-shelf-glow book-shelf-glow-a" />
@@ -877,6 +841,7 @@ function animateScrollTo(
           className="book-carousel"
           onScroll={handleScrollerScroll}
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           <article
@@ -894,7 +859,6 @@ function animateScrollTo(
               }}
               className="book-page-scroll cover-page-scroll"
             >
-              
               <div className="cover-ornament cover-ornament-a" />
               <div className="cover-ornament cover-ornament-b" />
               <div className="cover-ornament cover-ornament-c" />
@@ -912,107 +876,98 @@ function animateScrollTo(
                   className="cover-logo-image"
                 />
                 <p className="cover-subtitle">~ みんなのプロフィール帳 ~</p>
-                <p className="cover-copy">
-                  2026/5/16(Sat)
-                </p>
-                
-                
-                
+                <p className="cover-copy">2026/5/16(Sat)</p>
               </section>
             </div>
           </article>
 
-       {filteredProfiles.map((profile, index) => {
-          const xUrl = buildXUrl(profile.xId ?? "")
-          const pageIndex = index + 1
-          const isActive = pageIndex === currentIndex
-          const isFavorite = favoriteIdSet.has(profile.id)
-          const isBookmarked = bookmarkIdSet.has(profile.id)
-          const isRainbowTeam = !profile.team
-          const teamClass = profile.team ? `team-${profile.team}` : ""
+          {filteredProfiles.map((profile, index) => {
+            const xUrl = buildXUrl(profile.xId ?? "");
+            const pageIndex = index + 1;
+            const isActive = pageIndex === currentIndex;
+            const isFavorite = favoriteIdSet.has(profile.id);
+            const isBookmarked = bookmarkIdSet.has(profile.id);
+            const isRainbowTeam = !profile.team;
+            const teamClass = profile.team ? `team-${profile.team}` : "";
 
-          return (
-            <article
-              key={profile.id}
-              ref={(element) => {
-                pageRefs.current[pageIndex] = element
-              }}
-              className={`paper-sheet profile-paper ${
-                isActive ? "is-active" : ""
-              } ${isBookmarked ? "is-bookmarked" : ""} ${teamClass} ${
-                isRainbowTeam ? "is-rainbow-team" : ""
-              }`}
-              aria-current={isActive ? "page" : undefined}
-            >
-              {isBookmarked ? (
-                <div className="paper-bookmark-ribbon" aria-hidden="true">
-                  <BookmarkIcon filled />
-                </div>
-              ) : null}
+            return (
+              <article
+                key={profile.id}
+                ref={(element) => {
+                  pageRefs.current[pageIndex] = element;
+                }}
+                className={`paper-sheet profile-paper ${
+                  isActive ? "is-active" : ""
+                } ${isBookmarked ? "is-bookmarked" : ""} ${teamClass} ${
+                  isRainbowTeam ? "is-rainbow-team" : ""
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {isBookmarked ? (
+                  <div className="paper-bookmark-ribbon" aria-hidden="true">
+                    <BookmarkIcon filled />
+                  </div>
+                ) : null}
 
-              <div className="profile-paper-frame">
-                
-                <div className="paper-spine" aria-hidden="true" />
-                <div className="paper-corner paper-corner-a" aria-hidden="true" />
-                <div className="paper-corner paper-corner-b" aria-hidden="true" />
-                <div className="paper-sparkle paper-sparkle-a" aria-hidden="true" />
-                <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
+                <div className="profile-paper-frame">
+                  <div className="paper-spine" aria-hidden="true" />
+                  <div className="paper-corner paper-corner-a" aria-hidden="true" />
+                  <div className="paper-corner paper-corner-b" aria-hidden="true" />
+                  <div className="paper-sparkle paper-sparkle-a" aria-hidden="true" />
+                  <div className="paper-sparkle paper-sparkle-b" aria-hidden="true" />
 
-                <div
-                  ref={(element) => {
-                    pageScrollRefs.current[pageIndex] = element
-                  }}
-                  className="book-page-scroll profile-page-scroll"
-                >
-                  <header className="profile-paper-header profile-paper-header-balanced">
-                    <div className="profile-top-row">
-                      <div className="profile-avatar-box">
-                        <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
-                      </div>
-                      
-
-                      <div className="profile-heading-copy">
-                        <div className="profile-kicker">
-                          {profile.team ? `${profile.team}チーム` : "運営"}
+                  <div
+                    ref={(element) => {
+                      pageScrollRefs.current[pageIndex] = element;
+                    }}
+                    className="book-page-scroll profile-page-scroll"
+                  >
+                    <header className="profile-paper-header profile-paper-header-balanced">
+                      <div className="profile-top-row">
+                        <div className="profile-avatar-box">
+                          <ProfileAvatar name={profile.name} xId={profile.xId ?? ""} />
                         </div>
-                        <h2 className="profile-name">{profile.name}</h2>
-                      </div>
 
-                      <div className="profile-head-actions">
-                        {xUrl ? (
-                          <a
-                            href={xUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="profile-x-link"
-                            aria-label={`${profile.name} のXを開く`}
+                        <div className="profile-heading-copy">
+                          <div className="profile-kicker">
+                            {profile.team ? `${profile.team}チーム` : "運営"}
+                          </div>
+                          <h2 className="profile-name">{profile.name}</h2>
+                        </div>
+
+                        <div className="profile-head-actions">
+                          {xUrl ? (
+                            <a
+                              href={xUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="profile-x-link"
+                              aria-label={`${profile.name} のXを開く`}
+                            >
+                              <XIcon />
+                            </a>
+                          ) : null}
+
+                          <button
+                            type="button"
+                            className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
+                            aria-label={isFavorite ? "お気に入りを外す" : "お気に入りに追加"}
+                            onClick={() => toggleFavorite(profile.id)}
                           >
-                            <XIcon />
-                          </a>
-                        ) : null}
-                        
-                        <button
-                          type="button"
-                          className={`icon-toggle-button ${isFavorite ? "is-active" : ""}`}
-                          aria-label={isFavorite ? "お気に入りを外す" : "お気に入りに追加"}
-                          onClick={() => toggleFavorite(profile.id)}
-                        >
-                          <HeartIcon filled={isFavorite} />
-                        </button>
+                            <HeartIcon filled={isFavorite} />
+                          </button>
 
-                        <button
-                          type="button"
-                          className={`icon-toggle-button ${isBookmarked ? "is-active" : ""}`}
-                          aria-label={isBookmarked ? "しおりを外す" : "しおりに追加"}
-                          onClick={() => toggleBookmark(profile.id)}
-                        >
-                          <BookmarkIcon filled={isBookmarked} />
-                        </button>
-
-                        
+                          <button
+                            type="button"
+                            className={`icon-toggle-button ${isBookmarked ? "is-active" : ""}`}
+                            aria-label={isBookmarked ? "しおりを外す" : "しおりに追加"}
+                            onClick={() => toggleBookmark(profile.id)}
+                          >
+                            <BookmarkIcon filled={isBookmarked} />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </header>
+                    </header>
 
                     <section className="paper-section">
                       <h3 className="paper-section-title">この人の成分</h3>
@@ -1033,7 +988,7 @@ function animateScrollTo(
                           onOpenField={openFieldInspector}
                           onOpenValue={openValueInspector}
                         />
-                     
+
                         <TokenFieldBlock
                           label="好きな食べ物・飲み物"
                           fieldKey="food"
@@ -1132,12 +1087,13 @@ function animateScrollTo(
                         {profile.message || "―"}
                       </button>
                     </section>
+
                     <section className="paper-section">
                       <div className="paper-note-head">
                         <h3 className="paper-section-title">メモ</h3>
                         <span className="paper-note-caption">※この端末にのみ保存されます</span>
                       </div>
-                    
+
                       <textarea
                         className="paper-note-textarea"
                         value={profileNotes[profile.id] ?? ""}
@@ -1159,7 +1115,7 @@ function animateScrollTo(
           type="button"
           className="nav-button"
           onClick={goPrev}
-          disabled={currentIndex === 0}
+          disabled={currentIndex === 0 || isAutoScrolling}
           aria-label="前のページへ"
         >
           <ChevronIcon dir="left" />
@@ -1179,7 +1135,7 @@ function animateScrollTo(
           type="button"
           className="nav-button"
           onClick={goNext}
-          disabled={currentIndex === bookPages.length - 1}
+          disabled={currentIndex === bookPages.length - 1 || isAutoScrolling}
           aria-label="次のページへ"
         >
           <span>次へ</span>
@@ -1240,8 +1196,7 @@ function animateScrollTo(
                   </button>
                 </div>
 
-                <div ref={tocListRef}
-                className="floating-list floating-list-topless">
+                <div ref={tocListRef} className="floating-list floating-list-topless">
                   <button
                     type="button"
                     className="toc-item toc-item-cover"
