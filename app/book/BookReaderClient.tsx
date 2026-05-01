@@ -9,7 +9,7 @@ import {
   type MouseEvent,
   type TouchEvent,
 } from "react";
-import { collection, doc, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import type { Profile } from "../../types/profile";
 
@@ -508,6 +508,7 @@ useEffect(() => {
 
   return () => unsub();
 }, []);
+
   useEffect(() => {
     setFavoriteIds(readStoredIds(FAVORITES_STORAGE_KEY));
     setBookmarkIds(readStoredIds(BOOKMARKS_STORAGE_KEY));
