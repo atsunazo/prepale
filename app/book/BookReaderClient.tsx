@@ -449,17 +449,7 @@ export default function BookReaderClient() {
   const shareUrl = postUrl.trim();
   const text = ["プレパレでつながろう！", shareUrl].filter(Boolean).join("\n");
   const appUrl = `twitter://post?message=${encodeURIComponent(text)}`;
-  const webUrl = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
-
-  const start = Date.now();
   window.location.href = appUrl;
-
-  window.setTimeout(() => {
-    const elapsed = Date.now() - start;
-    if (elapsed < 1200) {
-      window.location.href = webUrl;
-    }
-  }, 700);
 }
 
   useEffect(() => {
