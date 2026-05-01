@@ -9,7 +9,7 @@ import {
   type MouseEvent,
   type TouchEvent,
 } from "react";
-import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import type { Profile } from "../../types/profile";
 
@@ -455,41 +455,22 @@ export default function BookReaderClient() {
     };
   }, []);
 
-  useEffect(() => {
-  async function loadProfiles() {
-    try {
-      const q = query(collection(db, "profiles"), orderBy("order", "asc"));
-
-      const [snapshot, linksSnapshot] = await Promise.all([
-        getDocs(q),
-        getDoc(doc(db, "settings", "publicLinks")),
-      ]);
-
-      const items: Profile[] = snapshot.docs.map((docItem) => ({
-        id: docItem.id,
-        ...(docItem.data() as Omit<Profile, "id">),
-      }));
-      setProfiles(items);
-
-      if (linksSnapshot.exists()) {
-        const data = linksSnapshot.data() as Partial<PublicLinksSettings>;
-        setPublicLinks({
-          showPostButton: Boolean(data.showPostButton),
-          postUrl: typeof data.postUrl === "string" ? data.postUrl : "",
-          showSurveyButton: Boolean(data.showSurveyButton),
-          surveyUrl: typeof data.surveyUrl === "string" ? data.surveyUrl : "",
-        });
-      } else {
-        setPublicLinks(DEFAULT_PUBLIC_LINKS);
-      }
-    } catch (error) {
-      console.error("failed to load profiles", error);
-    } finally {
-      setLoading(false);
+useEffect(() => {
+  const unsub = onSnapshot(doc(db, "settings", "publicLinks"), (snapshot) => {
+    if (snapshot.exists()) {
+      const data = snapshot.data() as Partial<PublicLinksSettings>;
+      setPublicLinks({
+        showPostButton: Boolean(data.showPostButton),
+        postUrl: typeof data.postUrl === "string" ? data.postUrl : "",
+        showSurveyButton: Boolean(data.showSurveyButton),
+        surveyUrl: typeof data.surveyUrl === "string" ? data.surveyUrl : "",
+      });
+    } else {
+      setPublicLinks(DEFAULT_PUBLIC_LINKS);
     }
-  }
+  });
 
-  loadProfiles();
+  return () => unsub();
 }, []);
 
   useEffect(() => {
