@@ -632,7 +632,7 @@ export default function BookReaderClient() {
     window.setTimeout(() => {
       suppressScrollSync.current = false;
       syncIndexFromScroll();
-    }, behavior === "smooth" ? 280 : 40);
+    }, behavior === "smooth" ? 200 : 40);
   }
 
   function goPrev() {
