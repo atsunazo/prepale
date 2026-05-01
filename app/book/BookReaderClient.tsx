@@ -696,7 +696,7 @@ function animateScrollTo(targetLeft: number, duration = 240) {
     return;
   }
 
-  animateScrollTo(targetLeft, 320);
+  animateScrollTo(targetLeft, 400);
 }
 
   function goPrev() {
