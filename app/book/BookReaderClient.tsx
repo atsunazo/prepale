@@ -597,9 +597,9 @@ useEffect(() => {
     ],
     [filteredProfiles]
   );
-  const postUrl = sanitizeExternalUrl(publicLinks.postUrl);
+  const postUrl = (publicLinks.postUrl ?? "").trim();
   const surveyUrl = sanitizeExternalUrl(publicLinks.surveyUrl);
-  const showPostButton = publicLinks.showPostButton && !!postUrl;
+  const showPostButton = publicLinks.showPostButton;
   const showSurveyButton = publicLinks.showSurveyButton && !!surveyUrl;
 
   useEffect(() => {
