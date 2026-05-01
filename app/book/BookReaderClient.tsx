@@ -86,6 +86,23 @@ const DEFAULT_PUBLIC_LINKS: PublicLinksSettings = {
   surveyUrl: "",
 };
 
+function openXPost() {
+  const shareUrl = postUrl?.trim() ?? "";
+  const text = [`プレパレでつながろう！`, shareUrl].filter(Boolean).join("\n");
+  const appUrl = `twitter://post?message=${encodeURIComponent(text)}`;
+  const webUrl = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
+
+  const start = Date.now();
+  window.location.href = appUrl;
+
+  window.setTimeout(() => {
+    const elapsed = Date.now() - start;
+    if (elapsed < 1200) {
+      window.location.href = webUrl;
+    }
+  }, 700);
+}
+
 function sanitizeExternalUrl(value?: string) {
   const url = (value ?? "").trim();
   if (!url) return "";
@@ -992,16 +1009,15 @@ useEffect(() => {
                       <div className="paper-section-head">
                         <h3 className="paper-section-title">この人の成分</h3>
 
-                        <div className="paper-section-cta-slot" aria-live="polite">
+                       <div className="paper-section-cta-slot" aria-live="polite">
                           {showPostButton ? (
-                            <a
-                              href={postUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <button
+                              type="button"
                               className="paper-mini-cta"
+                              onClick={openXPost}
                             >
                               Xで投稿
-                            </a>
+                            </button>
                           ) : null}
 
                           {showSurveyButton ? (
