@@ -135,8 +135,8 @@ export default function EditMyProfilePage() {
     document.documentElement.style.overflow = "auto";
 
     return () => {
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overflow = "auto";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, []);
 

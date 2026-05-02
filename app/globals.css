@@ -193,7 +193,7 @@ select {
   overscroll-behavior-y: none;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  touch-action: auto;
+  touch-action: pan-x;
 }
 
 .book-carousel::-webkit-scrollbar {
