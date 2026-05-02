@@ -9,7 +9,7 @@ import {
   type MouseEvent,
   type TouchEvent,
 } from "react";
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import type { Profile } from "../../types/profile";
 
@@ -465,23 +465,31 @@ export default function BookReaderClient() {
   }, []);
 
   useEffect(() => {
-  async function loadProfiles() {
-    try {
-      const q = query(collection(db, "profiles"), orderBy("order", "asc"));
+    const q = query(collection(db, "profiles"), orderBy("order", "asc"));
 
-      const [snapshot, linksSnapshot] = await Promise.all([
-        getDocs(q),
-        getDoc(doc(db, "settings", "publicLinks")),
-      ]);
+    const unsubProfiles = onSnapshot(
+      q,
+      (snapshot) => {
+        const items: Profile[] = snapshot.docs.map((docItem) => ({
+          id: docItem.id,
+          ...(docItem.data() as Omit<Profile, "id">),
+        }));
+        setProfiles(items);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("failed to subscribe profiles", error);
+        setLoading(false);
+      }
+    );
 
-      const items: Profile[] = snapshot.docs.map((docItem) => ({
-        id: docItem.id,
-        ...(docItem.data() as Omit<Profile, "id">),
-      }));
-      setProfiles(items);
+    return () => unsubProfiles();
+  }, []);
 
-      if (linksSnapshot.exists()) {
-        const data = linksSnapshot.data() as Partial<PublicLinksSettings>;
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "settings", "publicLinks"), (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.data() as Partial<PublicLinksSettings>;
         setPublicLinks({
           showPostButton: Boolean(data.showPostButton),
           postUrl: typeof data.postUrl === "string" ? data.postUrl : "",
@@ -491,32 +499,10 @@ export default function BookReaderClient() {
       } else {
         setPublicLinks(DEFAULT_PUBLIC_LINKS);
       }
-    } catch (error) {
-      console.error("failed to load profiles", error);
-    } finally {
-      setLoading(false);
-    }
-  }
+    });
 
-  loadProfiles();
-}, []);
-useEffect(() => {
-  const unsub = onSnapshot(doc(db, "settings", "publicLinks"), (snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.data() as Partial<PublicLinksSettings>;
-      setPublicLinks({
-        showPostButton: Boolean(data.showPostButton),
-        postUrl: typeof data.postUrl === "string" ? data.postUrl : "",
-        showSurveyButton: Boolean(data.showSurveyButton),
-        surveyUrl: typeof data.surveyUrl === "string" ? data.surveyUrl : "",
-      });
-    } else {
-      setPublicLinks(DEFAULT_PUBLIC_LINKS);
-    }
-  });
-
-  return () => unsub();
-}, []);
+    return () => unsub();
+  }, []);
 
   useEffect(() => {
     setFavoriteIds(readStoredIds(FAVORITES_STORAGE_KEY));
