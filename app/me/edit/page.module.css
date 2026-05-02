@@ -399,3 +399,50 @@
   gap: 10px;
   flex-shrink: 0;
 }
+
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.headerTop > :first-child {
+  min-width: 0;
+}
+
+.headerActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.headerSaveButton {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f8bfd8, #cbe9ff);
+  color: #5a435f;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.headerSaveButton:disabled {
+  opacity: 0.5;
+}
+
+@media (max-width: 520px) {
+  .headerTop {
+    display: grid;
+    gap: 12px;
+  }
+
+  .headerActions {
+    margin-left: 0;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}
