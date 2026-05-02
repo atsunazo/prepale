@@ -29,7 +29,24 @@ type ListEditorProps = {
   disabled?: boolean;
   placeholder?: string;
   addLabel?: string;
+  maxItems?: number;
 };
+
+type InterestCheckboxGroupProps = {
+  items: string[];
+  onChange: (items: string[]) => void;
+  disabled?: boolean;
+};
+
+const INTEREST_OPTIONS = [
+  "マダミス",
+  "謎解き",
+  "ボドゲ",
+  "イマーシブ",
+  "トレカ",
+] as const;
+
+const MAX_LIST_ITEMS = 8;
 
 function ListEditor({
   label,
@@ -39,7 +56,10 @@ function ListEditor({
   disabled,
   placeholder = "項目を入力",
   addLabel = "項目を追加",
+  maxItems = MAX_LIST_ITEMS,
 }: ListEditorProps) {
+  const reachedMax = items.length >= maxItems;
+
   function updateItem(index: number, value: string) {
     const next = [...items];
     next[index] = value;
@@ -52,6 +72,7 @@ function ListEditor({
   }
 
   function addItem() {
+    if (disabled || reachedMax) return;
     onChange([...items, ""]);
   }
 
@@ -63,12 +84,15 @@ function ListEditor({
           {description ? (
             <p className={styles.sectionDescription}>{description}</p>
           ) : null}
+          <p className={styles.sectionDescription}>
+            {items.length} / {maxItems}
+          </p>
         </div>
 
         <button
           type="button"
           onClick={addItem}
-          disabled={disabled}
+          disabled={disabled || reachedMax}
           className={styles.addButton}
         >
           ＋ {addLabel}
@@ -78,6 +102,12 @@ function ListEditor({
       {items.length === 0 ? (
         <div className={styles.emptyBox}>
           まだ項目がありません。右上の「追加」ボタンから登録できます。
+        </div>
+      ) : null}
+
+      {reachedMax ? (
+        <div className={styles.limitBox}>
+          最大 {maxItems} 件まで登録できます。
         </div>
       ) : null}
 
@@ -113,6 +143,55 @@ function ListEditor({
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function InterestCheckboxGroup({
+  items,
+  onChange,
+  disabled,
+}: InterestCheckboxGroupProps) {
+  function toggleItem(value: string) {
+    if (disabled) return;
+
+    if (items.includes(value)) {
+      onChange(items.filter((item) => item !== value));
+      return;
+    }
+
+    onChange([...items, value]);
+  }
+
+  return (
+    <section className={styles.cardSection}>
+      <div className={styles.sectionHeader}>
+        <div>
+          <h3 className={styles.sectionTitle}>興味のあるもの</h3>
+          <p className={styles.sectionDescription}>
+            当てはまるものをチェックして登録してください。
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGrid}>
+        {INTEREST_OPTIONS.map((option) => {
+          const checked = items.includes(option);
+
+          return (
+            <label key={option} className={styles.checkCard}>
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={() => toggleItem(option)}
+                disabled={disabled}
+                className={styles.checkboxInput}
+              />
+              <span className={styles.checkLabel}>{option}</span>
+            </label>
+          );
+        })}
       </div>
     </section>
   );
@@ -247,12 +326,30 @@ export default function EditMyProfilePage() {
     setError("");
 
     try {
-      const interests = normalizeList(profile.interests);
-      const favorites = normalizeList(profile.favorites);
-      const foodTokens = normalizeList(profile.foodTokens ?? []);
-      const placeTokens = normalizeList(profile.placeTokens ?? []);
-      const clubTokens = normalizeList(profile.clubTokens ?? []);
-      const recentTokens = normalizeList(profile.recentTokens ?? []);
+      const interests = normalizeList(
+        profile.interests.filter((item) =>
+          INTEREST_OPTIONS.includes(
+            item as (typeof INTEREST_OPTIONS)[number]
+          )
+        )
+      );
+      const favorites = normalizeList(profile.favorites).slice(0, MAX_LIST_ITEMS);
+      const foodTokens = normalizeList(profile.foodTokens ?? []).slice(
+        0,
+        MAX_LIST_ITEMS
+      );
+      const placeTokens = normalizeList(profile.placeTokens ?? []).slice(
+        0,
+        MAX_LIST_ITEMS
+      );
+      const clubTokens = normalizeList(profile.clubTokens ?? []).slice(
+        0,
+        MAX_LIST_ITEMS
+      );
+      const recentTokens = normalizeList(profile.recentTokens ?? []).slice(
+        0,
+        MAX_LIST_ITEMS
+      );
 
       const payload: Partial<Profile> = {
         interests,
@@ -379,14 +476,10 @@ export default function EditMyProfilePage() {
 
       <form onSubmit={onSave} className={styles.formArea}>
         <div className={styles.fieldSetLike}>
-          <ListEditor
-            label="興味のあるもの"
-            description="1件ずつ入力・追加・削除できます。"
+          <InterestCheckboxGroup
             items={profile.interests}
             onChange={(items) => setProfile({ ...profile, interests: items })}
             disabled={editLocked}
-            placeholder="例：映画、旅行、読書"
-            addLabel="興味を追加"
           />
 
           <ListEditor
@@ -397,6 +490,7 @@ export default function EditMyProfilePage() {
             disabled={editLocked}
             placeholder="例：猫、音楽、カフェ"
             addLabel="好きなものを追加"
+            maxItems={MAX_LIST_ITEMS}
           />
 
           <ListEditor
@@ -406,6 +500,7 @@ export default function EditMyProfilePage() {
             disabled={editLocked}
             placeholder="例：コーヒー、ラーメン"
             addLabel="食べ物・飲み物を追加"
+            maxItems={MAX_LIST_ITEMS}
           />
 
           <ListEditor
@@ -415,6 +510,7 @@ export default function EditMyProfilePage() {
             disabled={editLocked}
             placeholder="例：図書館、カフェ、体育館"
             addLabel="場所を追加"
+            maxItems={MAX_LIST_ITEMS}
           />
 
           <ListEditor
@@ -424,6 +520,7 @@ export default function EditMyProfilePage() {
             disabled={editLocked}
             placeholder="例：吹奏楽、サッカー"
             addLabel="部活動を追加"
+            maxItems={MAX_LIST_ITEMS}
           />
 
           <ListEditor
@@ -433,6 +530,7 @@ export default function EditMyProfilePage() {
             disabled={editLocked}
             placeholder="例：散歩、写真、ランニング"
             addLabel="最近のことを追加"
+            maxItems={MAX_LIST_ITEMS}
           />
 
           <section className={styles.cardSection}>
@@ -441,12 +539,13 @@ export default function EditMyProfilePage() {
             <div className={styles.textGroup}>
               <label className={styles.field}>
                 <span className={styles.fieldLabel}>興味のある話題</span>
-                <input
+                <textarea
                   value={profile.topics || ""}
                   onChange={(e) =>
                     setProfile({ ...profile, topics: e.target.value })
                   }
-                  className={styles.textInput}
+                  rows={5}
+                  className={styles.textArea}
                   disabled={editLocked}
                 />
               </label>
@@ -455,12 +554,13 @@ export default function EditMyProfilePage() {
                 <span className={styles.fieldLabel}>
                   おすすめしたいコンテンツ
                 </span>
-                <input
+                <textarea
                   value={profile.recommendation || ""}
                   onChange={(e) =>
                     setProfile({ ...profile, recommendation: e.target.value })
                   }
-                  className={styles.textInput}
+                  rows={5}
+                  className={styles.textArea}
                   disabled={editLocked}
                 />
               </label>

@@ -291,3 +291,62 @@
   display: grid;
   gap: 14px;
 }
+
+.pageAndroidScroll {
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.fieldSetLike {
+  display: grid;
+  gap: 14px;
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.checkCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(126, 102, 151, 0.16);
+  background: #fff;
+}
+
+.checkboxInput {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.checkLabel {
+  font-size: 15px;
+  font-weight: 700;
+  color: #3b3244;
+}
+
+.limitBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff7e8;
+  border: 1px solid #f1d08a;
+  color: #7a5a12;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 420px) {
+  .checkboxGrid {
+    grid-template-columns: 1fr;
+  }
+}
