@@ -58,9 +58,6 @@ body {
     sans-serif;
 }
 
-body {
-  overflow: hidden;
-}
 
 a {
   color: inherit;
@@ -1788,3 +1785,7 @@ select {
   }
 }
 
+html.book-scroll-lock,
+body.book-scroll-lock {
+  overflow: hidden;
+}

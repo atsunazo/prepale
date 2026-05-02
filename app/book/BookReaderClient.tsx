@@ -453,16 +453,14 @@ export default function BookReaderClient() {
 }
 
   useEffect(() => {
-    const prevBodyOverflow = document.body.style.overflow;
-    const prevHtmlOverflow = document.documentElement.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
+  document.body.classList.add("book-scroll-lock");
+  document.documentElement.classList.add("book-scroll-lock");
 
-    return () => {
-      document.body.style.overflow = prevBodyOverflow;
-      document.documentElement.style.overflow = prevHtmlOverflow;
-    };
-  }, []);
+  return () => {
+    document.body.classList.remove("book-scroll-lock");
+    document.documentElement.classList.remove("book-scroll-lock");
+  };
+}, []);
 
   useEffect(() => {
   async function loadProfiles() {
