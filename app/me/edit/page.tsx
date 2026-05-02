@@ -131,6 +131,16 @@ export default function EditMyProfilePage() {
   const [passwordMessage, setPasswordMessage] = useState("");
 
   useEffect(() => {
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         router.replace("/login");
@@ -181,7 +191,7 @@ export default function EditMyProfilePage() {
     e.preventDefault();
     setPasswordMessage("");
 
-    if (!auth.currentUser || !profile || !docId) return;
+    if (!auth.currentUser || !profile) return;
 
     if (!newPassword || newPassword.length < 8) {
       setPasswordMessage("新しいパスワードは8文字以上で入力してください。");
@@ -215,7 +225,7 @@ export default function EditMyProfilePage() {
 
   async function onSave(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!profile || !docId || editLocked) return;
+    if (!profile || !docId) return;
 
     setSaving(true);
     setError("");
@@ -306,10 +316,8 @@ export default function EditMyProfilePage() {
           </div>
 
           <button
-            type="button"
             onClick={() => signOut(auth).then(() => router.replace("/login"))}
             className={styles.logoutButton}
-            disabled={saving}
           >
             ログアウト
           </button>
@@ -332,7 +340,6 @@ export default function EditMyProfilePage() {
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="新しいパスワード（8文字以上）"
               className={styles.textInput}
-              autoComplete="new-password"
             />
             <input
               type="password"
@@ -340,7 +347,6 @@ export default function EditMyProfilePage() {
               onChange={(e) => setNewPassword2(e.target.value)}
               placeholder="確認用パスワード"
               className={styles.textInput}
-              autoComplete="new-password"
             />
             {passwordMessage ? (
               <div className={styles.passwordMessage}>{passwordMessage}</div>
@@ -353,10 +359,7 @@ export default function EditMyProfilePage() {
       ) : null}
 
       <form onSubmit={onSave} className={styles.formArea}>
-        <div
-          className={`${styles.formBody} ${editLocked ? styles.disabledSection : ""}`}
-          aria-disabled={editLocked}
-        >
+        <fieldset disabled={editLocked} className={styles.fieldSet}>
           <ListEditor
             label="興味のあるもの"
             description="1件ずつ入力・追加・削除できます。"
@@ -425,7 +428,6 @@ export default function EditMyProfilePage() {
                     setProfile({ ...profile, topics: e.target.value })
                   }
                   className={styles.textInput}
-                  disabled={editLocked}
                 />
               </label>
 
@@ -439,7 +441,6 @@ export default function EditMyProfilePage() {
                     setProfile({ ...profile, recommendation: e.target.value })
                   }
                   className={styles.textInput}
-                  disabled={editLocked}
                 />
               </label>
 
@@ -452,17 +453,16 @@ export default function EditMyProfilePage() {
                   }
                   rows={5}
                   className={styles.textArea}
-                  disabled={editLocked}
                 />
               </label>
             </div>
           </section>
 
           {error ? <div className={styles.errorBox}>{error}</div> : null}
-        </div>
+        </fieldset>
 
         <div className={styles.stickySaveBar}>
-          <button type="submit" className={styles.saveButton} disabled={editLocked}>
+          <button type="submit" className={styles.saveButton}>
             {saving ? "保存中..." : "変更を保存する"}
           </button>
         </div>
