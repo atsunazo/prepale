@@ -384,3 +384,18 @@
     flex-wrap: wrap;
   }
 }
+
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.headerActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
