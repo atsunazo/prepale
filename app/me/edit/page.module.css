@@ -60,7 +60,6 @@
   border: 1px solid #d1d5db;
   background: #fff;
   font-weight: 700;
-  margin-right: auto;
 }
 
 .warningCard {
@@ -446,4 +445,22 @@
     justify-content: flex-end;
     flex-wrap: wrap;
   }
+}
+
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.headerTop > :first-child {
+  min-width: 0;
+}
+
+.headerActions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
