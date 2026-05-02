@@ -1,8 +1,8 @@
 .page {
-  min-height: 100dvh;
   background: #f8fafc;
   padding: 16px 12px 96px;
   max-width: 100%;
+  overflow-x: hidden;
 }
 
 .loading {
@@ -82,7 +82,7 @@
 
 .passwordForm,
 .formArea,
-.fieldSet,
+.formBody,
 .textGroup {
   display: grid;
   gap: 14px;
@@ -171,6 +171,7 @@
   font-size: 16px;
   background: #fff;
   outline: none;
+  color: #111827;
 }
 
 .textArea {
@@ -245,6 +246,22 @@
   padding-top: 4px;
 }
 
+.disabledSection {
+  opacity: 0.72;
+}
+
+.addButton:disabled,
+.primaryButton:disabled,
+.saveButton:disabled,
+.subButton:disabled,
+.dangerButton:disabled,
+.logoutButton:disabled,
+.textInput:disabled,
+.textArea:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
 @media (min-width: 768px) {
   .page {
     max-width: 980px;
@@ -272,4 +289,3 @@
     justify-content: flex-end;
   }
 }
-

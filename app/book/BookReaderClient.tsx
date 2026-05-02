@@ -447,20 +447,22 @@ export default function BookReaderClient() {
 
   function openXPost() {
   const shareUrl = postUrl.trim();
-  const text = ["【ここにプレパレの感想を】", shareUrl].filter(Boolean).join("\n");
+  const text = ["【ここにプレパレの感想を書いてね】", shareUrl].filter(Boolean).join("\n");
   const appUrl = `twitter://post?message=${encodeURIComponent(text)}`;
   window.location.href = appUrl;
 }
 
   useEffect(() => {
-  document.body.classList.add("book-scroll-lock");
-  document.documentElement.classList.add("book-scroll-lock");
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
-  return () => {
-    document.body.classList.remove("book-scroll-lock");
-    document.documentElement.classList.remove("book-scroll-lock");
-  };
-}, []);
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, []);
 
   useEffect(() => {
   async function loadProfiles() {
