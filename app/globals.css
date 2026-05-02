@@ -96,8 +96,8 @@ select {
 }
 
 .book-app-shell-fixed {
-  height: 100dvh;
-  overflow: hidden;
+  /*height: 100dvh;
+  overflow: hidden;*/
   padding: var(--stage-gap-top) 14px
     calc(var(--dock-height) + var(--stage-gap-bottom) + env(safe-area-inset-bottom));
 }
@@ -146,7 +146,7 @@ select {
     100dvh - var(--stage-gap-top) - var(--dock-height) - var(--stage-gap-bottom) -
       env(safe-area-inset-bottom)
   );
-  overflow: hidden;
+  /*overflow: hidden;*/
   perspective: 1800px;
 }
 
