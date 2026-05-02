@@ -445,8 +445,8 @@ export default function EditMyProfilePage() {
               className={styles.headerSaveButton}
               disabled={editLocked}
             >
-              {saving ? "保存中..." : "変更を保存"}
-			  
+              {saving ? "保存中..." : "変更を保存する"}
+
             </button>
 
           </div>
