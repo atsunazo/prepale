@@ -272,3 +272,15 @@
     justify-content: flex-end;
   }
 }
+
+.page {
+  min-height: 100dvh;
+  background: #f8fafc;
+  padding: 16px 12px 96px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior-y: contain;
+}
