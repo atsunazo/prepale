@@ -130,13 +130,29 @@ export default function EditMyProfilePage() {
   const [newPassword2, setNewPassword2] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
 
+  const [isAndroid, setIsAndroid] = useState(false);
+
   useEffect(() => {
-    document.body.style.overflow = "auto";
-    document.documentElement.style.overflow = "auto";
+    if (typeof window === "undefined") return;
+
+    const ua = window.navigator.userAgent || "";
+    const android = /Android/i.test(ua);
+    setIsAndroid(android);
+
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+
+    if (android) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    }
 
     return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
     };
   }, []);
 
@@ -191,7 +207,7 @@ export default function EditMyProfilePage() {
     e.preventDefault();
     setPasswordMessage("");
 
-    if (!auth.currentUser || !profile) return;
+    if (!auth.currentUser || !profile || !docId) return;
 
     if (!newPassword || newPassword.length < 8) {
       setPasswordMessage("新しいパスワードは8文字以上で入力してください。");
@@ -302,7 +318,9 @@ export default function EditMyProfilePage() {
   const editLocked = !!profile.needsPasswordChange || saving;
 
   return (
-    <main className={styles.page}>
+    <main
+      className={`${styles.page} ${isAndroid ? styles.pageAndroidScroll : ""}`}
+    >
       <div className={styles.headerCard}>
         <div className={styles.headerTop}>
           <div>
@@ -316,6 +334,7 @@ export default function EditMyProfilePage() {
           </div>
 
           <button
+            type="button"
             onClick={() => signOut(auth).then(() => router.replace("/login"))}
             className={styles.logoutButton}
           >
@@ -359,7 +378,7 @@ export default function EditMyProfilePage() {
       ) : null}
 
       <form onSubmit={onSave} className={styles.formArea}>
-        <fieldset disabled={editLocked} className={styles.fieldSet}>
+        <div className={styles.fieldSetLike}>
           <ListEditor
             label="興味のあるもの"
             description="1件ずつ入力・追加・削除できます。"
@@ -428,6 +447,7 @@ export default function EditMyProfilePage() {
                     setProfile({ ...profile, topics: e.target.value })
                   }
                   className={styles.textInput}
+                  disabled={editLocked}
                 />
               </label>
 
@@ -441,6 +461,7 @@ export default function EditMyProfilePage() {
                     setProfile({ ...profile, recommendation: e.target.value })
                   }
                   className={styles.textInput}
+                  disabled={editLocked}
                 />
               </label>
 
@@ -453,16 +474,17 @@ export default function EditMyProfilePage() {
                   }
                   rows={5}
                   className={styles.textArea}
+                  disabled={editLocked}
                 />
               </label>
             </div>
           </section>
 
           {error ? <div className={styles.errorBox}>{error}</div> : null}
-        </fieldset>
+        </div>
 
         <div className={styles.stickySaveBar}>
-          <button type="submit" className={styles.saveButton}>
+          <button type="submit" className={styles.saveButton} disabled={saving}>
             {saving ? "保存中..." : "変更を保存する"}
           </button>
         </div>
