@@ -328,9 +328,7 @@ export default function EditMyProfilePage() {
     try {
       const interests = normalizeList(
         profile.interests.filter((item) =>
-          INTEREST_OPTIONS.includes(
-            item as (typeof INTEREST_OPTIONS)[number]
-          )
+          INTEREST_OPTIONS.includes(item as (typeof INTEREST_OPTIONS)[number])
         )
       );
       const favorites = normalizeList(profile.favorites).slice(0, MAX_LIST_ITEMS);
@@ -430,13 +428,24 @@ export default function EditMyProfilePage() {
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={() => signOut(auth).then(() => router.replace("/login"))}
-            className={styles.logoutButton}
-          >
-            ログアウト
-          </button>
+          <div className={styles.headerActions}>
+            <button
+              type="submit"
+              form="profile-edit-form"
+              className={styles.headerSaveButton}
+              disabled={editLocked}
+            >
+              {saving ? "保存中..." : "保存"}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => signOut(auth).then(() => router.replace("/login"))}
+              className={styles.logoutButton}
+            >
+              ログアウト
+            </button>
+          </div>
         </div>
       </div>
 
@@ -474,7 +483,11 @@ export default function EditMyProfilePage() {
         </section>
       ) : null}
 
-      <form onSubmit={onSave} className={styles.formArea}>
+      <form
+        id="profile-edit-form"
+        onSubmit={onSave}
+        className={styles.formArea}
+      >
         <div className={styles.fieldSetLike}>
           <InterestCheckboxGroup
             items={profile.interests}
@@ -484,7 +497,6 @@ export default function EditMyProfilePage() {
 
           <ListEditor
             label="好きなこと・もの"
-            description="好きなものを1件ずつ管理できます。"
             items={profile.favorites}
             onChange={(items) => setProfile({ ...profile, favorites: items })}
             disabled={editLocked}
