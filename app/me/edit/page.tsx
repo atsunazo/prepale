@@ -423,9 +423,7 @@ export default function EditMyProfilePage() {
             <p className={styles.subTitle}>
               {profile.name} / {profile.xId}
             </p>
-            <p className={styles.note}>
-              スマホ向けに、追加・編集・削除しやすい形にしています。
-            </p>
+            
           </div>
 
           <div className={styles.headerActions}>
@@ -530,7 +528,7 @@ export default function EditMyProfilePage() {
             items={profile.clubTokens ?? []}
             onChange={(items) => setProfile({ ...profile, clubTokens: items })}
             disabled={editLocked}
-            placeholder="例：吹奏楽、サッカー"
+            placeholder="例：吹奏楽部、サッカー部"
             addLabel="部活動を追加"
             maxItems={MAX_LIST_ITEMS}
           />
