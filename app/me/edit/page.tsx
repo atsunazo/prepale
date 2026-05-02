@@ -731,6 +731,17 @@ export default function EditMyProfilePage() {
         	justify-content: flex-end;
       	}
     	}
+		html, body {
+			overflow-y: auto;
+			}
+
+			.page,
+			.formArea,
+			.fieldSet {
+			touch-action: pan-y;
+			}
+
+		
   	`}</style>
 	</main>
   );

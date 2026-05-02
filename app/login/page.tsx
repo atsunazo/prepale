@@ -70,9 +70,6 @@ export default function LoginPage() {
         	/>
       	</label>
 
-      	{emailPreview ? (
-        	<div className="hint">内部認証メール: {emailPreview}</div>
-      	) : null}
 
       	{error ? <div className="error">{error}</div> : null}
 
