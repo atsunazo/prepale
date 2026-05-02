@@ -423,18 +423,13 @@ export default function EditMyProfilePage() {
             <p className={styles.subTitle}>
               {profile.name} / {profile.xId}
             </p>
-            
+            <p className={styles.note}>
+				変更した場合は保存をクリックしてください。
+			</p>
           </div>
 
           <div className={styles.headerActions}>
-            <button
-              type="submit"
-              form="profile-edit-form"
-              className={styles.headerSaveButton}
-              disabled={editLocked}
-            >
-              {saving ? "保存中..." : "保存"}
-            </button>
+            
 
             <button
               type="button"
@@ -443,6 +438,16 @@ export default function EditMyProfilePage() {
             >
               ログアウト
             </button>
+
+			<button
+              type="submit"
+              form="profile-edit-form"
+              className={styles.headerSaveButton}
+              disabled={editLocked}
+            >
+              {saving ? "保存中..." : "保存"}
+            </button>
+			
           </div>
         </div>
       </div>
