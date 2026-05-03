@@ -554,19 +554,6 @@ export default function EditMyProfilePage() {
 
             <div className={styles.textGroup}>
               <label className={styles.field}>
-                <span className={styles.fieldLabel}>興味のある話題</span>
-                <textarea
-                  value={profile.topics || ""}
-                  onChange={(e) =>
-                    setProfile({ ...profile, topics: e.target.value })
-                  }
-                  rows={5}
-                  className={styles.textArea}
-                  disabled={editLocked}
-                />
-              </label>
-
-              <label className={styles.field}>
                 <span className={styles.fieldLabel}>
                   おすすめしたいコンテンツ
                 </span>
@@ -579,7 +566,22 @@ export default function EditMyProfilePage() {
                   className={styles.textArea}
                   disabled={editLocked}
                 />
+                
               </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>興味のある話題</span>
+                <textarea
+                  value={profile.topics || ""}
+                  onChange={(e) =>
+                    setProfile({ ...profile, topics: e.target.value })
+                  }
+                  rows={5}
+                  className={styles.textArea}
+                  disabled={editLocked}
+                />
+              </label>
+
+              
 
               <label className={styles.field}>
                 <span className={styles.fieldLabel}>ひとこと</span>
