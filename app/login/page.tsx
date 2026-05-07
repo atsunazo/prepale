@@ -44,7 +44,7 @@ export default function LoginPage() {
 	<main className="page">
   	<div className="card">
     	<h1 className="title">プロフィール編集ログイン</h1>
-    	<p className="lead">ID は X の @ より後ろを入力してください。</p>
+    	<p className="lead">ID は X の @ より後ろを「全て小文字」で入力してください。</p>
 
     	<form onSubmit={onSubmit} className="form">
       	<label className="field">
@@ -52,7 +52,7 @@ export default function LoginPage() {
         	<input
           	value={loginId}
           	onChange={(e) => setLoginId(e.target.value)}
-          	placeholder="例: prepale"
+          	placeholder="例: prepale（全て小文字）"
           	autoComplete="username"
           	className="input"
         	/>
