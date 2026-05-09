@@ -985,7 +985,7 @@ export default function BookReaderClient() {
 
                     <section className="paper-section">
                       <div className="paper-section-head">
-                        <h3 className="paper-section-title">この人の成分</h3>
+                        <h3 className="paper-section-title">私の成分</h3>
 
                        <div className="paper-section-cta-slot" aria-live="polite">
                           {showPostButton ? (
